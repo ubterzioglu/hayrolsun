@@ -2,6 +2,10 @@
 
 Basit bir **React + Vite + Tailwind** arayüzü (rüya tabirleri demo).
 
+### Dokümantasyon
+
+- Database manuel: `DATABASE_MANUAL.md`
+
 ### Turso (Database)
 
 - **Önemli**: `TURSO_AUTH_TOKEN` **asla** frontend’e konmaz, repoya commit edilmez. Vercel Environment Variables olarak ekleyin.
