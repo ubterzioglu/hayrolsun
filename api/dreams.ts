@@ -33,13 +33,14 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
     const where: string[] = [];
     const args: unknown[] = [];
 
-    let from = 'dreams d';
-    let select = 'd.id, d.title, d.slug, d.body, d.category_slug as category, d.views, d.rating, d.created_at, d.updated_at';
+    let from = 'dreams d LEFT JOIN categories c ON c.slug = d.category_slug';
+    let select =
+      'd.id, d.title, d.slug, d.body, COALESCE(c.name, d.category_slug) as category, d.views, d.rating, d.created_at, d.updated_at';
     let orderBy = 'd.views DESC, d.id DESC';
 
     if (query.length > 0) {
       // Use FTS for search. Quote query to avoid special char issues; keep it basic.
-      from = 'dreams_fts f JOIN dreams d ON d.id = f.rowid';
+      from = 'dreams_fts f JOIN dreams d ON d.id = f.rowid LEFT JOIN categories c ON c.slug = d.category_slug';
       where.push('dreams_fts MATCH ?');
       args.push(query);
       orderBy = 'bm25(f) ASC, d.views DESC';

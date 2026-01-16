@@ -20,7 +20,7 @@ INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating) V
   (
     'Su Rüyası Tabiri',
     'ruyada-su-gormek',
-    'Suyun durumu rüyanın anlamını belirler. Temiz su mutluluk, kirli su ise sorunları simgeler.',
+    'Rüyada su görmek; suyun temizliği, berraklığı ve akışına göre farklı mânâlara gelebilir. Temiz ve berrak su hayra, ferahlığa ve gönül huzuruna işaret eder. Bulanık/kirli su ise sıkıntı ve imtihanı hatırlatabilir. Allah Teâlâ en doğrusunu bilir.',
     'doga',
     95000,
     4.7
@@ -28,7 +28,7 @@ INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating) V
   (
     'Uçmak Rüyası Tabiri',
     'ruyada-ucmak',
-    'Uçmak özgürlük ve hırslarınızı temsil eder. Yüksekten uçmak başarıyı gösterir.',
+    'Rüyada uçmak; niyet ve hâle göre yükseliş, arzu edilen bir maksada yaklaşma veya bir belâdan kurtuluş şeklinde yorumlanabilir. Uçuş esnasındaki huzur, tabirin hayra dönmesine vesile olabilir. Allah Teâlâ en doğrusunu bilir.',
     'hareket',
     88000,
     4.5
@@ -36,7 +36,7 @@ INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating) V
   (
     'Diş Düşmesi Rüyası Tabiri',
     'ruyada-dis-dusmesi',
-    'Diş düşmesi kaygı, güvensizlik veya bir kaybı simgeler. Aile fertlerine dikkat edilmelidir.',
+    'Rüyada dişin düşmesi; aile, yakınlar ve geçimle ilgili bazı endişeleri hatırlatabilir. Detaylar (kaç diş, acı, kan vb.) tabiri etkiler. Dua ve sadaka ile hayra çevirmeye gayret edilebilir. Allah Teâlâ en doğrusunu bilir.',
     'vucut',
     92000,
     4.6
@@ -44,7 +44,7 @@ INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating) V
   (
     'Yılan Rüyası Tabiri',
     'ruyada-yilan-gormek',
-    'Yılan hem tehlike hem de dönüşüm sembolüdür. Rüyanın detayları yorumu değiştirir.',
+    'Rüyada yılan görmek; bazen düşmanlık, bazen de gizli bir imtihanı işaret edebilir. Yılanın rengi, büyüklüğü ve davranışı tabiri değiştirir. Korunma duaları ve istiğfar tavsiye edilir. Allah Teâlâ en doğrusunu bilir.',
     'hayvanlar',
     85000,
     4.4
@@ -52,7 +52,7 @@ INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating) V
   (
     'Ölüm Rüyası Tabiri',
     'ruyada-olum-gormek',
-    'Ölüm rüyası genellikle yeni başlangıçları temsil eder, korkulacak bir şey değildir.',
+    'Rüyada ölüm görmek; çoğu zaman bir hâlin kapanıp yeni bir dönemin başlamasına, tevbe ve dönüşe işaret edebilir. Böyle rüyalar ibret ve muhasebeye vesile olabilir. Allah Teâlâ en doğrusunu bilir.',
     'hayat',
     78000,
     4.2
@@ -60,7 +60,7 @@ INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating) V
   (
     'Para Rüyası Tabiri',
     'ruyada-para-gormek',
-    'Para kazanmak zenginlik değil, değer kazanmayı simgeler. Kaybetmek ise endişeyi gösterir.',
+    'Rüyada para görmek; rızık, emanet ve sorumlulukla ilgili işaretler taşıyabilir. Paranın bulunması/harcanması, miktarı ve türü tabiri değiştirir. Helâl kazanca yönelip şükür tavsiye edilir. Allah Teâlâ en doğrusunu bilir.',
     'maddi',
     82000,
     4.3
