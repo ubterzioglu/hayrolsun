@@ -17,7 +17,7 @@ Gerekli değişkenler:
 - `TURSO_AUTH_TOKEN`
 - `ADMIN_TOKEN` (admin paneli için)
 
-Admin paneli (`/admin`) için `ADMIN_TOKEN` değerini Vercel ve `.env` için ayarlayın.
+Admin paneli (`/admin.html`) için `ADMIN_TOKEN` değerini Vercel ve `.env` için ayarlayın.
 
 Schema / seed (Turso paneli veya admin paneli üzerinden):
 
@@ -26,6 +26,6 @@ Schema / seed (Turso paneli veya admin paneli üzerinden):
 
 ### SEO / Robots / Sitemap
 
-- `public/robots.txt`
-- `public/sitemap.xml`
-- `public/sitemap.html`
+- `robots.txt`
+- `sitemap.xml`
+- `sitemap.html`

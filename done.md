@@ -2,26 +2,13 @@
 
 - `status_timestamp.md` olusturuldu ve zaman damgasi ile repo ozet bulgulari yazildi.
 - `.env` icine `ADMIN_TOKEN` eklendi; `readme.md` icinde admin degiskeni not edildi.
-- `vercel.json` icin apex -> `www` 301 yonlendirme eklendi; SPA icin rewrite kurallari guncellendi.
-- `index.html`, `public/robots.txt`, `public/sitemap.xml` icinde canonical/sitemap URL’leri `www` olacak sekilde duzeltildi.
-- Logo boyutu buyutuldu (`src/pages/Home.tsx`) ve header’a dik ayirac + `Yazilarimiz` butonu eklendi.
-- Ana sayfa hero metni istenen yeni metinle degistirildi (`src/pages/Home.tsx`).
-- `public/art.html` olusturuldu ve verilen 12 yazi icerigi eklendi.
-- `db/schema.sql` icinde `articles` tablosu ve `updated_at` trigger’i eklendi.
-- `db/seed.sql` icine `articles` verileri eklendi.
-- `api/admin/sql.ts` icinde `articles` tablosu admin import whitelist’ine eklendi.
-- `public/sitemap.html` icinde “Yazilarimiz” linki varligi kontrol edildi.
-- Deep crawl (sitemap+robots) calistirildi: 200 OK (robots, sitemap, ana sayfa, sitemap.html). Canli sitemap’ta `art.html` henuz yok (deploy edilmedi).
+- `vercel.json` apex -> `www` 301 yonlendirme eklendi ve filesystem routing ayarlandi.
+- `index.html` ana sayfa metni guncellendi; logo boyutu/yerlesim duzenlendi; header'a ayirac + `Yazilarimiz` butonu eklendi.
+- `art.html` olusturuldu ve verilen yazilar eklendi.
+- `db/schema.sql` icinde `articles` tablosu ve trigger eklendi; `db/seed.sql` icine `articles` ve `ruyaadd.sql` icerigi eklendi, duplicate temizlendi.
+- `api/admin/sql.ts` whitelist'e `articles` eklendi; `api/_lib/turso.ts` HTTP pipeline ile baglantiya guncellendi.
+- Admin paneline SQL calistir bolumu eklendi (`/api/admin/sql`).
+- Statik sistem ana dizine alindi: `index.html`, `app.js`, `styles.css`, `dream.html`, `dream.js`, `admin.html`, `admin.js`, `robots.txt`, `sitemap.xml`, `sitemap.html`.
+- React/TSX dosyalari kaldirildi (`src/`, configler, `package.json`, `node_modules`, `dist`).
+- Dokumanlarda eski komut referanslari temizlendi, admin URL `/admin.html` olarak guncellendi.
 - Test calistirilmadi.
-- `0/ruyaadd.sql` iceriği `db/seed.sql` dosyasina `INSERT OR IGNORE` olacak sekilde eklendi (kod fence temizlendi).
-- `db/seed.sql` icinde `İslami` kategorisi eklendi.
-- Ana sayfa kategori filtrelerine `İslami` secenegi eklendi (`src/pages/Home.tsx`).
-- `db/seed.sql` icindeki kod fence satirlari temizlendi; satir-içi `);INSERT` bolunmeleri duzeltildi.
-- `npm run db:seed` calistirildi ve basarili oldu.
-- Duplicate kontrolu: `db/seed.sql` icinde tekrar eden slug bulundu ve temizlendi (artık duplicate yok).
-- `olddev` branch olusturuldu ve mevcut durum oraya commitlendi.
-- HTML tabanli sistem ana sisteme alindi: `index.html` root, `public/` altina `app.js`, `styles.css`, `dream.html`, `dream.js`, `admin.html`, `admin.js` tasindi.
-- React/TSX yapisi kaldirildi (`src/` ve TS/Tailwind configleri silindi), `package.json` sadeleştirildi, `vite.config.ts` basit hale getirildi.
-- `vercel.json` SPA rewrite kaldirildi, statik dosya servis (filesystem) ayarlandi.
-- `npm install` calistirildi (lock dosyasi guncellendi).
-- `npm run build` calistirildi ve basarili oldu.

@@ -74,6 +74,17 @@ body.page {
   font-size: 14px;
 }
 
+.admin-row textarea {
+  border: 1px solid #d1d5db;
+  border-radius: 12px;
+  padding: 10px 14px;
+  min-width: 260px;
+  width: min(100%, 720px);
+  min-height: 140px;
+  font-size: 14px;
+  resize: vertical;
+}
+
 .btn {
   display: inline-flex;
   align-items: center;

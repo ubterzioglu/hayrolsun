@@ -22,8 +22,6 @@ FTS, `db/schema.sql` içindeki trigger’lar ile **otomatik senkron** tutulur.
 
 - **Schema**: `db/schema.sql`
 - **Seed (örnek data)**: `db/seed.sql`
-- **Migration komutu**: `npm run db:migrate` (script: `scripts/db-migrate.mjs`)
-- **Seed komutu**: `npm run db:seed` (script: `scripts/db-seed.mjs`)
 
 ### Ortam değişkenleri (Production)
 
@@ -39,9 +37,9 @@ Vercel projesinde aşağıdaki env’ler tanımlı olmalı:
 Bu işlem için iki yol var:
 
 - **(A) Turso Dashboard / SQL Editor**: en pratik yöntem
-- **(B) Lokalden SQL çalıştırma**: kendi script’inle (ileride istersen admin CLI ekleriz)
+- **(B) Lokalden SQL çalıştırma**: Turso paneli veya kendi araçların (Turso CLI, curl vb.)
 
-Şu an repoda (kasıtlı olarak) “admin panel / content editor” yok; içerik ekleme genelde Dashboard üzerinden yapılır.
+Admin panelde SQL import alani vardir; icerik ekleme Dashboard veya admin panelden yapilabilir.
 
 ### SQL query’yi nereye yazıyorum? (Turso Dashboard)
 
@@ -62,7 +60,7 @@ VALUES ('İslami', 'islami');
 
 Eğer Turso Dashboard’a erişemiyorsan, sitedeki admin ekranını kullanabilirsin:
 
-- URL: **`/admin`**
+- URL: **`/admin.html`**
 - Token: **`ADMIN_TOKEN`** (Vercel Env’e eklediğin değer)
 - “**SQL Çalıştır (Import)**” alanına SQL’ini yapıştır → **Çalıştır**
 
@@ -72,16 +70,22 @@ Güvenlik için backend yalnızca şu tablolara **INSERT** (ve kontrol amaçlı 
 - `categories`
 - `tags`
 - `dream_tags`
+- `articles`
 
 ### Terminalden SQL çalıştırma (dosya ile)
 
-Eğer SQL’i dosyada tutmak istersen:
+Eğer SQL'i dosyada tutmak istersen iki yol var:
 
-1. Örn. `import.sql` dosyası oluştur ve SQL’ini içine koy
-2. Çalıştır:
+- **Turso SQL Editor / Turso CLI** (tercih edilen)
+- **Canlı API**: `/api/admin/sql` (yalnızca INSERT/SELECT)
+
+Örnek (curl):
 
 ```bash
-npm run db:sql -- import.sql
+curl -X POST https://www.hayrolsun.site/api/admin/sql \
+  -H "content-type: application/json" \
+  -H "x-admin-token: $ADMIN_TOKEN" \
+  -d "{\"sql\":\"INSERT OR IGNORE INTO categories (name, slug) VALUES ('Islami','islami');\"}"
 ```
 
 ### A) Turso Dashboard ile yeni rüya ekleme
@@ -174,7 +178,7 @@ UPDATE dreams SET likes = likes + 1 WHERE slug = 'ruyada-yilan-gormek';
 UPDATE dreams SET dislikes = dislikes + 1 WHERE slug = 'ruyada-yilan-gormek';
 ```
 
-## 2) Schema değişikliği (migration)
+## 2) Schema değişikliği (manual)
 
 Schema değişikliği demek: yeni tablo/kolon/index/trigger eklemek veya değiştirmek demek.
 
@@ -183,22 +187,18 @@ Bu projede schema kaynağı **`db/schema.sql`**.
 ### Adımlar
 
 1. `db/schema.sql` dosyasını düzenle
-2. Production env’ler hazırken (Vercel’de zaten var), **lokal makineden** migration’ı çalıştır:
+2. **Turso SQL Editor** (veya Turso CLI) ile schema SQL'ini çalıştır
 
-```bash
-npm run db:migrate
-```
-
-> Bu komut `.env / .env.local / .env.development.local` dosyalarını otomatik okur.
-> Production için `.env` içine production Turso bilgilerini koymak yerine, güvenli yöntem: Vercel’den `vercel env pull` ile yerel dosyaya almak veya geçici olarak shell env ile çalıştırmaktır.
+> Not: `/api/admin/sql` yalnızca INSERT/SELECT kabul ettiği için schema değişikliği burada yapılamaz.
 
 ## 3) Seed (ilk veri basma)
 
-Seed yalnızca “ilk kurulum” veya “demo verisi” için.
+Seed yalnızca "ilk kurulum" veya "demo verisi" için.
 
-```bash
-npm run db:seed
-```
+Yöntemler:
+
+- Turso SQL Editor ile `db/seed.sql` çalıştır
+- Admin paneldeki SQL import alanını kullan
 
 > Seed `INSERT OR IGNORE` kullandığı için tekrar çalıştırıldığında genelde idempotent davranır.
 

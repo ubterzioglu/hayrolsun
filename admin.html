@@ -33,6 +33,23 @@
           <p id="admin-error" class="error hidden"></p>
         </section>
 
+        <section class="admin-card">
+          <h2>SQL Calistir</h2>
+          <p class="muted">Sadece INSERT/SELECT ve whitelist tablolara izin verilir.</p>
+          <div class="admin-row">
+            <textarea
+              id="sql-input"
+              class="admin-textarea"
+              rows="6"
+              placeholder="SQL komutlarini buraya yapistirin..."
+            ></textarea>
+          </div>
+          <div class="admin-row">
+            <button id="sql-run" class="btn">Calistir</button>
+            <span id="sql-status" class="muted"></span>
+          </div>
+        </section>
+
         <section class="admin-grid">
           <div class="stat-card">
             <div class="stat-label">Rüya tabir sayısı</div>

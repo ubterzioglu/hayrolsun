@@ -2,6 +2,9 @@ const tokenInput = document.getElementById('token-input');
 const saveBtn = document.getElementById('token-save');
 const refreshBtn = document.getElementById('token-refresh');
 const errorEl = document.getElementById('admin-error');
+const sqlInput = document.getElementById('sql-input');
+const sqlRun = document.getElementById('sql-run');
+const sqlStatus = document.getElementById('sql-status');
 
 const statDreams = document.getElementById('stat-dreams');
 const statArticles = document.getElementById('stat-articles');
@@ -18,6 +21,11 @@ function setError(message) {
     errorEl.classList.remove('hidden');
     errorEl.textContent = message;
   }
+}
+
+function setSqlStatus(message) {
+  if (!sqlStatus) return;
+  sqlStatus.textContent = message || '';
 }
 
 function getToken() {
@@ -68,6 +76,40 @@ async function loadAll() {
   }
 }
 
+async function runSql() {
+  const token = getToken();
+  if (!token) {
+    setError('ADMIN_TOKEN giriniz.');
+    return;
+  }
+
+  if (!sqlInput) return;
+  const sql = sqlInput.value.trim();
+  if (!sql) {
+    setSqlStatus('SQL bos.');
+    return;
+  }
+
+  setSqlStatus('Calistiriliyor...');
+  try {
+    const res = await fetch('/api/admin/sql', {
+      method: 'POST',
+      headers: {
+        'content-type': 'application/json',
+        'x-admin-token': token,
+      },
+      body: JSON.stringify({ sql }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data?.detail || data?.error || `HTTP ${res.status}`);
+    }
+    setSqlStatus(`OK (${data.executed || 0})`);
+  } catch (err) {
+    setSqlStatus(err.message || 'SQL calistirilamadi.');
+  }
+}
+
 saveBtn.addEventListener('click', () => {
   const token = tokenInput.value.trim();
   sessionStorage.setItem('adminToken', token);
@@ -75,6 +117,7 @@ saveBtn.addEventListener('click', () => {
 });
 
 refreshBtn.addEventListener('click', () => loadAll());
+if (sqlRun) sqlRun.addEventListener('click', () => runSql());
 
 const saved = getToken();
 if (saved) {
