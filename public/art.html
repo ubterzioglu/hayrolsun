@@ -161,6 +161,105 @@
         color: #4b5563;
         max-width: 720px;
       }
+      .articles-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+        gap: 24px;
+        margin: 24px 0;
+      }
+      .article-card {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 18px;
+        padding: 20px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+        transition: all 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        position: relative;
+        min-height: 280px;
+      }
+      .article-card:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 12px 32px rgba(15, 23, 42, 0.12);
+      }
+      .article-meta {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 12px;
+        font-size: 0.75rem;
+        color: #6b7280;
+      }
+      .article-date {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .article-views {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+      }
+      .article-card h2 {
+        margin: 0 0 12px 0;
+        font-size: 1.25rem;
+        font-weight: 700;
+        color: #0f172a;
+        line-height: 1.4;
+      }
+      .article-card h2 a {
+        color: inherit;
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      .article-card h2 a:hover {
+        color: #16a34a;
+      }
+      .article-excerpt {
+        flex: 1;
+        margin: 0 0 16px 0;
+        color: #4b5563;
+        font-size: 0.9rem;
+        line-height: 1.6;
+        display: -webkit-box;
+        -webkit-line-clamp: 4;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+      }
+      .article-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: auto;
+      }
+      .icon-btn {
+        background: transparent;
+        border: 1px solid #e5e7eb;
+        border-radius: 8px;
+        padding: 8px 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        font-size: 0.85rem;
+        color: #6b7280;
+        transition: all 0.2s;
+      }
+      .icon-btn:hover {
+        background: #f9fafb;
+        border-color: #16a34a;
+        color: #16a34a;
+      }
+      .icon-btn.active-like {
+        background: #dcfce7;
+        border-color: #16a34a;
+        color: #16a34a;
+      }
+      .icon-btn.active-dislike {
+        background: #fee2e2;
+        border-color: #ef4444;
+        color: #ef4444;
+      }
       .article {
         background: #ffffff;
         border: 1px solid #e5e7eb;
@@ -168,6 +267,7 @@
         padding: 22px;
         box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
         margin: 18px 0;
+        display: none;
       }
       .article h2 {
         margin-top: 0;
@@ -225,27 +325,342 @@
       function toggleMenu() {
         document.getElementById('menuDropdown').classList.toggle('open');
       }
+
+      function toggleLike(btn, articleId) {
+        const card = btn.closest('.article-card');
+        const dislikeBtn = card.querySelector('.icon-btn:last-child');
+        
+        // Toggle like
+        btn.classList.toggle('active-like');
+        
+        // Remove dislike if active
+        if (dislikeBtn.classList.contains('active-dislike')) {
+          dislikeBtn.classList.remove('active-dislike');
+        }
+        
+        // Update count (demo - in real app would call API)
+        const countSpan = btn.querySelector('span');
+        const currentCount = parseInt(countSpan.textContent);
+        if (btn.classList.contains('active-like')) {
+          countSpan.textContent = currentCount + 1;
+        } else {
+          countSpan.textContent = currentCount - 1;
+        }
+      }
+
+      function toggleDislike(btn, articleId) {
+        const card = btn.closest('.article-card');
+        const likeBtn = card.querySelector('.icon-btn:first-child');
+        
+        // Toggle dislike
+        btn.classList.toggle('active-dislike');
+        
+        // Remove like if active
+        if (likeBtn.classList.contains('active-like')) {
+          likeBtn.classList.remove('active-like');
+        }
+        
+        // Update count (demo - in real app would call API)
+        const countSpan = btn.querySelector('span');
+        const currentCount = parseInt(countSpan.textContent);
+        if (btn.classList.contains('active-dislike')) {
+          countSpan.textContent = currentCount + 1;
+        } else {
+          countSpan.textContent = currentCount - 1;
+        }
+      }
     </script>
 
     <main class="container">
       <section class="hero">
         <h1>Yazılarımız</h1>
+        <p>İslami rüya tabirleri ve rüyalar üzerine makalelerimiz</p>
       </section>
 
-      <article class="article" id="islamiyet-ve-ruyalar">
+      <div class="articles-grid">
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 15 Ocak 2026</span>
+            <span class="article-views">👁️ 342</span>
+          </div>
+          <h2><a href="#islamiyet-ve-ruyalar">İslamiyet ve Rüyalar</a></h2>
+          <p class="article-excerpt">
+            İslam, rüyaları "müminin üçte biri" olarak tanımlayarak onlara özel bir yer verir.
+            Kur'an-ı Kerim'de "Allah'ın bir işareti" olarak ifade edilen rüyalar, insanın ruh hali ve
+            imanı ile doğrudan ilişkilidir. Peygamberimiz (s.a.v.), "En güzel rüya, müminin rüyasıdır"
+            hadisiyle rüyaların temiz kalple bağlantısını vurgulamıştır.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'islamiyet-ve-ruyalar')">👍 <span>12</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'islamiyet-ve-ruyalar')">👎 <span>2</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 14 Ocak 2026</span>
+            <span class="article-views">👁️ 289</span>
+          </div>
+          <h2><a href="#ruya-nedir">Rüya Nedir</a></h2>
+          <p class="article-excerpt">
+            Rüya, insanın uyuduğunda zihnin serbestçe hareket ettiği, bilinçsiz bir durumda oluşan
+            görüntülerdir. İslam'da rüya, "ruhun serbest kalması" olarak tanımlanır ve Allah'ın izniyle
+            gerçekleşir. Kur'an-ı Kerim'de, "Allah, insanın ruhunu alır" ayetiyle uyku ve rüyaların
+            ilahi bir süreç olduğu vurgulanır.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'ruya-nedir')">👍 <span>18</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'ruya-nedir')">👎 <span>1</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 13 Ocak 2026</span>
+            <span class="article-views">👁️ 256</span>
+          </div>
+          <h2><a href="#ruyalar-ve-bilincalti">Rüyalar ve Bilinçaltı</a></h2>
+          <p class="article-excerpt">
+            Bilinçaltı kavramı, modern psikolojide rüyaları açıklamak için kullanılır; ancak İslam,
+            rüyaları Allah'ın izniyle şekillenen bir süreç olarak görür. Bilinçaltı, insanın gizli
+            arzularını yansıtabilir, ancak İslam'da rüyaların asıl kaynağı Allah'ın hikmetidir.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'ruyalar-ve-bilincalti')">👍 <span>15</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'ruyalar-ve-bilincalti')">👎 <span>3</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 12 Ocak 2026</span>
+            <span class="article-views">👁️ 198</span>
+          </div>
+          <h2><a href="#uyku-nedir">Uyku Nedir</a></h2>
+          <p class="article-excerpt">
+            Uyku, Allah'ın insanlara lütfu olan ve vücudun dinlenmesi için yaratılmış bir nimettir.
+            Kur'an-ı Kerim'de, "Allah, size geceyi uyku olarak yaratmıştır" ayetiyle uyku, Allah'ın
+            hikmetiyle şekillenmiş bir süreç olarak tanımlanır.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'uyku-nedir')">👍 <span>22</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'uyku-nedir')">👎 <span>1</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 11 Ocak 2026</span>
+            <span class="article-views">👁️ 412</span>
+          </div>
+          <h2><a href="#astral-seyahat-nedir">Astral Seyahat Nedir</a></h2>
+          <p class="article-excerpt">
+            Astral seyahat, modern dünyada "ruhun bedenden ayrılması" olarak tanımlanan bir kavramdır;
+            ancak İslam'da bu inançlar kabul edilmez. Kur'an-ı Kerim ve Sünnet'ten destek alamayan bu
+            kavram, şirk ve batıl inançlara kapı açabilir.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'astral-seyahat')">👍 <span>8</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'astral-seyahat')">👎 <span>5</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 10 Ocak 2026</span>
+            <span class="article-views">👁️ 178</span>
+          </div>
+          <h2><a href="#burclar">Burçlar</a></h2>
+          <p class="article-excerpt">
+            Burçlar, modern dünyada yaygın bir inanç sistemidir; ancak İslam'da burçlara göre gelecek tahmini yapmak şirk kabul edilir. Kur'an-ı Kerim ve Sünnet, burçlara dayalı falcılığı ve kehanetin kesinlikle yasak olduğunu belirtir.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'burclar')">👍 <span>6</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'burclar')">👎 <span>8</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 9 Ocak 2026</span>
+            <span class="article-views">👁️ 324</span>
+          </div>
+          <h2><a href="#kontrol-edilebilen-ruyalar">Kontrol Edilebilen Rüyalar</a></h2>
+          <p class="article-excerpt">
+            Kontrol edilebilen rüyalar, "lucid dream" olarak bilinen modern bir kavramdır. İslam'da rüyalar Allah'ın izniyle şekillenir ve insanın kontrolünde değildir. Rüyaları kontrol etmeye çalışmak, batıl inançlara kapı açabilir.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'kontrol-edilebilen')">👍 <span>14</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'kontrol-edilebilen')">👎 <span>4</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 8 Ocak 2026</span>
+            <span class="article-views">👁️ 567</span>
+          </div>
+          <h2><a href="#istihare-nasil-yapilir">İstihare Nasıl Yapılır</a></h2>
+          <p class="article-excerpt">
+            İstihare namazı, Müslümanın bir kararı vermek için Allah'tan yardım istemesidir. İslam'da istihare, önemli kararlar öncesinde yapılan bir ibadettir. Peygamberimiz (s.a.v.), "Sizden biri bir işe karar verdiğinde istihare namazı kılsın" buyurmuştur.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'istihare')">👍 <span>45</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'istihare')">👎 <span>1</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 7 Ocak 2026</span>
+            <span class="article-views">👁️ 245</span>
+          </div>
+          <h2><a href="#psikolojik-ruya-yorumlari">Psikolojik Rüya Yorumları</a></h2>
+          <p class="article-excerpt">
+            Modern psikoloji, rüyaları bilinçaltının bir yansıması olarak görür. İslam'da ise rüyalar Allah'ın izniyle gerçekleşir. Psikolojik yorumlar, İslam'ın temel prensiplerini aşmamalıdır.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'psikolojik')">👍 <span>19</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'psikolojik')">👎 <span>3</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 6 Ocak 2026</span>
+            <span class="article-views">👁️ 389</span>
+          </div>
+          <h2><a href="#ruya-yorumlama-ve-tabiri">Rüya Yorumlama ve Tabiri</a></h2>
+          <p class="article-excerpt">
+            Rüya yorumlaması, ehliyetli alimlerin ve bilgili kişilerin yapabileceği bir sanattır. İslam'da rüya tabiri, Kur'an ve Sünnet ışığında yapılmalıdır. Her rüyanın yorumu yoktur ve her yorumcu güvenilir değildir.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'yorumlama')">👍 <span>28</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'yorumlama')">👎 <span>2</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 5 Ocak 2026</span>
+            <span class="article-views">👁️ 412</span>
+          </div>
+          <h2><a href="#ruyalara-dair-gercekler">Rüyalara Dair Gerçekler</a></h2>
+          <p class="article-excerpt">
+            Rüyalar, İslam'da Allah'ın bir nimeti olarak kabul edilir. Ancak rüyalara dair birçok yanlış inanç vardır. Rüyaların gerçek manası, Kur'an ve Sünnet ışığında anlaşılmalıdır.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'gercekler')">👍 <span>31</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'gercekler')">👎 <span>2</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 4 Ocak 2026</span>
+            <span class="article-views">👁️ 501</span>
+          </div>
+          <h2><a href="#tekrarlanan-ruyalar">Tekrarlanan Rüyalar</a></h2>
+          <p class="article-excerpt">
+            Tekrarlanan rüyalar, İslam'da özel bir önem taşır. Peygamberimiz (s.a.v.), "Güzel rüya tekrarlanırsa, Allah'tan bir müjdedir" buyurmuştur. Tekrarlayan rüyalar, özel dikkat edilmesi gereken mesajlar olabilir.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'tekrarlanan')">👍 <span>38</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'tekrarlanan')">👎 <span>1</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 3 Ocak 2026</span>
+            <span class="article-views">👁️ 356</span>
+          </div>
+          <h2><a href="#islamda-ruyalarin-kaynagi">İslam'da Rüyaların Kaynağı</a></h2>
+          <p class="article-excerpt">
+            İslam'da rüyaların üç kaynağı vardır: Allah'tan gelen müjdeler, insanın içinden gelen düşünceler ve şeytanın vesvesesi. Bu ayrımı bilmek, rüyaları doğru değerlendirmek için önemlidir.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'kaynagi')">👍 <span>42</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'kaynagi')">👎 <span>0</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 2 Ocak 2026</span>
+            <span class="article-views">👁️ 423</span>
+          </div>
+          <h2><a href="#ruyalarin-uce-ayrilmasi">Rüyaların Üçe Ayrılması</a></h2>
+          <p class="article-excerpt">
+            Peygamberimiz (s.a.v.), "Rüya üç kısımdır: Allah'tan gelen müjde, insanın içinden gelen düşünceler ve şeytanın vesvesesi" buyurmuştur. Bu hadis, rüyaları anlamanın temelini oluşturur.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'uce-ayrilmasi')">👍 <span>36</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'uce-ayrilmasi')">👎 <span>1</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 1 Ocak 2026</span>
+            <span class="article-views">👁️ 298</span>
+          </div>
+          <h2><a href="#ruya-tabirinin-sinirlari">Rüya Tabirinin Sınırları</a></h2>
+          <p class="article-excerpt">
+            Rüya tabiri, sınırsız bir bilgi değildir. İslam'da rüya tabirinin belirli kuralları ve sınırları vardır. Her rüyanın bir anlamı olmayabilir ve her yorumcu güvenilir değildir.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'sinirlari')">👍 <span>24</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'sinirlari')">👎 <span>2</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 31 Aralık 2025</span>
+            <span class="article-views">👁️ 367</span>
+          </div>
+          <h2><a href="#ruyalar-hayat-kararlarini-belirler-mi">Rüyalar Hayat Kararlarını Belirler Mi</a></h2>
+          <p class="article-excerpt">
+            Rüyalar, hayat kararlarında rehber olabilir ancak tek belirleyici olmamalıdır. İslam'da akıl, ilim ve istişare de önemlidir. Rüyaları aşırı önemsemek, dengeli bir yaklaşımı bozabilir.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'hayat-kararlari')">👍 <span>29</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'hayat-kararlari')">👎 <span>3</span></button>
+          </div>
+        </div>
+
+        <div class="article-card">
+          <div class="article-meta">
+            <span class="article-date">📅 30 Aralık 2025</span>
+            <span class="article-views">👁️ 445</span>
+          </div>
+          <h2><a href="#ruyalar-ve-iman-iliskisi">Rüyalar ve İman İlişkisi</a></h2>
+          <p class="article-excerpt">
+            Rüyalar, imanla doğrudan ilişkilidir. İmanı güçlü olanların rüyaları daha aydınlık ve huzur vericidir. Peygamberimiz (s.a.v.), "Müminin rüyası, nübüvvetin kırk altıda biridir" buyurmuştur.
+          </p>
+          <div class="article-actions">
+            <button class="icon-btn" onclick="toggleLike(this, 'iman-iliskisi')">👍 <span>52</span></button>
+            <button class="icon-btn" onclick="toggleDislike(this, 'iman-iliskisi')">👎 <span>0</span></button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Full articles hidden by default -->
+      <article class="article" id="islamiyet-ve-ruyalar" style="display: none;">
         <h2>İslamiyet ve Rüyalar</h2>
         <p>
           İslam, rüyaları "müminin üçte biri" olarak tanımlayarak onlara özel bir yer verir.
-          Kur’an-ı Kerim’de "Allah’ın bir işareti" olarak ifade edilen rüyalar, insanın ruh hali ve
+          Kur'an-ı Kerim'de "Allah'ın bir işareti" olarak ifade edilen rüyalar, insanın ruh hali ve
           imanı ile doğrudan ilişkilidir. Peygamberimiz (s.a.v.), "En güzel rüya, müminin rüyasıdır"
-          hadisiyle rüyaların temiz kalple bağlantısını vurgulamıştır. İslam’da rüyalar, Allah’ın
+          hadisiyle rüyaların temiz kalple bağlantısını vurgulamıştır. İslam'da rüyalar, Allah'ın
           izniyle gelen bir nimet ve bazen de uyaran bir mesaj olabilir; ancak her rüyanın manası
-          yoktur. Batıl inançlardan uzak durulması, Kur’an ve Sünnet ışığında değerlendirilmesi
+          yoktur. Batıl inançlardan uzak durulması, Kur'an ve Sünnet ışığında değerlendirilmesi
           gerekir.
         </p>
         <p>
-          Rüyaların İslam’da yeri, Hz. Yusuf (a.s.)’ın rüyalarının tefsirini içeren Kur’an
-          ayetlerinde de net bir şekilde ortaya konur. Rüyalar, bilinçaltı ile değil, Allah’ın
+          Rüyaların İslam'da yeri, Hz. Yusuf (a.s.)'ın rüyalarının tefsirini içeren Kur'an
+          ayetlerinde de net bir şekilde ortaya konur. Rüyalar, bilinçaltı ile değil, Allah'ın
           iradesiyle şekillenir. Bu yüzden rüya yorumlaması, sadece ehliyetli alimlerin yapabileceği
           bir bilimdir. Müslüman, rüyalarını manevi bir rehber olarak görmeli, ancak her rüyayı
           gerçekleştirmeye kalkmamalıdır. Rüya yorumlaması, imanın ve dua ile beslenen bir
@@ -253,15 +668,15 @@
         </p>
         <p>
           İslam, rüyaları anlamak için "istikametli niyet" ve "sabah-akşam duaları" gibi pratikler
-          önerir. Rüyaların kontrolü, Allah’a tevekkül ederek ve istikametli bir yaşam süresiyle
+          önerir. Rüyaların kontrolü, Allah'a tevekkül ederek ve istikametli bir yaşam süresiyle
           mümkündür. Rüya tabiri, kişinin niyeti ve hayatındaki durumla bağlantılıdır. Bu yüzden
           rüyalar, sadece gece dünyasının eseri değil, imanın ve dua ile beslenen bir hayatın
-          ışığıdır. Müslüman, rüyaları değerlendirirken her zaman Kur’an ve Sünnet’i referans
+          ışığıdır. Müslüman, rüyaları değerlendirirken her zaman Kur'an ve Sünnet'i referans
           almalıdır.
         </p>
       </article>
 
-      <article class="article" id="ruya-nedir">
+      <article class="article" id="ruya-nedir" style="display: none;">
         <h2>Rüya Nedir</h2>
         <p>
           Rüya, insanın uyuduğunda zihnin serbestçe hareket ettiği, bilinçsiz bir durumda oluşan
@@ -285,7 +700,7 @@
         </p>
       </article>
 
-      <article class="article" id="ruyalar-ve-bilincalti">
+      <article class="article" id="ruyalar-ve-bilincalti" style="display: none;">
         <h2>Rüyalar ve Bilinçaltı</h2>
         <p>
           Bilinçaltı kavramı, modern psikolojide rüyaları açıklamak için kullanılır; ancak İslam,
@@ -309,7 +724,7 @@
         </p>
       </article>
 
-      <article class="article" id="uyku-nedir">
+      <article class="article" id="uyku-nedir" style="display: none;">
         <h2>Uyku Nedir</h2>
         <p>
           Uyku, Allah’ın insanlara lütfu olan ve vücudun dinlenmesi için yaratılmış bir nimettir.
@@ -332,7 +747,7 @@
         </p>
       </article>
 
-      <article class="article" id="astral-seyahat-nedir">
+      <article class="article" id="astral-seyahat-nedir" style="display: none;">
         <h2>Astral Seyahat Nedir</h2>
         <p>
           Astral seyahat, modern dünyada "ruhun bedenden ayrılması" olarak tanımlanan bir kavramdır;
@@ -355,7 +770,7 @@
         </p>
       </article>
 
-      <article class="article" id="burclar">
+      <article class="article" id="burclar" style="display: none;">
         <h2>Burçlar</h2>
         <p>
           Burçlar, yıldızların konumuna dayalı bir kader inancıdır; ancak İslam’da bu tür inançlar
@@ -377,7 +792,7 @@
         </p>
       </article>
 
-      <article class="article" id="kontrol-edilebilen-ruyalar">
+      <article class="article" id="kontrol-edilebilen-ruyalar" style="display: none;">
         <h2>Kontrol Edilebilen Rüyalar</h2>
         <p>
           Kontrol edilebilen rüyalar, modern psikolojide "lucid dream" olarak tanımlanır; ancak
@@ -401,7 +816,7 @@
         </p>
       </article>
 
-      <article class="article" id="istihare-nasil-yapilir">
+      <article class="article" id="istihare-nasil-yapilir" style="display: none;">
         <h2>İstihare Nasıl Yapılır</h2>
         <p>
           İstihare namazı, önemli kararlar alırken Allah’tan doğru yolu istemek için kılınan bir
@@ -423,7 +838,7 @@
         </p>
       </article>
 
-      <article class="article" id="psikolojik-ruya-yorumlari">
+      <article class="article" id="psikolojik-ruya-yorumlari" style="display: none;">
         <h2>Psikolojik Rüya Yorumları</h2>
         <p>
           Psikolojik rüya yorumları, modern dünyada rüyaları anlamak için kullanılan bir yöntemdir;
@@ -445,7 +860,7 @@
         </p>
       </article>
 
-      <article class="article" id="ruya-yorumlama-ve-tabiri">
+      <article class="article" id="ruya-yorumlama-ve-tabiri" style="display: none;">
         <h2>Rüya Yorumlama ve Tabiri</h2>
         <p>
           Rüya yorumlama, İslam’da "tebşir" olarak adlandırılan ve ehliyetli alimlerin yaptığı bir
@@ -465,7 +880,7 @@
         </p>
       </article>
 
-      <article class="article" id="ruyalara-dair-gercekler">
+      <article class="article" id="ruyalara-dair-gercekler" style="display: none;">
         <h2>Rüyalara Dair Gerçekler</h2>
         <p>
           Rüyalar, İslam’da "müminin üçte biri" olarak tanımlanır ve Allah’ın izniyle oluşur.
@@ -486,7 +901,7 @@
         </p>
       </article>
 
-      <article class="article" id="tekrarlanan-ruyalar">
+      <article class="article" id="tekrarlanan-ruyalar" style="display: none;">
         <h2>Tekrarlanan Rüyalar</h2>
         <p>
           Tekrarlanan rüyalar, İslam’da Allah’ın insanı uyarmak veya doğru yola yönlendirmek için
@@ -507,8 +922,8 @@
       </article>
     
 
-      <article class="article" id="islamda-ruyalarin-kaynagi">
-        <h2>İslam’da Rüyaların Kaynağı</h2>
+      <article class="article" id="islamda-ruyalarin-kaynagi" style="display: none;">
+        <h2>İslam'da Rüyaların Kaynağı</h2>
         <p>
           Rüyalar, insanın uyku hâlinde gördüğü hallerdir. İslam’da rüyalar, tamamen inkâr edilmez.
           Ancak her rüya da ilahi bir mesaj olarak kabul edilmez. Rüyaların kaynağı, Allah’ın izniyle
@@ -537,7 +952,7 @@
         </p>
       </article>
 
-      <article class="article" id="ruyalarin-uce-ayrilmasi">
+      <article class="article" id="ruyalarin-uce-ayrilmasi" style="display: none;">
         <h2>Rüyaların Üçe Ayrılması</h2>
         <p>
           İslam’da rüyalar tek tip kabul edilmez. Peygamberimiz (s.a.v.) rüyaları üç ana gruba
@@ -565,7 +980,7 @@
         </p>
       </article>
 
-      <article class="article" id="ruya-tabirinin-sinirlari">
+      <article class="article" id="ruya-tabirinin-sinirlari" style="display: none;">
         <h2>Rüya Tabirinin Sınırları</h2>
         <p>
           Rüya tabiri, İslam’da herkesin yapabileceği bir alan değildir. Bilgi ve tecrübe gerektirir.
@@ -594,7 +1009,7 @@
         </p>
       </article>
 
-      <article class="article" id="ruyalar-hayat-kararlarini-belirler-mi">
+      <article class="article" id="ruyalar-hayat-kararlarini-belirler-mi" style="display: none;">
         <h2>Rüyalar Hayat Kararlarını Belirler mi?</h2>
         <p>
           İslam’da rüyalar, hayatın merkezine konulmaz. Önemli kararlar rüyaya göre alınmaz. Evlilik,
@@ -623,7 +1038,7 @@
         </p>
       </article>
 
-      <article class="article" id="ruyalar-ve-iman-iliskisi">
+      <article class="article" id="ruyalar-ve-iman-iliskisi" style="display: none;">
         <h2>Rüyalar ve İman İlişkisi</h2>
         <p>
           Rüyalar ile iman arasında dolaylı bir ilişki vardır. İslam’a göre rüyalar, kişinin iç
@@ -658,16 +1073,19 @@
         <div class="flex items-center justify-center space-x-2 mb-3">
           <span class="text-lg font-bold" style="background: linear-gradient(90deg, #059669, #10b981, #14b8a6); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">hayrolsun.site</span>
         </div>
-        <p class="mb-2 text-gray-600" style="font-size: 0.75rem;">
-          © 2026 Hayrolsun.site - Tüm hakları saklıdır. Rüya tabirleri Kur'an-ı Kerim ve hadis-i şeriflere dayanmaktadır.
+        <p class="mb-3 text-gray-600" style="font-size: 0.75rem;">
+          Rüya tabirleri Kur'an-ı Kerim ve hadis-i şeriflere dayanmaktadır.
         </p>
-        <div class="flex flex-wrap justify-center gap-3 text-gray-500" style="font-size: 0.7rem;">
+        <div class="flex flex-wrap justify-center gap-3 text-gray-500 mb-3" style="font-size: 0.7rem;">
           <a href="/art.html" class="hover:text-emerald-600 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5">Yazılarımız</a>
           <a href="#" class="hover:text-emerald-600 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5">Gizlilik Politikası</a>
           <a href="/contact.html" class="hover:text-emerald-600 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5">İletişim</a>
           <a href="/share.html" class="hover:text-emerald-600 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5">Rüya Paylaş</a>
           <a href="#" class="hover:text-emerald-600 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5">Hakkımızda</a>
         </div>
+        <p class="text-gray-500" style="font-size: 0.7rem;">
+          © 2026 Hayrolsun.site - Tüm hakları saklıdır.
+        </p>
       </div>
     </footer>
     <script>
