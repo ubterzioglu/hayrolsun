@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 
 type Summary = {
   dreamCount: number;
+  articleCount: number;
   categoryCount: number;
   tagCount: number;
   totalViews: number;
@@ -172,16 +173,20 @@ export default function AdminPage() {
           )}
         </section>
 
-        <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <section className="grid grid-cols-1 md:grid-cols-4 gap-4">
           <div className="rounded-2xl bg-white shadow p-5">
             <div className="text-sm text-gray-500">Mevcut rüya tabiri sayısı</div>
-            <div className="text-3xl font-bold">{summary ? formatNumber(summary.dreamCount) : '—'}</div>
+            <div className="text-3xl font-bold">{summary ? formatNumber(summary.dreamCount) : '-'}</div>
+          </div>
+          <div className="rounded-2xl bg-white shadow p-5">
+            <div className="text-sm text-gray-500">Mevcut makale sayısı</div>
+            <div className="text-3xl font-bold">{summary ? formatNumber(summary.articleCount) : '-'}</div>
           </div>
           <div className="rounded-2xl bg-white shadow p-5">
             <div className="text-sm text-gray-500">Toplam görüntülenme (rüya sayfaları)</div>
-            <div className="text-3xl font-bold">{summary ? formatNumber(summary.totalViews) : '—'}</div>
+            <div className="text-3xl font-bold">{summary ? formatNumber(summary.totalViews) : '-'}</div>
             <div className="text-xs text-gray-500 mt-1">
-              Not: Bu metrik “tekil kişi” değildir; rüya sayfalarının toplam görüntülenmesidir.
+              Not: Bu metrik "tekil kişi" değildir; rüya sayfalarının toplam görüntülenmesidir.
             </div>
           </div>
           <div className="rounded-2xl bg-white shadow p-5">

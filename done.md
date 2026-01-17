@@ -13,3 +13,9 @@
 - `public/sitemap.html` icinde “Yazilarimiz” linki varligi kontrol edildi.
 - Deep crawl (sitemap+robots) calistirildi: 200 OK (robots, sitemap, ana sayfa, sitemap.html). Canli sitemap’ta `art.html` henuz yok (deploy edilmedi).
 - Test calistirilmadi.
+- `0/ruyaadd.sql` iceriği `db/seed.sql` dosyasina `INSERT OR IGNORE` olacak sekilde eklendi (kod fence temizlendi).
+- `db/seed.sql` icinde `İslami` kategorisi eklendi.
+- Ana sayfa kategori filtrelerine `İslami` secenegi eklendi (`src/pages/Home.tsx`).
+- `db/seed.sql` icindeki kod fence satirlari temizlendi; satir-içi `);INSERT` bolunmeleri duzeltildi.
+- `npm run db:seed` calistirildi ve basarili oldu.
+- Duplicate kontrolu: `db/seed.sql` icinde tekrar eden slug bulundu ve temizlendi (artık duplicate yok).

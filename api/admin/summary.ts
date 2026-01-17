@@ -15,10 +15,11 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
 
   const client = tursoClient();
   try {
-    const [dreams, categories, tags, totals] = await Promise.all([
+    const [dreams, categories, tags, articles, totals] = await Promise.all([
       client.execute('SELECT COUNT(*) as c FROM dreams'),
       client.execute('SELECT COUNT(*) as c FROM categories'),
       client.execute('SELECT COUNT(*) as c FROM tags'),
+      client.execute('SELECT COUNT(*) as c FROM articles'),
       client.execute(
         'SELECT COALESCE(SUM(views),0) as views, COALESCE(SUM(likes),0) as likes, COALESCE(SUM(dislikes),0) as dislikes FROM dreams'
       ),
@@ -28,6 +29,7 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
       dreamCount: Number(dreams.rows[0]?.c ?? 0),
       categoryCount: Number(categories.rows[0]?.c ?? 0),
       tagCount: Number(tags.rows[0]?.c ?? 0),
+      articleCount: Number(articles.rows[0]?.c ?? 0),
       totalViews: Number(totals.rows[0]?.views ?? 0),
       totalLikes: Number(totals.rows[0]?.likes ?? 0),
       totalDislikes: Number(totals.rows[0]?.dislikes ?? 0),

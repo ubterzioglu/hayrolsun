@@ -431,5 +431,30 @@
     <footer class="container footer">
       Allah Teâlâ en doğrusunu bilir.
     </footer>
+    <script>
+      (function () {
+        const title = document.querySelector('.site-title');
+        const tagline = document.querySelector('.site-tagline');
+        if (!title || !tagline) return;
+
+        function updateSize() {
+          const titleWidth = title.offsetWidth;
+          const taglineWidth = tagline.offsetWidth;
+          if (!titleWidth || !taglineWidth) return;
+          const currentSize = parseFloat(getComputedStyle(title).fontSize);
+          if (!Number.isFinite(currentSize) || currentSize <= 0) return;
+          const targetSize = (taglineWidth / titleWidth) * currentSize;
+          if (!Number.isFinite(targetSize)) return;
+          if (Math.abs(targetSize - currentSize) < 0.5) return;
+          title.style.fontSize = `${targetSize}px`;
+        }
+
+        updateSize();
+        const ro = new ResizeObserver(updateSize);
+        ro.observe(title);
+        ro.observe(tagline);
+        window.addEventListener('resize', updateSize);
+      })();
+    </script>
   </body>
 </html>

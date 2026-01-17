@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { Clock, Eye, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
@@ -80,6 +80,7 @@ const categories = [
   { label: 'Hareket', slug: 'hareket' },
   { label: 'Hayat', slug: 'hayat' },
   { label: 'Maddi', slug: 'maddi' },
+  { label: 'İslami', slug: 'islami' },
 ] as const;
 
 type Props = {
@@ -92,6 +93,37 @@ export default function Home(_: Props) {
   const [items, setItems] = useState<DreamListItem[]>(fallbackDreams);
   const [loading, setLoading] = useState(false);
   const [usingFallback, setUsingFallback] = useState(true);
+  const titleRef = useRef<HTMLHeadingElement | null>(null);
+  const taglineRef = useRef<HTMLParagraphElement | null>(null);
+
+  useLayoutEffect(() => {
+    const titleEl = titleRef.current;
+    const taglineEl = taglineRef.current;
+    if (!titleEl || !taglineEl) return;
+
+    const updateSize = () => {
+      const titleWidth = titleEl.offsetWidth;
+      const taglineWidth = taglineEl.offsetWidth;
+      if (!titleWidth || !taglineWidth) return;
+      const currentSize = parseFloat(getComputedStyle(titleEl).fontSize);
+      if (!Number.isFinite(currentSize) || currentSize <= 0) return;
+      const targetSize = (taglineWidth / titleWidth) * currentSize * 1.25;
+      if (!Number.isFinite(targetSize)) return;
+      if (Math.abs(targetSize - currentSize) < 0.5) return;
+      titleEl.style.fontSize = `${targetSize}px`;
+    };
+
+    updateSize();
+    const ro = new ResizeObserver(updateSize);
+    ro.observe(titleEl);
+    ro.observe(taglineEl);
+    window.addEventListener('resize', updateSize);
+
+    return () => {
+      ro.disconnect();
+      window.removeEventListener('resize', updateSize);
+    };
+  }, []);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -169,10 +201,15 @@ export default function Home(_: Props) {
                     }}
                   />
                   <div>
-                    <h1 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                    <h1
+                      ref={titleRef}
+                      className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent"
+                    >
                       hayrolsun.site
                     </h1>
-                    <p className="text-sm opacity-75">İslami Rüya Tabirleri Rehberiniz</p>
+                    <p ref={taglineRef} className="text-sm opacity-75">
+                      İslami Rüya Tabirleri Rehberiniz
+                    </p>
                   </div>
                 </div>
 

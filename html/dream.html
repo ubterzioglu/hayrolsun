@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rüya Detayı | hayrolsun.site</title>
+    <meta name="robots" content="index,follow" />
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="page">
+    <header class="site-header">
+      <div class="container header-row">
+        <div class="brand">
+          <a href="./index.html" class="btn btn-outline">Geri</a>
+          <div>
+            <h1 class="brand-title">hayrolsun.site</h1>
+            <p class="brand-tagline">İslami Rüya Tabirleri Rehberiniz</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="detail">
+      <div class="container">
+        <div id="detail-state" class="muted">Yükleniyor...</div>
+        <article id="detail-card" class="detail-card hidden">
+          <div class="detail-meta">
+            <span id="detail-category" class="pill"></span>
+            <span id="detail-date" class="muted"></span>
+            <span id="detail-slug" class="code"></span>
+          </div>
+          <h2 id="detail-title"></h2>
+          <p id="detail-body" class="detail-body"></p>
+
+          <div class="detail-actions">
+            <span id="detail-views" class="muted"></span>
+            <button id="like-btn" class="btn btn-outline">Beğen</button>
+            <button id="dislike-btn" class="btn btn-outline">Beğenme</button>
+          </div>
+        </article>
+      </div>
+    </main>
+
+    <script src="./dream.js" defer></script>
+  </body>
+</html>

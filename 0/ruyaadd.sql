@@ -1,313 +1,14 @@
-PRAGMA foreign_keys = ON;
-
-INSERT OR IGNORE INTO categories (name, slug) VALUES
-  ('Doğa', 'doga'),
-  ('Hareket', 'hareket'),
-  ('Vücut', 'vucut'),
-  ('Hayvanlar', 'hayvanlar'),
-  ('Hayat', 'hayat'),
-  ('Maddi', 'maddi'),
-  ('İslami', 'islami');
-
-INSERT OR IGNORE INTO tags (name, slug) VALUES
-  ('Su', 'su'),
-  ('Uçmak', 'ucmak'),
-  ('Diş', 'dis'),
-  ('Yılan', 'yilan'),
-  ('Ölüm', 'olum'),
-  ('Para', 'para');
-
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating) VALUES
-  (
-    'Rüyada Su Görmek',
-    'ruyada-su-gormek',
-    'Rüyada su görmek; suyun temizliği, berraklığı ve akışına göre farklı mânâlara gelebilir. Temiz ve berrak su hayra, ferahlığa ve gönül huzuruna işaret eder. Bulanık/kirli su ise sıkıntı ve imtihanı hatırlatabilir. Allah Teâlâ en doğrusunu bilir.',
-    'doga',
-    0,
-    0
-  ),
-  (
-    'Rüyada Uçmak Görmek',
-    'ruyada-ucmak',
-    'Rüyada uçmak; niyet ve hâle göre yükseliş, arzu edilen bir maksada yaklaşma veya bir belâdan kurtuluş şeklinde yorumlanabilir. Uçuş esnasındaki huzur, tabirin hayra dönmesine vesile olabilir. Allah Teâlâ en doğrusunu bilir.',
-    'hareket',
-    0,
-    0
-  ),
-  (
-    'Rüyada Diş Düşmesi Görmek',
-    'ruyada-dis-dusmesi',
-    'Rüyada dişin düşmesi; aile, yakınlar ve geçimle ilgili bazı endişeleri hatırlatabilir. Detaylar (kaç diş, acı, kan vb.) tabiri etkiler. Dua ve sadaka ile hayra çevirmeye gayret edilebilir. Allah Teâlâ en doğrusunu bilir.',
-    'vucut',
-    0,
-    0
-  ),
-  (
-    'Rüyada Yılan Görmek',
-    'ruyada-yilan-gormek',
-    'Rüyada yılan görmek; bazen düşmanlık, bazen de gizli bir imtihanı işaret edebilir. Yılanın rengi, büyüklüğü ve davranışı tabiri değiştirir. Korunma duaları ve istiğfar tavsiye edilir. Allah Teâlâ en doğrusunu bilir.',
-    'hayvanlar',
-    0,
-    0
-  ),
-  (
-    'Rüyada Ölüm Görmek',
-    'ruyada-olum-gormek',
-    'Rüyada ölüm görmek; çoğu zaman bir hâlin kapanıp yeni bir dönemin başlamasına, tevbe ve dönüşe işaret edebilir. Böyle rüyalar ibret ve muhasebeye vesile olabilir. Allah Teâlâ en doğrusunu bilir.',
-    'hayat',
-    0,
-    0
-  ),
-  (
-    'Rüyada Para Görmek',
-    'ruyada-para-gormek',
-    'Rüyada para görmek; rızık, emanet ve sorumlulukla ilgili işaretler taşıyabilir. Paranın bulunması/harcanması, miktarı ve türü tabiri değiştirir. Helâl kazanca yönelip şükür tavsiye edilir. Allah Teâlâ en doğrusunu bilir.',
-    'maddi',
-    0,
-    0
-  );
-
-INSERT OR IGNORE INTO articles (title, slug, body) VALUES
-  (
-    'İslamiyet ve Rüyalar',
-    'islamiyet-ve-ruyalar',
-    'İslam, rüyaları "müminin üçte biri" olarak tanımlayarak onlara özel bir yer verir. Kur’an-ı Kerim’de "Allah’ın bir işareti" olarak ifade edilen rüyalar, insanın ruh hali ve imanı ile doğrudan ilişkilidir. Peygamberimiz (s.a.v.), "En güzel rüya, müminin rüyasıdır" hadisiyle rüyaların temiz kalple bağlantısını vurgulamıştır. İslam’da rüyalar, Allah’ın izniyle gelen bir nimet ve bazen de uyaran bir mesaj olabilir; ancak her rüyanın manası yoktur. Batıl inançlardan uzak durulması, Kur’an ve Sünnet ışığında değerlendirilmesi gerekir.
-
-Rüyaların İslam’da yeri, Hz. Yusuf (a.s.)’ın rüyalarının tefsirini içeren Kur’an ayetlerinde de net bir şekilde ortaya konur. Rüyalar, bilinçaltı ile değil, Allah’ın iradesiyle şekillenir. Bu yüzden rüya yorumlaması, sadece ehliyetli alimlerin yapabileceği bir bilimdir. Müslüman, rüyalarını manevi bir rehber olarak görmeli, ancak her rüyayı gerçekleştirmeye kalkmamalıdır. Rüya yorumlaması, imanın ve dua ile beslenen bir yaklaşımla yapılmalıdır.
-
-İslam, rüyaları anlamak için "istikametli niyet" ve "sabah-akşam duaları" gibi pratikler önerir. Rüyaların kontrolü, Allah’a tevekkül ederek ve istikametli bir yaşam süresiyle mümkündür. Rüya tabiri, kişinin niyeti ve hayatındaki durumla bağlantılıdır. Bu yüzden rüyalar, sadece gece dünyasının eseri değil, imanın ve dua ile beslenen bir hayatın ışığıdır. Müslüman, rüyaları değerlendirirken her zaman Kur’an ve Sünnet’i referans almalıdır.'
-  ),
-  (
-    'Rüya Nedir',
-    'ruya-nedir',
-    'Rüya, insanın uyuduğunda zihnin serbestçe hareket ettiği, bilinçsiz bir durumda oluşan görüntülerdir. İslam’da rüya, "ruhun serbest kalması" olarak tanımlanır ve Allah’ın izniyle gerçekleşir. Kur’an-ı Kerim’de, "Allah, insanın ruhunu alır" ayetiyle uyku ve rüyaların ilahi bir süreç olduğu vurgulanır. Rüyalar, bazen müjde, bazen de uyarı niteliğinde olabilir; ancak her rüyanın manası yoktur.
-
-Peygamberimiz (s.a.v.), "Rüya üç kısımdır: Allah’tan gelen müjde, insanın içinden gelen düşünceler ve şeytanın vesvesesi" buyurarak rüyaları üç ana başlıkta toplamıştır. Müslüman, rüyalarını değerlendirmek için bu ayrımı dikkate almalıdır. Güzel rüyalar, Allah’ın lütfu; kötü rüyalar ise genellikle şeytanın vesvesesidir. Bu yüzden rüyaların yorumu, imanla ve bilgiyle yapılmalıdır.
-
-Rüya, insanın kalbinin temizliğiyle doğrudan ilişkilidir. İmanı güçlü olanların rüyaları genellikle daha aydınlıktır. Rüya tabiri, ehliyetli alimlerin danışılmasıyla yapılmalıdır. Her rüya gerçek olmayabilir; bu yüzden rüyaları aşırı önemsemek veya korkmamak gerekir. Rüya, İslam’da "ruhun huzur anı" olarak kabul edilir ve imanla beslenmelidir.'
-  ),
-  (
-    'Rüyalar ve Bilinçaltı',
-    'ruyalar-ve-bilincalti',
-    'Bilinçaltı kavramı, modern psikolojide rüyaları açıklamak için kullanılır; ancak İslam, rüyaları Allah’ın izniyle şekillenen bir süreç olarak görür. Bilinçaltı, insanın gizli arzularını yansıtabilir, ancak İslam’da rüyaların asıl kaynağı Allah’ın hikmetidir. Peygamberimiz (s.a.v.), "Rüya, müminin üçte biridir" diyerek rüyaların manevi boyutunu vurgulamıştır.
-
-Rüyalar, bilinçaltı ile bağlantılı olsa bile sonucu Allah’ın elindedir. Bu yüzden bilinçaltı üzerinden yapılan yorumlar, İslam’ın temel prensiplerini aşmamalıdır. Müslüman, rüyalarını anlamak için Kur’an ve Sünnet’i referans almalı, psikolojik yorumlara aşırı güvenmemelidir. Rüya tabiri, imanla ve ehliyetli alimlerin görüşüyle yapılmalıdır.
-
-İslam, bilinçaltı kavramını reddetmez; ancak onu Allah’ın kudreti çerçevesinde değerlendirir. Rüyalar, kişinin niyeti, dua ederken iç hali ve yaşam tarzıyla ilişkilidir. Bu yüzden rüyaları anlamak için, sadece bilinçaltı değil, iman ve dua ile beslenen bir yaklaşım gerekir. Rüya, İslam’da "ruhun huzur anı" olarak kabul edilir ve imanla beslenmelidir.'
-  ),
-  (
-    'Uyku Nedir',
-    'uyku-nedir',
-    'Uyku, Allah’ın insanlara lütfu olan ve vücudun dinlenmesi için yaratılmış bir nimettir. Kur’an-ı Kerim’de, "Allah, size geceyi uyku olarak yaratmıştır" ayetiyle uyku, Allah’ın hikmetiyle şekillenmiş bir süreç olarak tanımlanır. Uyku, insanın ruhunu serbest bırakarak rüyaların oluşmasına zemin hazırlar. İslam’da uyku, sadece fiziksel dinlenme değil, manevi bir huzur anıdır.
-
-Peygamberimiz (s.a.v.), "Uyku, ölümün küçük kardeşidir" diyerek uyku ile ölüm arasındaki ilişkiyi vurgulamıştır. Uyku, Allah’ın izniyle ruhun geçici olarak alınmasıdır. Bu yüzden uyku öncesi ve sonrası duaları, İslam’da büyük önem taşır. Sabah-akşam dualarıyla uyumak ve uyanmak, rüyaların güzel olmasını sağlar.
-
-İslam, uyku düzenini de önemser. Gece geç saatlerde uyumamak, sabah namazına uygun bir uyku almak teşvik edilir. Uyku, rüyaların oluştuğu bir süreçtir; bu yüzden uyku öncesi yapılan dualar ve niyetler, rüyaları olumlu yönde etkiler. Müslüman, uyku anını da Allah’a şükretmek ve dua etmek için fırsat bilir.'
-  ),
-  (
-    'Astral Seyahat Nedir',
-    'astral-seyahat-nedir',
-    'Astral seyahat, modern dünyada "ruhun bedenden ayrılması" olarak tanımlanan bir kavramdır; ancak İslam’da bu inançlar kabul edilmez. Kur’an-ı Kerim ve Sünnet’ten destek alamayan bu kavram, şirk ve batıl inançlara kapı açabilir. Peygamberimiz (s.a.v.), "Rüya üç kısımdır" hadisiyle rüyaların kaynağını net bir şekilde açıklamıştır; astral seyahat gibi kavramlar ise bu sınırları aşar.
-
-İslam, astral seyahat gibi kavramları reddeder. Ruh, Allah’ın izniyle bedenden ayrılır; ancak bu, sadece ölüm anında gerçekleşir. Hayatta iken ruhun bedenden ayrılması, Kur’an ve Sünnet’ten destek alamaz. Bu yüzden astral seyahat, batıl inançlar ve şifa arayışları içindeki insanların sapmasına neden olabilir.
-
-Müslüman, astral seyahat gibi kavramlardan uzak durmalı ve Kur’an ve Sünnet’i referans almalıdır. Rüyalar, Allah’ın izniyle oluşur; ancak astral seyahat, bu süreci insana mal eden bir yaklaşımdır. İslam’da rüyaların manası, imanla ve ehliyetli alimlerin görüşüyle değerlendirilmelidir. Astral seyahat, İslam’ın çerçevesinde değerlendirilemez.'
-  ),
-  (
-    'Burçlar',
-    'burclar',
-    'Burçlar, yıldızların konumuna dayalı bir kader inancıdır; ancak İslam’da bu tür inançlar şirk sayılır. Kur’an-ı Kerim’de, "Kaderi sadece Allah bilir" ayetiyle kaderin Allah’ın elinde olduğu vurgulanır. Burçlar, insanların kaderini yıldızlara bağlaması anlamına gelir ve bu, tevhid inancına aykırıdır.
-
-Peygamberimiz (s.a.v.), "Yıldızlar, geceyi aydınlatmak ve yol göstermek için yaratılmıştır; burçlarla kaderi tahmin etmek ise batıldır" buyurmuştur. Burçlar, insanı Allah’a değil, yaratılanlara yönelten bir inançtır. Müslüman, kaderini Allah’a tevekkül ederek, burçlara inanmamalıdır.
-
-İslam, burçların rüya yorumlamasına karıştırılmasını reddeder. Rüyalar, Allah’ın izniyle oluşur; ancak burçlar, bu süreci insana ve yıldızlara mal eder. Müslüman, rüya tabirini ehliyetli alimlerden almalı, burçların etkisine kapılmamalıdır. Burçlar, İslam’ın temel prensiplerine aykırı olduğundan kesinlikle reddedilmelidir.'
-  ),
-  (
-    'Kontrol Edilebilen Rüyalar',
-    'kontrol-edilebilen-ruyalar',
-    'Kontrol edilebilen rüyalar, modern psikolojide "lucid dream" olarak tanımlanır; ancak İslam’da rüyaların kontrolü, Allah’ın izniyle mümkündür. Peygamberimiz (s.a.v.), "Uyku öncesi istikametli niyet ve dua" ile rüyaların olumlu olmasını teşvik etmiştir. Müslüman, rüyalarını kontrol etmek için sabah-akşam dualarını ve istikametli bir yaşamı tercih etmelidir.
-
-Rüyaların kontrolü, sadece Allah’ın izniyle gerçekleşir. İnsan, rüyalarını kontrol etmek için dua edebilir; ancak bu, Allah’a tevekkül ederek yapılmalıdır. Peygamberimiz (s.a.v.), "Rüya, müminin üçte biridir" diyerek rüyaların manevi boyutunu vurgulamıştır. Bu yüzden rüyaları kontrol etmek, imanla ve dua ile beslenmelidir.
-
-Kontrol edilebilen rüyalar, İslam’da "istikametli niyet" ile ilişkilendirilir. Müslüman, rüyalarını olumlu yönde şekillendirmek için Kur’an-ı Kerim okumalı ve sabah-akşam dualarını ihmal etmemelidir. Rüyaların kontrolü, insanın kendi gücüne değil, Allah’ın kudretine dayanmalıdır. Bu yüzden kontrol edilebilen rüyalar, İslam’ın çerçevesinde "dua ve tevekkül" ile değerlendirilmelidir.'
-  ),
-  (
-    'İstihare Nasıl Yapılır',
-    'istihare-nasil-yapilir',
-    'İstihare namazı, önemli kararlar alırken Allah’tan doğru yolu istemek için kılınan bir namazdır. Peygamberimiz (s.a.v.), "Herhangi bir işe karar veremiyorsanız, istihare namazı kılın" buyurmuştur. İstihare, rüya yorumlamasında da önemli bir yer tutar; çünkü istihare sonrası gelen rüyalar, genellikle Allah’ın rehberliğidir.
-
-İstihare namazı, iki rekâttır ve her rekâtın sonunda "Allah’ım, eğer bu iş benim için hayırlıysa..." diye dua edilir. İstihare sonrası, kalbin huzur bulması ve rüyaların olumlu olması, Allah’ın rehberliğinin işareti olabilir. Müslüman, istihareyi düzenli olarak yapmalı ve rüyalarını bu çerçevede değerlendirmelidir.
-
-İstihare, rüya yorumlamasında en güvenilir rehberdir. İstihare sonrası gelen rüyalar, genellikle Allah’ın rehberliğidir. Müslüman, rüya tabiri için ehliyetli alimlere danışmalı, ancak istihareyi ihmal etmemelidir. İstihare, İslam’da "dua ve tevekkül"ün en güzel örneklerindendir.'
-  ),
-  (
-    'Psikolojik Rüya Yorumları',
-    'psikolojik-ruya-yorumlari',
-    'Psikolojik rüya yorumları, modern dünyada rüyaları anlamak için kullanılan bir yöntemdir; ancak İslam’da rüya tabiri, Kur’an ve Sünnet’ten yola çıkılarak yapılmalıdır. Psikolojik yorumlar bazen faydalı olsa da, İslam’ın temel prensiplerini aşmamalıdır. Peygamberimiz (s.a.v.), "Rüya üç kısımdır" diyerek rüyaların kaynağını net bir şekilde açıklamıştır.
-
-Müslüman, psikolojik yorumlara aşırı güvenmemeli ve her zaman Kur’an ve Sünnet’i referans almalıdır. Rüya tabiri, ehliyetli alimlerin danışılmasıyla yapılmalıdır. Psikolojik yorumlar, rüyaların manevi boyutunu göremeyebilir; bu yüzden İslam’ın çerçevesinde değerlendirilmelidir.
-
-Rüyalar, psikolojik yorumlarla kısmen açıklanabilir; ancak asıl manası Allah’ın izniyle belirlenir. Müslüman, rüyalarını anlamak için psikolojik yorumları destek olarak kullanabilir, ancak Kur’an ve Sünnet’i esas almalıdır. Rüya tabiri, imanla ve ehliyetli alimlerin görüşüyle yapılmalıdır.'
-  ),
-  (
-    'Rüya Yorumlama ve Tabiri',
-    'ruya-yorumlama-ve-tabiri',
-    'Rüya yorumlama, İslam’da "tebşir" olarak adlandırılan ve ehliyetli alimlerin yaptığı bir bilimdir. Peygamberimiz (s.a.v.), "En güzel rüya, müminin rüyasıdır" diyerek rüya tabirinin önemini vurgulamıştır. Rüya tabiri, kişinin niyeti, yaşam durumu ve dua ederken iç haliyle bağlantılıdır.
-
-Rüya yorumlaması, sadece ehliyetli alimlerin yapabileceği bir bilimdir. Herkesin rüya tabiri yapması, hatalı yorumlara neden olabilir. Müslüman, rüya tabiri için ehliyetli alimlere danışmalıdır. Rüya tabiri, Kur’an ve Sünnet’ten yola çıkılarak yapılmalıdır.
-
-Rüya yorumlaması, imanla ve tevekkülle yapılmalıdır. Rüyaların manası, Allah’ın izniyle belirlenir. Müslüman, rüya tabirini ehliyetli alimlerden almalı ve rüyalarını manevi bir rehber olarak görmelidir. Rüya tabiri, İslam’da "ruhun huzur anı" olarak kabul edilir.'
-  ),
-  (
-    'Rüyalara Dair Gerçekler',
-    'ruyalara-dair-gercekler',
-    'Rüyalar, İslam’da "müminin üçte biri" olarak tanımlanır ve Allah’ın izniyle oluşur. Peygamberimiz (s.a.v.), "Rüya üç kısımdır: Allah’tan gelen müjde, insanın içinden gelen düşünceler ve şeytanın vesvesesi" buyurmuştur. Bu yüzden her rüyanın manası yoktur; ancak tekrarlanan veya kalp huzuru veren rüyalar dikkate alınmalıdır.
-
-Rüyalar, kişinin niyeti ve yaşam tarzıyla doğrudan ilişkilidir. İmanı güçlü olanların rüyaları genellikle daha aydınlıktır. Rüya tabiri, ehliyetli alimlerin danışılmasıyla yapılmalıdır. Müslüman, rüyalarını aşırı önemsememeli, ancak Allah’ın rehberliği için dikkatli olmalıdır.
-
-Rüyalara dair en önemli gerçek, rüyaların Allah’ın izniyle oluşmasıdır. Müslüman, rüyalarını manevi bir rehber olarak görmeli ve Kur’an ve Sünnet’i referans almalıdır. Rüyalar, İslam’da "ruhun huzur anı" olarak kabul edilir ve imanla beslenmelidir.'
-  ),
-  (
-    'Tekrarlanan Rüyalar',
-    'tekrarlanan-ruyalar',
-    'Tekrarlanan rüyalar, İslam’da Allah’ın insanı uyarmak veya doğru yola yönlendirmek için gönderdiği işaretlerdir. Peygamberimiz (s.a.v.), "Tekrarlanan rüya, Allah’ın lütfudur" buyurmuştur. Tekrarlanan rüyalar, genellikle kişinin dikkatini çekmek için gönderilir ve önemsenmelidir.
-
-Müslüman, tekrarlanan rüyaları ciddiye almalı ve istihare namazı kılmalıdır. Rüya tabiri, ehliyetli alimlerin danışılmasıyla yapılmalıdır. Tekrarlanan rüyalar, kişinin yaşamını olumlu yönde değiştirmesi için bir fırsat olabilir.
-
-Tekrarlanan rüyalar, İslam’da "Allah’ın rehberliği" olarak kabul edilir. Müslüman, tekrarlanan rüyaları manevi bir rehber olarak görmeli ve Kur’an ve Sünnet’i referans almalıdır. Rüyalar, İslam’da "ruhun huzur anı" olarak kabul edilir ve imanla beslenmelidir.'
-  );
-
--- Tag relations
-INSERT OR IGNORE INTO dream_tags (dream_id, tag_slug)
-SELECT d.id, 'su' FROM dreams d WHERE d.slug = 'ruyada-su-gormek';
-INSERT OR IGNORE INTO dream_tags (dream_id, tag_slug)
-SELECT d.id, 'ucmak' FROM dreams d WHERE d.slug = 'ruyada-ucmak';
-INSERT OR IGNORE INTO dream_tags (dream_id, tag_slug)
-SELECT d.id, 'dis' FROM dreams d WHERE d.slug = 'ruyada-dis-dusmesi';
-INSERT OR IGNORE INTO dream_tags (dream_id, tag_slug)
-SELECT d.id, 'yilan' FROM dreams d WHERE d.slug = 'ruyada-yilan-gormek';
-INSERT OR IGNORE INTO dream_tags (dream_id, tag_slug)
-SELECT d.id, 'olum' FROM dreams d WHERE d.slug = 'ruyada-olum-gormek';
-INSERT OR IGNORE INTO dream_tags (dream_id, tag_slug)
-SELECT d.id, 'para' FROM dreams d WHERE d.slug = 'ruyada-para-gormek';
-
-INSERT OR IGNORE INTO articles (title, slug, body) VALUES
-  (
-    'İslamiyet ve Rüyalar',
-    'islamiyet-ve-ruyalar',
-    'İslam, rüyaları "müminin üçte biri" olarak tanımlayarak onlara özel bir yer verir. Kur’an-ı Kerim’de "Allah’ın bir işareti" olarak ifade edilen rüyalar, insanın ruh hali ve imanı ile doğrudan ilişkilidir. Peygamberimiz (s.a.v.), "En güzel rüya, müminin rüyasıdır" hadisiyle rüyaların temiz kalple bağlantısını vurgulamıştır. İslam’da rüyalar, Allah’ın izniyle gelen bir nimet ve bazen de uyaran bir mesaj olabilir; ancak her rüyanın manası yoktur. Batıl inançlardan uzak durulması, Kur’an ve Sünnet ışığında değerlendirilmesi gerekir.
-
-Rüyaların İslam’da yeri, Hz. Yusuf (a.s.)’ın rüyalarının tefsirini içeren Kur’an ayetlerinde de net bir şekilde ortaya konur. Rüyalar, bilinçaltı ile değil, Allah’ın iradesiyle şekillenir. Bu yüzden rüya yorumlaması, sadece ehliyetli alimlerin yapabileceği bir bilimdir. Müslüman, rüyalarını manevi bir rehber olarak görmeli, ancak her rüyayı gerçekleştirmeye kalkmamalıdır. Rüya yorumlaması, imanın ve dua ile beslenen bir yaklaşımla yapılmalıdır.
-
-İslam, rüyaları anlamak için "istikametli niyet" ve "sabah-akşam duaları" gibi pratikler önerir. Rüyaların kontrolü, Allah’a tevekkül ederek ve istikametli bir yaşam süresiyle mümkündür. Rüya tabiri, kişinin niyeti ve hayatındaki durumla bağlantılıdır. Bu yüzden rüyalar, sadece gece dünyasının eseri değil, imanın ve dua ile beslenen bir hayatın ışığıdır. Müslüman, rüyaları değerlendirirken her zaman Kur’an ve Sünnet’i referans almalıdır.'
-  ),
-  (
-    'Rüya Nedir',
-    'ruya-nedir',
-    'Rüya, insanın uyuduğunda zihnin serbestçe hareket ettiği, bilinçsiz bir durumda oluşan görüntülerdir. İslam’da rüya, "ruhun serbest kalması" olarak tanımlanır ve Allah’ın izniyle gerçekleşir. Kur’an-ı Kerim’de, "Allah, insanın ruhunu alır" ayetiyle uyku ve rüyaların ilahi bir süreç olduğu vurgulanır. Rüyalar, bazen müjde, bazen de uyarı niteliğinde olabilir; ancak her rüyanın manası yoktur.
-
-Peygamberimiz (s.a.v.), "Rüya üç kısımdır: Allah’tan gelen müjde, insanın içinden gelen düşünceler ve şeytanın vesvesesi" buyurarak rüyaları üç ana başlıkta toplamıştır. Müslüman, rüyalarını değerlendirmek için bu ayrımı dikkate almalıdır. Güzel rüyalar, Allah’ın lütfu; kötü rüyalar ise genellikle şeytanın vesvesesidir. Bu yüzden rüyaların yorumu, imanla ve bilgiyle yapılmalıdır.
-
-Rüya, insanın kalbinin temizliğiyle doğrudan ilişkilidir. İmanı güçlü olanların rüyaları genellikle daha aydınlıktır. Rüya tabiri, ehliyetli alimlerin danışılmasıyla yapılmalıdır. Her rüya gerçek olmayabilir; bu yüzden rüyaları aşırı önemsemek veya korkmamak gerekir. Rüya, İslam’da "ruhun huzur anı" olarak kabul edilir ve imanla beslenmelidir.'
-  ),
-  (
-    'Rüyalar ve Bilinçaltı',
-    'ruyalar-ve-bilincalti',
-    'Bilinçaltı kavramı, modern psikolojide rüyaları açıklamak için kullanılır; ancak İslam, rüyaları Allah’ın izniyle şekillenen bir süreç olarak görür. Bilinçaltı, insanın gizli arzularını yansıtabilir, ancak İslam’da rüyaların asıl kaynağı Allah’ın hikmetidir. Peygamberimiz (s.a.v.), "Rüya, müminin üçte biridir" diyerek rüyaların manevi boyutunu vurgulamıştır.
-
-Rüyalar, bilinçaltı ile bağlantılı olsa bile sonucu Allah’ın elindedir. Bu yüzden bilinçaltı üzerinden yapılan yorumlar, İslam’ın temel prensiplerini aşmamalıdır. Müslüman, rüyalarını anlamak için Kur’an ve Sünnet’i referans almalı, psikolojik yorumlara aşırı güvenmemelidir. Rüya tabiri, imanla ve ehliyetli alimlerin görüşüyle yapılmalıdır.
-
-İslam, bilinçaltı kavramını reddetmez; ancak onu Allah’ın kudreti çerçevesinde değerlendirir. Rüyalar, kişinin niyeti, dua ederken iç hali ve yaşam tarzıyla ilişkilidir. Bu yüzden rüyaları anlamak için, sadece bilinçaltı değil, iman ve dua ile beslenen bir yaklaşım gerekir. Rüya, İslam’da "ruhun huzur anı" olarak kabul edilir ve imanla beslenmelidir.'
-  ),
-  (
-    'Uyku Nedir',
-    'uyku-nedir',
-    'Uyku, Allah’ın insanlara lütfu olan ve vücudun dinlenmesi için yaratılmış bir nimettir. Kur’an-ı Kerim’de, "Allah, size geceyi uyku olarak yaratmıştır" ayetiyle uyku, Allah’ın hikmetiyle şekillenmiş bir süreç olarak tanımlanır. Uyku, insanın ruhunu serbest bırakarak rüyaların oluşmasına zemin hazırlar. İslam’da uyku, sadece fiziksel dinlenme değil, manevi bir huzur anıdır.
-
-Peygamberimiz (s.a.v.), "Uyku, ölümün küçük kardeşidir" diyerek uyku ile ölüm arasındaki ilişkiyi vurgulamıştır. Uyku, Allah’ın izniyle ruhun geçici olarak alınmasıdır. Bu yüzden uyku öncesi ve sonrası duaları, İslam’da büyük önem taşır. Sabah-akşam dualarıyla uyumak ve uyanmak, rüyaların güzel olmasını sağlar.
-
-İslam, uyku düzenini de önemser. Gece geç saatlerde uyumamak, sabah namazına uygun bir uyku almak teşvik edilir. Uyku, rüyaların oluştuğu bir süreçtir; bu yüzden uyku öncesi yapılan dualar ve niyetler, rüyaları olumlu yönde etkiler. Müslüman, uyku anını da Allah’a şükretmek ve dua etmek için fırsat bilir.'
-  ),
-  (
-    'Astral Seyahat Nedir',
-    'astral-seyahat-nedir',
-    'Astral seyahat, modern dünyada "ruhun bedenden ayrılması" olarak tanımlanan bir kavramdır; ancak İslam’da bu inançlar kabul edilmez. Kur’an-ı Kerim ve Sünnet’ten destek alamayan bu kavram, şirk ve batıl inançlara kapı açabilir. Peygamberimiz (s.a.v.), "Rüya üç kısımdır" hadisiyle rüyaların kaynağını net bir şekilde açıklamıştır; astral seyahat gibi kavramlar ise bu sınırları aşar.
-
-İslam, astral seyahat gibi kavramları reddeder. Ruh, Allah’ın izniyle bedenden ayrılır; ancak bu, sadece ölüm anında gerçekleşir. Hayatta iken ruhun bedenden ayrılması, Kur’an ve Sünnet’ten destek alamaz. Bu yüzden astral seyahat, batıl inançlar ve şifa arayışları içindeki insanların sapmasına neden olabilir.
-
-Müslüman, astral seyahat gibi kavramlardan uzak durmalı ve Kur’an ve Sünnet’i referans almalıdır. Rüyalar, Allah’ın izniyle oluşur; ancak astral seyahat, bu süreci insana mal eden bir yaklaşımdır. İslam’da rüyaların manası, imanla ve ehliyetli alimlerin görüşüyle değerlendirilmelidir. Astral seyahat, İslam’ın çerçevesinde değerlendirilemez.'
-  ),
-  (
-    'Burçlar',
-    'burclar',
-    'Burçlar, yıldızların konumuna dayalı bir kader inancıdır; ancak İslam’da bu tür inançlar şirk sayılır. Kur’an-ı Kerim’de, "Kaderi sadece Allah bilir" ayetiyle kaderin Allah’ın elinde olduğu vurgulanır. Burçlar, insanların kaderini yıldızlara bağlaması anlamına gelir ve bu, tevhid inancına aykırıdır.
-
-Peygamberimiz (s.a.v.), "Yıldızlar, geceyi aydınlatmak ve yol göstermek için yaratılmıştır; burçlarla kaderi tahmin etmek ise batıldır" buyurmuştur. Burçlar, insanı Allah’a değil, yaratılanlara yönelten bir inançtır. Müslüman, kaderini Allah’a tevekkül ederek, burçlara inanmamalıdır.
-
-İslam, burçların rüya yorumlamasına karıştırılmasını reddeder. Rüyalar, Allah’ın izniyle oluşur; ancak burçlar, bu süreci insana ve yıldızlara mal eder. Müslüman, rüya tabirini ehliyetli alimlerden almalı, burçların etkisine kapılmamalıdır. Burçlar, İslam’ın temel prensiplerine aykırı olduğundan kesinlikle reddedilmelidir.'
-  ),
-  (
-    'Kontrol Edilebilen Rüyalar',
-    'kontrol-edilebilen-ruyalar',
-    'Kontrol edilebilen rüyalar, modern psikolojide "lucid dream" olarak tanımlanır; ancak İslam’da rüyaların kontrolü, Allah’ın izniyle mümkündür. Peygamberimiz (s.a.v.), "Uyku öncesi istikametli niyet ve dua" ile rüyaların olumlu olmasını teşvik etmiştir. Müslüman, rüyalarını kontrol etmek için sabah-akşam dualarını ve istikametli bir yaşamı tercih etmelidir.
-
-Rüyaların kontrolü, sadece Allah’ın izniyle gerçekleşir. İnsan, rüyalarını kontrol etmek için dua edebilir; ancak bu, Allah’a tevekkül ederek yapılmalıdır. Peygamberimiz (s.a.v.), "Rüya, müminin üçte biridir" diyerek rüyaların manevi boyutunu vurgulamıştır. Bu yüzden rüyaları kontrol etmek, imanla ve dua ile beslenmelidir.
-
-Kontrol edilebilen rüyalar, İslam’da "istikametli niyet" ile ilişkilendirilir. Müslüman, rüyalarını olumlu yönde şekillendirmek için Kur’an-ı Kerim okumalı ve sabah-akşam dualarını ihmal etmemelidir. Rüyaların kontrolü, insanın kendi gücüne değil, Allah’ın kudretine dayanmalıdır. Bu yüzden kontrol edilebilen rüyalar, İslam’ın çerçevesinde "dua ve tevekkül" ile değerlendirilmelidir.'
-  ),
-  (
-    'İstihare Nasıl Yapılır',
-    'istihare-nasil-yapilir',
-    'İstihare namazı, önemli kararlar alırken Allah’tan doğru yolu istemek için kılınan bir namazdır. Peygamberimiz (s.a.v.), "Herhangi bir işe karar veremiyorsanız, istihare namazı kılın" buyurmuştur. İstihare, rüya yorumlamasında da önemli bir yer tutar; çünkü istihare sonrası gelen rüyalar, genellikle Allah’ın rehberliğidir.
-
-İstihare namazı, iki rekâttır ve her rekâtın sonunda "Allah’ım, eğer bu iş benim için hayırlıysa..." diye dua edilir. İstihare sonrası, kalbin huzur bulması ve rüyaların olumlu olması, Allah’ın rehberliğinin işareti olabilir. Müslüman, istihareyi düzenli olarak yapmalı ve rüyalarını bu çerçevede değerlendirmelidir.
-
-İstihare, rüya yorumlamasında en güvenilir rehberdir. İstihare sonrası gelen rüyalar, genellikle Allah’ın rehberliğidir. Müslüman, rüya tabiri için ehliyetli alimlere danışmalı, ancak istihareyi ihmal etmemelidir. İstihare, İslam’da "dua ve tevekkül"ün en güzel örneklerindendir.'
-  ),
-  (
-    'Psikolojik Rüya Yorumları',
-    'psikolojik-ruya-yorumlari',
-    'Psikolojik rüya yorumları, modern dünyada rüyaları anlamak için kullanılan bir yöntemdir; ancak İslam’da rüya tabiri, Kur’an ve Sünnet’ten yola çıkılarak yapılmalıdır. Psikolojik yorumlar bazen faydalı olsa da, İslam’ın temel prensiplerini aşmamalıdır. Peygamberimiz (s.a.v.), "Rüya üç kısımdır" diyerek rüyaların kaynağını net bir şekilde açıklamıştır.
-
-Müslüman, psikolojik yorumlara aşırı güvenmemeli ve her zaman Kur’an ve Sünnet’i referans almalıdır. Rüya tabiri, ehliyetli alimlerin danışılmasıyla yapılmalıdır. Psikolojik yorumlar, rüyaların manevi boyutunu göremeyebilir; bu yüzden İslam’ın çerçevesinde değerlendirilmelidir.
-
-Rüyalar, psikolojik yorumlarla kısmen açıklanabilir; ancak asıl manası Allah’ın izniyle belirlenir. Müslüman, rüyalarını anlamak için psikolojik yorumları destek olarak kullanabilir, ancak Kur’an ve Sünnet’i esas almalıdır. Rüya tabiri, imanla ve ehliyetli alimlerin görüşüyle yapılmalıdır.'
-  ),
-  (
-    'Rüya Yorumlama ve Tabiri',
-    'ruya-yorumlama-ve-tabiri',
-    'Rüya yorumlama, İslam’da "tebşir" olarak adlandırılan ve ehliyetli alimlerin yaptığı bir bilimdir. Peygamberimiz (s.a.v.), "En güzel rüya, müminin rüyasıdır" diyerek rüya tabirinin önemini vurgulamıştır. Rüya tabiri, kişinin niyeti, yaşam durumu ve dua ederken iç haliyle bağlantılıdır.
-
-Rüya yorumlaması, sadece ehliyetli alimlerin yapabileceği bir bilimdir. Herkesin rüya tabiri yapması, hatalı yorumlara neden olabilir. Müslüman, rüya tabiri için ehliyetli alimlere danışmalıdır. Rüya tabiri, Kur’an ve Sünnet’ten yola çıkılarak yapılmalıdır.
-
-Rüya yorumlaması, imanla ve tevekkülle yapılmalıdır. Rüyaların manası, Allah’ın izniyle belirlenir. Müslüman, rüya tabirini ehliyetli alimlerden almalı ve rüyalarını manevi bir rehber olarak görmelidir. Rüya tabiri, İslam’da "ruhun huzur anı" olarak kabul edilir.'
-  ),
-  (
-    'Rüyalara Dair Gerçekler',
-    'ruyalara-dair-gercekler',
-    'Rüyalar, İslam’da "müminin üçte biri" olarak tanımlanır ve Allah’ın izniyle oluşur. Peygamberimiz (s.a.v.), "Rüya üç kısımdır: Allah’tan gelen müjde, insanın içinden gelen düşünceler ve şeytanın vesvesesi" buyurmuştur. Bu yüzden her rüyanın manası yoktur; ancak tekrarlanan veya kalp huzuru veren rüyalar dikkate alınmalıdır.
-
-Rüyalar, kişinin niyeti ve yaşam tarzıyla doğrudan ilişkilidir. İmanı güçlü olanların rüyaları genellikle daha aydınlıktır. Rüya tabiri, ehliyetli alimlerin danışılmasıyla yapılmalıdır. Müslüman, rüyalarını aşırı önemsememeli, ancak Allah’ın rehberliği için dikkatli olmalıdır.
-
-Rüyalara dair en önemli gerçek, rüyaların Allah’ın izniyle oluşmasıdır. Müslüman, rüyalarını manevi bir rehber olarak görmeli ve Kur’an ve Sünnet’i referans almalıdır. Rüyalar, İslam’da "ruhun huzur anı" olarak kabul edilir ve imanla beslenmelidir.'
-  ),
-  (
-    'Tekrarlanan Rüyalar',
-    'tekrarlanan-ruyalar',
-    'Tekrarlanan rüyalar, İslam’da Allah’ın insanı uyarmak veya doğru yola yönlendirmek için gönderdiği işaretlerdir. Peygamberimiz (s.a.v.), "Tekrarlanan rüya, Allah’ın lütfudur" buyurmuştur. Tekrarlanan rüyalar, genellikle kişinin dikkatini çekmek için gönderilir ve önemsenmelidir.
-
-Müslüman, tekrarlanan rüyaları ciddiye almalı ve istihare namazı kılmalıdır. Rüya tabiri, ehliyetli alimlerin danışılmasıyla yapılmalıdır. Tekrarlanan rüyalar, kişinin yaşamını olumlu yönde değiştirmesi için bir fırsat olabilir.
-
-Tekrarlanan rüyalar, İslam’da "Allah’ın rehberliği" olarak kabul edilir. Müslüman, tekrarlanan rüyaları manevi bir rehber olarak görmeli ve Kur’an ve Sünnet’i referans almalıdır. Rüyalar, İslam’da "ruhun huzur anı" olarak kabul edilir ve imanla beslenmelidir.'
-  );
--- Imported from 0/ruyaadd.sql
-suyun sıcak, ılık, bulanık ve temiz olmaması kötü manalara işarettir. [[7]] Genel anlamda rüyada su görmek hoş bir hayata, güzel rızka, iyiliksever insana, sadık dosta, büyüklere yaklaşmaya, din güzelliğine yorumlanır. [[10]] Bazı yorumculara göre durgun su hapse, tuzlu su kedere, bulanık su rızk darlığına işarettir. [[9]]',
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
+VALUES (
+  'Rüyada Su Görmek',
+  'ruyada-su-gormek',
+  'İslami rüya tabirlerine göre su, güzel bir yaşam ve iyi bir rızkın sembolüdür. [[10]] Berrak ve temiz su görmek bol miktarda helal mal elde edeceğinize işaret ederken, bulanık su görmek haram mal elde edeceğinize işarettir. [[3]] Rüyada suyun berrak, temiz ve içebilecek kadar soğuk olması iyi manalara; suyun sıcak, ılık, bulanık ve temiz olmaması kötü manalara işarettir. [[7]] Genel anlamda rüyada su görmek hoş bir hayata, güzel rızka, iyiliksever insana, sadık dosta, büyüklere yaklaşmaya, din güzelliğine yorumlanır. [[10]] Bazı yorumculara göre durgun su hapse, tuzlu su kedere, bulanık su rızk darlığına işarettir. [[9]]',
   'islami',
   0,
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Ateş Görmek',
   'ruyada-ates-gormek',
@@ -317,7 +18,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kuş Görmek',
   'ruyada-kus-gormek',
@@ -327,7 +28,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Yılan Görmek',
   'ruyada-yilan-gormek',
@@ -337,7 +38,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Ev Görmek',
   'ruyada-ev-gormek',
@@ -347,7 +48,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Para Görmek',
   'ruyada-para-gormek',
@@ -357,7 +58,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Mezar Görmek',
   'ruyada-mezar-gormek',
@@ -367,7 +68,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Deniz Görmek',
   'ruyada-deniz-gormek',
@@ -377,7 +78,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Ağaç Görmek',
   'ruyada-agac-gormek',
@@ -387,7 +88,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Uçak Görmek',
   'ruyada-ucak-gormek',
@@ -397,7 +98,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Tilki Görmek',
   'ruyada-tilki-gormek',
@@ -407,7 +108,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Araba Görmek',
   'ruyada-araba-gormek',
@@ -417,7 +118,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Balık Görmek',
   'ruyada-balik-gormek',
@@ -427,7 +128,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Bebek Görmek',
   'ruyada-bebek-gormek',
@@ -437,7 +138,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kurt Görmek',
   'ruyada-kurt-gormek',
@@ -447,7 +148,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Aslan Görmek',
   'ruyada-aslan-gormek',
@@ -457,7 +158,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kedi Görmek',
   'ruyada-kedi-gormek',
@@ -467,7 +168,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Yıldız Görmek',
   'ruyada-yildiz-gormek',
@@ -477,7 +178,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kurtuluş Görmek',
   'ruyada-kurtulus-gormek',
@@ -487,7 +188,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Altın Görmek',
   'ruyada-altin-gormek',
@@ -497,7 +198,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Karanlık Görmek',
   'ruyada-karanlik-gormek',
@@ -507,7 +208,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Güneş Görmek',
   'ruyada-gunes-gormek',
@@ -517,7 +218,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Ay Görmek',
   'ruyada-ay-gormek',
@@ -527,7 +228,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Dağ Görmek',
   'ruyada-dag-gormek',
@@ -537,7 +238,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Gül Görmek',
   'ruyada-gul-gormek',
@@ -547,7 +248,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Yol Görmek',
   'ruyada-yol-gormek',
@@ -557,7 +258,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Köprü Görmek',
   'ruyada-kopru-gormek',
@@ -567,7 +268,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kapı Görmek',
   'ruyada-kapi-gormek',
@@ -577,7 +278,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Pencere Görmek',
   'ruyada-pencere-gormek',
@@ -587,7 +288,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kitap Görmek',
   'ruyada-kitap-gormek',
@@ -597,7 +298,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kalem Görmek',
   'ruyada-kalem-gormek',
@@ -607,7 +308,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Saat Görmek',
   'ruyada-saat-gormek',
@@ -617,7 +318,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Ayakkabı Görmek',
   'ruyada-ayakkabi-gormek',
@@ -627,7 +328,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Elbise Görmek',
   'ruyada-elbise-gormek',
@@ -637,7 +338,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Yemek Görmek',
   'ruyada-yemek-gormek',
@@ -647,7 +348,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Ekmek Görmek',
   'ruyada-ekmek-gormek',
@@ -657,7 +358,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Çiçek Görmek',
   'ruyada-cicek-gormek',
@@ -667,7 +368,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Toprak Görmek',
   'ruyada-toprak-gormek',
@@ -677,7 +378,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Taş Görmek',
   'ruyada-tas-gormek',
@@ -687,7 +388,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Cam Görmek',
   'ruyada-cam-gormek',
@@ -697,7 +398,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Ayna Görmek',
   'ruyada-ayna-gormek',
@@ -707,7 +408,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kilit Görmek',
   'ruyada-kilit-gormek',
@@ -717,7 +418,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Anahtar Görmek',
   'ruyada-anahtar-gormek',
@@ -727,7 +428,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Sandık Görmek',
   'ruyada-sandik-gormek',
@@ -737,7 +438,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Mektup Görmek',
   'ruyada-mektup-gormek',
@@ -747,7 +448,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kâğıt Görmek',
   'ruyada-kagit-gormek',
@@ -757,7 +458,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada İğne Görmek',
   'ruyada-igne-gormek',
@@ -767,7 +468,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada İplik Görmek',
   'ruyada-iplik-gormek',
@@ -777,7 +478,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kumaş Görmek',
   'ruyada-kumas-gormek',
@@ -787,7 +488,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Yatak Görmek',
   'ruyada-yatak-gormek',
@@ -795,9 +496,7 @@ VALUES (
   'islami',
   0,
   0
-);
-
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+);INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Merdiven Görmek',
   'ruyada-merdiven-gormek',
@@ -807,7 +506,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Nehir Görmek',
   'ruyada-nehir-gormek',
@@ -817,7 +516,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Orman Görmek',
   'ruyada-orman-gormek',
@@ -827,7 +526,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Tren Görmek',
   'ruyada-tren-gormek',
@@ -837,7 +536,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Gem Görmek',
   'ruyada-gem-gormek',
@@ -847,7 +546,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Papatya Görmek',
   'ruyada-papatya-gormek',
@@ -857,7 +556,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Uçurtma Görmek',
   'ruyada-ucurtma-gormek',
@@ -867,7 +566,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Köy Görmek',
   'ruyada-koy-gormek',
@@ -877,7 +576,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Şehir Görmek',
   'ruyada-sehir-gormek',
@@ -887,7 +586,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Çöl Görmek',
   'ruyada-col-gormek',
@@ -897,7 +596,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Dost Görmek',
   'ruyada-dost-gormek',
@@ -907,7 +606,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Düşman Görmek',
   'ruyada-dusman-gormek',
@@ -917,7 +616,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Anne Görmek',
   'ruyada-anne-gormek',
@@ -927,7 +626,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Baba Görmek',
   'ruyada-baba-gormek',
@@ -937,7 +636,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kardeş Görmek',
   'ruyada-kardes-gormek',
@@ -947,7 +646,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Düğün Görmek',
   'ruyada-dugun-gormek',
@@ -957,7 +656,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Cenaze Görmek',
   'ruyada-cenaze-gormek',
@@ -967,7 +666,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Doğum Görmek',
   'ruyada-dogum-gormek',
@@ -977,7 +676,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Ölüm Görmek',
   'ruyada-olum-gormek',
@@ -987,7 +686,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Yürümek',
   'ruyada-yurumek',
@@ -997,7 +696,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Koşmak',
   'ruyada-kosmak',
@@ -1007,7 +706,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Uçmak',
   'ruyada-ucmak',
@@ -1017,7 +716,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Yüzmek',
   'ruyada-yuzmek',
@@ -1027,7 +726,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Düşmek',
   'ruyada-dusmek',
@@ -1037,7 +736,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Sevmek',
   'ruyada-sevmek',
@@ -1045,9 +744,7 @@ VALUES (
   'islami',
   0,
   0
-);
-
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+);INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Karpuz Görmek',
   'ruyada-karpuz-gormek',
@@ -1057,7 +754,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kavun Görmek',
   'ruyada-kavun-gormek',
@@ -1067,7 +764,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Üzüm Görmek',
   'ruyada-uzum-gormek',
@@ -1077,7 +774,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Elma Görmek',
   'ruyada-elma-gormek',
@@ -1087,7 +784,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Portakal Görmek',
   'ruyada-portakal-gormek',
@@ -1097,7 +794,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Muz Görmek',
   'ruyada-muz-gormek',
@@ -1107,7 +804,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada İncir Görmek',
   'ruyada-incir-gormek',
@@ -1117,7 +814,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Zeytin Görmek',
   'ruyada-zeytin-gormek',
@@ -1127,7 +824,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Hurma Görmek',
   'ruyada-hurma-gormek',
@@ -1137,7 +834,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Badem Görmek',
   'ruyada-badem-gormek',
@@ -1147,7 +844,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Ceviz Görmek',
   'ruyada-ceviz-gormek',
@@ -1157,7 +854,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Fındık Görmek',
   'ruyada-findik-gormek',
@@ -1167,7 +864,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Çilek Görmek',
   'ruyada-cilek-gormek',
@@ -1177,7 +874,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kiraz Görmek',
   'ruyada-kiraz-gormek',
@@ -1187,7 +884,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Domates Görmek',
   'ruyada-domates-gormek',
@@ -1197,7 +894,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Salatalık Görmek',
   'ruyada-salatalik-gormek',
@@ -1207,7 +904,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Biber Görmek',
   'ruyada-biber-gormek',
@@ -1217,7 +914,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Patlıcan Görmek',
   'ruyada-patlican-gormek',
@@ -1227,7 +924,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kabak Görmek',
   'ruyada-kabak-gormek',
@@ -1237,7 +934,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Fasulye Görmek',
   'ruyada-fasulye-gormek',
@@ -1247,7 +944,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Nohut Görmek',
   'ruyada-nohut-gormek',
@@ -1257,7 +954,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Mercimek Görmek',
   'ruyada-mercimek-gormek',
@@ -1267,7 +964,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Pirinç Görmek',
   'ruyada-pirinc-gormek',
@@ -1277,7 +974,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Buğday Görmek',
   'ruyada-bugday-gormek',
@@ -1287,7 +984,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Arpa Görmek',
   'ruyada-arpa-gormek',
@@ -1297,7 +994,8 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+```sql
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Sivrisinek Görmek',
   'ruyada-sivrisinek-gormek',
@@ -1307,7 +1005,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kartal Görmek',
   'ruyada-kartal-gormek',
@@ -1317,7 +1015,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Baykuş Görmek',
   'ruyada-baykus-gormek',
@@ -1327,7 +1025,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Karınca Görmek',
   'ruyada-karinca-gormek',
@@ -1337,7 +1035,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kelebek Görmek',
   'ruyada-kelebek-gormek',
@@ -1347,7 +1045,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Ahtapot Görmek',
   'ruyada-ahtapot-gormek',
@@ -1357,7 +1055,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Karides Görmek',
   'ruyada-karides-gormek',
@@ -1367,7 +1065,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada İstiridye Görmek',
   'ruyada-istiridye-gormek',
@@ -1377,7 +1075,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Sülük Görmek',
   'ruyada-suluk-gormek',
@@ -1387,7 +1085,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Kurbağa Görmek',
   'ruyada-kurbaga-gormek',
@@ -1397,7 +1095,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Yengeç Görmek',
   'ruyada-yengec-gormek',
@@ -1407,7 +1105,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Sünger Görmek',
   'ruyada-sunger-gormek',
@@ -1417,7 +1115,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Ahtapot Mürekkebi Görmek',
   'ruyada-ahtapot-murekkebi-gormek',
@@ -1427,7 +1125,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Denizatı Görmek',
   'ruyada-denizati-gormek',
@@ -1437,7 +1135,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Mercan Görmek',
   'ruyada-mercan-gormek',
@@ -1447,7 +1145,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada İnci Görmek',
   'ruyada-inci-gormek',
@@ -1457,7 +1155,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Denizanası Görmek',
   'ruyada-denizanasi-gormek',
@@ -1467,7 +1165,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Denizyıldızı Görmek',
   'ruyada-denizyildizi-gormek',
@@ -1477,7 +1175,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Koral Resifi Görmek',
   'ruyada-koral-resifi-gormek',
@@ -1487,7 +1185,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Denizaltı Kayası Görmek',
   'ruyada-denizalti-kayasi-gormek',
@@ -1497,7 +1195,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Deniz Kabuğu Görmek',
   'ruyada-deniz-kabugu-gormek',
@@ -1507,7 +1205,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Denizaltı Mağarası Görmek',
   'ruyada-denizalti-magarasi-gormek',
@@ -1517,7 +1215,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Denizaltı Akıntıları Görmek',
   'ruyada-denizalti-akintilari-gormek',
@@ -1527,7 +1225,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Denizaltı Bitkileri Görmek',
   'ruyada-denizalti-bitkileri-gormek',
@@ -1537,7 +1235,7 @@ VALUES (
   0
 );
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating)
+INSERT INTO dreams (title, slug, body, category_slug, views, rating)
 VALUES (
   'Rüyada Denizaltı Işıkları Görmek',
   'ruyada-denizalti-isiklari-gormek',
@@ -1546,3 +1244,4 @@ VALUES (
   0,
   0
 );
+```
