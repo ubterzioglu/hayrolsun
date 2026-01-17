@@ -162,7 +162,7 @@ export default function Home(_: Props) {
                   <img
                     src="/img/favicon.png"
                     alt="hayrolsun.site logo"
-                    className="h-6 w-6"
+                    className="h-9 w-9"
                     onError={(e) => {
                       // If logo file is missing, hide the broken image icon.
                       (e.currentTarget as HTMLImageElement).style.display = 'none';
