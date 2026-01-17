@@ -227,7 +227,7 @@ export default function Home() {
           <div className={`flex flex-wrap justify-center gap-6 text-sm ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>
             <a href="/art.html" className="hover:text-green-600 transition-colors">Yazılarımız</a>
             <a href="#" className="hover:text-green-600 transition-colors">Gizlilik Politikası</a>
-            <a href="#" className="hover:text-green-600 transition-colors">İletişim</a>
+            <a href="/contact.html" className="hover:text-green-600 transition-colors">İletişim</a>
             <a href="#" className="hover:text-green-600 transition-colors">Hakkımızda</a>
           </div>
         </div>
