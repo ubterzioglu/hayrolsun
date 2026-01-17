@@ -9,9 +9,10 @@ export default function Footer({ darkMode }) {
           © 2026 Hayrolsun.site - Tüm hakları saklıdır. Rüya tabirleri Kur'an-ı Kerim ve hadis-i şeriflere dayanmaktadır.
         </p>
         <div className={`flex flex-wrap justify-center gap-6 text-sm ${darkMode ? 'text-gray-500' : 'text-gray-500'}`}>
-          <a href="/art.html" className="hover:text-emerald-600 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5">Yazılarımız</a>
+          <a href="/art" className="hover:text-emerald-600 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5">Yazılarımız</a>
           <a href="#" className="hover:text-emerald-600 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5">Gizlilik Politikası</a>
-          <a href="/contact.html" className="hover:text-emerald-600 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5">İletişim</a>
+          <a href="/contact" className="hover:text-emerald-600 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5">İletişim</a>
+          <a href="/share" className="hover:text-emerald-600 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5">Rüya Paylaş</a>
           <a href="#" className="hover:text-emerald-600 transition-all duration-200 hover:scale-105 hover:-translate-y-0.5">Hakkımızda</a>
         </div>
       </div>
