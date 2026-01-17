@@ -30,6 +30,7 @@ module.exports = async function handler(req, res) {
     // Build SQL with optional filters; keep it simple and safe with positional args.
     const where = [];
     const args = [];
+    const orderByArgs = [];
 
     let from = 'dreams d';
     const select =
@@ -37,11 +38,15 @@ module.exports = async function handler(req, res) {
     let orderBy = 'd.views DESC, d.id DESC';
 
     if (query.length > 0) {
-      // Use FTS for search. Quote query to avoid special char issues; keep it basic.
-      from = 'dreams_fts f JOIN dreams d ON d.id = f.rowid';
-      where.push('dreams_fts MATCH ?');
-      args.push(query);
-      orderBy = 'bm25(f) ASC, d.views DESC';
+      // Simple LIKE-based search for Turkish text - reliable and works well
+      // Search in both title and body, case-insensitive
+      const searchPattern = `%${query.toLowerCase()}%`;
+      where.push('(LOWER(d.title) LIKE ? OR LOWER(d.body) LIKE ?)');
+      args.push(searchPattern, searchPattern);
+      
+      // When searching, prioritize relevance: title matches first, then by views
+      orderBy = `CASE WHEN LOWER(d.title) LIKE ? THEN 0 ELSE 1 END ASC, d.views DESC, d.id DESC`;
+      orderByArgs.push(searchPattern);
     }
 
     if (tag.length > 0) {
@@ -59,9 +64,11 @@ module.exports = async function handler(req, res) {
       ORDER BY ${orderBy}
       LIMIT ? OFFSET ?
     `;
-    args.push(limit, offset);
+    
+    // Combine all args in correct order: WHERE conditions, ORDER BY, LIMIT, OFFSET
+    const allArgs = [...args, ...orderByArgs, limit, offset];
 
-    const result = await client.execute({ sql, args });
+    const result = await client.execute({ sql, args: allArgs });
 
     const items = result.rows.map((r) => ({
       id: r.id,
