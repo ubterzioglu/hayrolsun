@@ -8,13 +8,7 @@ export default function Home() {
   const [darkMode, setDarkMode] = useState(false);
   const [dreams, setDreams] = useState([]);
   const [loading, setLoading] = useState(true);
-
-  // Fallback data
-  const fallbackDreams = [
-    { id: 1, title: 'Su Rüyası Tabiri', slug: 'ruyada-su-gormek', shortDesc: 'Temiz su rüyası bereket ve rahmet işareti olup, kirli su ise günahlardan dolayı gelen sıkıntıları gösterir.', category: 'Doğa', popularity: 95 },
-    { id: 2, title: 'Uçmak Rüyası Tabiri', slug: 'ruyada-ucmak', shortDesc: 'Göklerde uçmak, Allah\'ın izniyle yüksek makamlara erişmek ve dünya işlerinde başarı kazanmak anlamına gelir.', category: 'Hareket', popularity: 88 },
-    { id: 3, title: 'Diş Düşmesi Rüyası Tabiri', slug: 'ruyada-dis-dusmesi', shortDesc: 'Diş düşmesi rüyası, aile fertlerinden birinin sağlık açısından dikkat etmesi gerektiğini gösterir.', category: 'Vücut', popularity: 92 },
-  ];
+  const [totalCount, setTotalCount] = useState(0);
 
   // Fetch dreams from API
   useEffect(() => {
@@ -31,14 +25,17 @@ export default function Home() {
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
 
       const data = await res.json();
-      if (Array.isArray(data.items) && data.items.length > 0) {
+      if (Array.isArray(data.items)) {
         setDreams(data.items);
+        setTotalCount(data.count || data.items.length);
       } else {
-        setDreams(fallbackDreams);
+        setDreams([]);
+        setTotalCount(0);
       }
     } catch (err) {
-      console.warn('API error, using fallback:', err);
-      setDreams(fallbackDreams);
+      console.warn('API error:', err);
+      setDreams([]);
+      setTotalCount(0);
     } finally {
       setLoading(false);
     }
@@ -77,13 +74,19 @@ export default function Home() {
         </div>
       </header>
 
-      {/* Search Section */}
-      <section className="py-12 px-4">
-        <div className="container mx-auto max-w-2xl">
-          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
-            Rüyalarınızın <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Anlamını</span> Keşfedin
+      {/* Hero Section with Search */}
+      <section className="py-16 px-4">
+        <div className="container mx-auto max-w-3xl text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            Rüyalarınızın <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Kutsal Anlamını</span> Keşfedin
           </h2>
-          <div className="relative">
+          <p className={`text-xl max-w-2xl mx-auto mb-8 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+            Kur'an-ı Kerim ve hadis-i şeriflere dayanan İslami rüya tabirleriyle ruhunuza rehberlik ediyoruz.
+            Rüyanızda gördüğünüz sembollerin ilahi mesajlarını öğrenin.
+          </p>
+
+          {/* Search Bar */}
+          <div className="relative max-w-2xl mx-auto">
             <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 h-6 w-6 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} />
             <input
               type="text"
@@ -97,6 +100,13 @@ export default function Home() {
               }`}
             />
           </div>
+
+          {/* Search status */}
+          {searchTerm && !loading && (
+            <p className={`mt-4 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+              "{searchTerm}" için {totalCount} sonuç bulundu
+            </p>
+          )}
         </div>
       </section>
 
@@ -104,9 +114,11 @@ export default function Home() {
       <section className="px-4 pb-16">
         <div className="container mx-auto">
           <div className="flex items-center justify-between mb-8">
-            <h3 className="text-2xl font-bold">İslami Rüya Tabirleri</h3>
+            <h3 className="text-2xl font-bold">
+              {searchTerm ? 'Arama Sonuçları' : 'İslami Rüya Tabirleri'}
+            </h3>
             <span className="text-sm opacity-75">
-              {loading ? 'Yükleniyor...' : `${dreams.length} sonuç bulundu`}
+              {loading ? 'Aranıyor...' : `${dreams.length} sonuç`}
             </span>
           </div>
 
@@ -114,6 +126,17 @@ export default function Home() {
             <div className="text-center py-12">
               <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto"></div>
               <p className="mt-4 opacity-75">Rüya tabirleri yükleniyor...</p>
+            </div>
+          ) : dreams.length === 0 ? (
+            <div className="text-center py-12">
+              <div className={`inline-block p-8 rounded-2xl ${darkMode ? 'bg-gray-800' : 'bg-white shadow-lg'}`}>
+                <Search className={`h-16 w-16 mx-auto mb-4 ${darkMode ? 'text-gray-600' : 'text-gray-300'}`} />
+                <h4 className="text-xl font-bold mb-2">Sonuç Bulunamadı</h4>
+                <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                  "{searchTerm}" ile ilgili rüya tabiri bulunamadı.<br />
+                  Farklı kelimelerle aramayı deneyin.
+                </p>
+              </div>
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
