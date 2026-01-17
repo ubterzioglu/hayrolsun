@@ -157,24 +157,35 @@ export default function Home(_: Props) {
         <div className="container mx-auto px-4 py-4">
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className="p-2 rounded-xl bg-white shadow-sm border border-gray-200">
-                  <img
-                    src="/img/favicon.png"
-                    alt="hayrolsun.site logo"
-                    className="h-9 w-9"
-                    onError={(e) => {
-                      // If logo file is missing, hide the broken image icon.
-                      (e.currentTarget as HTMLImageElement).style.display = 'none';
-                    }}
-                  />
+              <div className="flex items-center gap-4 md:gap-6">
+                <div className="flex items-center space-x-3">
+                  <div className="p-2 rounded-xl bg-white shadow-sm border border-gray-200">
+                    <img
+                      src="/img/favicon.png"
+                      alt="hayrolsun.site logo"
+                      className="h-9 w-9"
+                      onError={(e) => {
+                        // If logo file is missing, hide the broken image icon.
+                        (e.currentTarget as HTMLImageElement).style.display = 'none';
+                      }}
+                    />
+                  </div>
+                  <div>
+                    <h1 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                      hayrolsun.site
+                    </h1>
+                    <p className="text-sm opacity-75">İslami Rüya Tabirleri Rehberiniz</p>
+                  </div>
                 </div>
-                <div>
-                  <h1 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                    hayrolsun.site
-                  </h1>
-                  <p className="text-sm opacity-75">İslami Rüya Tabirleri Rehberiniz</p>
-                </div>
+
+                <span className="hidden sm:block h-9 w-px bg-gray-200" aria-hidden="true" />
+
+                <a
+                  href="/art.html"
+                  className="inline-flex items-center rounded-xl border border-gray-200 bg-white px-4 py-2 text-sm font-medium text-green-700 shadow-sm transition hover:bg-green-50"
+                >
+                  Yazılarımız
+                </a>
               </div>
             </div>
 
@@ -198,14 +209,16 @@ export default function Home(_: Props) {
           <h2 className="text-4xl md:text-6xl font-bold mb-6">
             Rüyalarınızın{' '}
             <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-              Anlamını
+              Hikmetini
             </span>{' '}
             Keşfedin
           </h2>
           <p className="text-xl max-w-2xl mx-auto mb-8 text-gray-600">
-            Rüyalar, bazen bir işaret ve hatırlatmadır. Burada yer alan tabirler; İslami geleneğin
-            genel kabullerine uygun, hayra yorucu bir üslupla sunulur. Allah Teâlâ en doğrusunu
-            bilir.
+            Rüyalar, bazen Rabbimizin bir ikazı, bir müjdesi ya da kalbe düşen bir hatırlatmadır.
+            Burada yer alan tabirler; İslami geleneğin genel kabullerine uygun, hayra yormayı esas
+            alan ve kalbi incitmeyen bir üslupla hazırlanmıştır. Yorumlar kesin hüküm değildir;
+            rüyanın hâli, kişinin niyeti ve şartlarıyla birlikte değerlendirilir. Allah Teâlâ en
+            doğrusunu bilir.
           </p>
           <div className="flex flex-wrap justify-center gap-4">
             {['Su', 'Uçmak', 'Diş', 'Yılan', 'Ölüm', 'Para'].map((keyword) => (

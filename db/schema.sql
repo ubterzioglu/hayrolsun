@@ -39,9 +39,19 @@ CREATE TABLE IF NOT EXISTS dream_tags (
   FOREIGN KEY (tag_slug) REFERENCES tags(slug) ON UPDATE CASCADE ON DELETE CASCADE
 );
 
+CREATE TABLE IF NOT EXISTS articles (
+  id INTEGER PRIMARY KEY,
+  title TEXT NOT NULL,
+  slug TEXT NOT NULL UNIQUE,
+  body TEXT NOT NULL,
+  created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
+  updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
+);
+
 CREATE INDEX IF NOT EXISTS idx_dreams_slug ON dreams(slug);
 CREATE INDEX IF NOT EXISTS idx_dreams_category ON dreams(category_slug);
 CREATE INDEX IF NOT EXISTS idx_dream_tags_tag ON dream_tags(tag_slug);
+CREATE INDEX IF NOT EXISTS idx_articles_slug ON articles(slug);
 
 -- Full-text search over title + body.
 -- unicode61 with diacritics removed helps Turkish search a bit.
@@ -66,6 +76,10 @@ CREATE TRIGGER IF NOT EXISTS dreams_au AFTER UPDATE ON dreams BEGIN
   UPDATE dreams SET updated_at = (strftime('%Y-%m-%dT%H:%M:%fZ','now')) WHERE id = old.id;
   INSERT INTO dreams_fts(dreams_fts, rowid, title, body) VALUES('delete', old.id, old.title, old.body);
   INSERT INTO dreams_fts(rowid, title, body) VALUES (new.id, new.title, new.body);
+END;
+
+CREATE TRIGGER IF NOT EXISTS articles_au AFTER UPDATE ON articles BEGIN
+  UPDATE articles SET updated_at = (strftime('%Y-%m-%dT%H:%M:%fZ','now')) WHERE id = old.id;
 END;
 
 -- Backfill columns for older DBs (scripts ignore duplicate-column errors)
