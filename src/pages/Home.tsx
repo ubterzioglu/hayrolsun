@@ -127,7 +127,28 @@ export default function Home(_: Props) {
     };
   }, [searchTerm, selectedCategory.slug]);
 
-  const filteredDreams = useMemo(() => items, [items]);
+  const filteredDreams = useMemo(() => {
+    const q = searchTerm.trim().toLowerCase();
+    const selectedLabel = selectedCategory.label;
+    const selectedSlug = selectedCategory.slug;
+
+    return items.filter((dream) => {
+      const title = (dream.title ?? '').toLowerCase();
+      const desc = (dream.shortDesc ?? '').toLowerCase();
+
+      const matchesQuery = q.length === 0 || title.includes(q) || desc.includes(q);
+
+      const cat = dream.category ?? '';
+      const matchesCategory =
+        selectedSlug === '' ||
+        cat === selectedLabel ||
+        cat === selectedSlug ||
+        cat.toLowerCase() === selectedLabel.toLowerCase() ||
+        cat.toLowerCase() === selectedSlug.toLowerCase();
+
+      return matchesQuery && matchesCategory;
+    });
+  }, [items, searchTerm, selectedCategory.label, selectedCategory.slug]);
 
   return (
     <div className="min-h-screen transition-colors duration-300 bg-gradient-to-br from-green-50 to-emerald-100 text-gray-800">
@@ -140,7 +161,7 @@ export default function Home(_: Props) {
                 <div className="p-2 rounded-xl bg-white shadow-sm border border-gray-200">
                   <img
                     src="/img/favicon.png"
-                    alt="Hayrolsun.site logo"
+                    alt="hayrolsun.site logo"
                     className="h-6 w-6"
                     onError={(e) => {
                       // If logo file is missing, hide the broken image icon.
@@ -150,7 +171,7 @@ export default function Home(_: Props) {
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                    Hayrolsun.site
+                    hayrolsun.site
                   </h1>
                   <p className="text-sm opacity-75">İslami Rüya Tabirleri Rehberiniz</p>
                 </div>
@@ -291,10 +312,10 @@ export default function Home(_: Props) {
       <footer className="py-8 border-t border-gray-200 bg-white">
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <span className="text-xl font-bold">Hayrolsun.site</span>
+            <span className="text-xl font-bold">hayrolsun.site</span>
           </div>
           <p className="mb-2 text-gray-600">
-            © 2026 Hayrolsun.site - Tüm hakları saklıdır.
+            © 2026 hayrolsun.site - Tüm hakları saklıdır.
           </p>
           <p className="mb-4 text-sm text-gray-500">
             Rüya tabirleri yorum mahiyetindedir; kesin hüküm ifade etmez. Allah Teâlâ en doğrusunu bilir.

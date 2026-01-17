@@ -114,7 +114,7 @@ export default function AdminPage() {
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
           <Link to="/" className="flex items-center gap-2">
             <BookOpen className="h-5 w-5 text-green-600" />
-            <span className="font-bold">Hayrolsun.site</span>
+            <span className="font-bold">hayrolsun.site</span>
           </Link>
           <div className="flex items-center gap-2 text-sm text-gray-600">
             <Shield className="h-4 w-4" />

@@ -1,4 +1,4 @@
--- Hayrolsun.site (Turso/libSQL) schema
+-- hayrolsun.site (Turso/libSQL) schema
 -- Read-heavy, rarely updated. Optimized for search + filtering.
 
 PRAGMA foreign_keys = ON;

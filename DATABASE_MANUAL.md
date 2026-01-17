@@ -1,4 +1,4 @@
-## Hayrolsun.site — Database Güncelleme Kılavuzu (Turso / libSQL)
+## hayrolsun.site — Database Güncelleme Kılavuzu (Turso / libSQL)
 
 Bu proje **okuma ağırlıklı** olduğu için veritabanında amaç:
 

@@ -1,4 +1,4 @@
-## Hayrolsun.site
+## hayrolsun.site
 
 Basit bir **React + Vite + Tailwind** arayüzü (rüya tabirleri demo).
 

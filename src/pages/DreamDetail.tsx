@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { ArrowLeft, BookOpen, Tag, ThumbsDown, ThumbsUp, Eye } from 'lucide-react';
+import { ArrowLeft, BookOpen, Tag, ThumbsDown, ThumbsUp, Eye, MessageCircle } from 'lucide-react';
 import { Link, useParams } from 'react-router-dom';
 
 type DreamDetail = {
@@ -102,6 +102,18 @@ export default function DreamDetailPage() {
   const [voted, setVoted] = useState<'like' | 'dislike' | null>(null);
 
   const fallback = useMemo(() => fallbackBySlug[slug], [slug]);
+  const shareUrl = useMemo(() => {
+    if (!slug) return '';
+    if (typeof window === 'undefined') return `https://hayrolsun.site/ruya/${slug}`;
+    return `${window.location.origin}/ruya/${slug}`;
+  }, [slug]);
+
+  const whatsappHref = useMemo(() => {
+    if (!shareUrl) return '';
+    const title = item?.title ?? '';
+    const text = `${title}\n${shareUrl}`;
+    return `https://wa.me/?text=${encodeURIComponent(text)}`;
+  }, [item?.title, shareUrl]);
 
   useEffect(() => {
     const controller = new AbortController();
@@ -196,7 +208,7 @@ export default function DreamDetailPage() {
           </Link>
           <div className="flex items-center gap-2">
             <BookOpen className="h-5 w-5 text-green-600" />
-            <span className="font-bold">Hayrolsun.site</span>
+            <span className="font-bold">hayrolsun.site</span>
           </div>
           <div className="w-10" />
         </div>
@@ -278,6 +290,23 @@ export default function DreamDetailPage() {
 
                   {voted && <span className="text-xs text-gray-500">Oyunuz alındı</span>}
                 </div>
+
+                {whatsappHref && (
+                  <>
+                    <span className="opacity-40">•</span>
+                    <a
+                      href={whatsappHref}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full border border-gray-200 bg-white hover:bg-green-50 transition-colors"
+                      aria-label="WhatsApp ile paylaş"
+                      title="WhatsApp ile paylaş"
+                    >
+                      <MessageCircle className="h-4 w-4" />
+                      <span>WhatsApp</span>
+                    </a>
+                  </>
+                )}
               </div>
 
               {item.tags?.length > 0 && (
