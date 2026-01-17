@@ -1,5 +1,4 @@
 {
-  "version": 2,
   "redirects": [
     {
       "source": "/(.*)",
@@ -7,10 +6,6 @@
       "destination": "https://www.hayrolsun.site/$1",
       "permanent": true
     }
-  ],
-  "routes": [
-    { "handle": "filesystem" },
-    { "src": "/api/(.*)", "dest": "/api/$1" }
   ]
 }
 
