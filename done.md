@@ -1,0 +1,15 @@
+# Done Ozeti
+
+- `status_timestamp.md` olusturuldu ve zaman damgasi ile repo ozet bulgulari yazildi.
+- `.env` icine `ADMIN_TOKEN` eklendi; `readme.md` icinde admin degiskeni not edildi.
+- `vercel.json` icin apex -> `www` 301 yonlendirme eklendi; SPA icin rewrite kurallari guncellendi.
+- `index.html`, `public/robots.txt`, `public/sitemap.xml` icinde canonical/sitemap URL’leri `www` olacak sekilde duzeltildi.
+- Logo boyutu buyutuldu (`src/pages/Home.tsx`) ve header’a dik ayirac + `Yazilarimiz` butonu eklendi.
+- Ana sayfa hero metni istenen yeni metinle degistirildi (`src/pages/Home.tsx`).
+- `public/art.html` olusturuldu ve verilen 12 yazi icerigi eklendi.
+- `db/schema.sql` icinde `articles` tablosu ve `updated_at` trigger’i eklendi.
+- `db/seed.sql` icine `articles` verileri eklendi.
+- `api/admin/sql.ts` icinde `articles` tablosu admin import whitelist’ine eklendi.
+- `public/sitemap.html` icinde “Yazilarimiz” linki varligi kontrol edildi.
+- Deep crawl (sitemap+robots) calistirildi: 200 OK (robots, sitemap, ana sayfa, sitemap.html). Canli sitemap’ta `art.html` henuz yok (deploy edilmedi).
+- Test calistirilmadi.

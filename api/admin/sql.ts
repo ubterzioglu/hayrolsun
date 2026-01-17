@@ -25,7 +25,7 @@ async function readJson(req: IncomingMessage) {
   });
 }
 
-const ALLOWED_TABLES = new Set(['dreams', 'categories', 'tags', 'dream_tags']);
+const ALLOWED_TABLES = new Set(['dreams', 'categories', 'tags', 'dream_tags', 'articles']);
 
 function isAllowedStatement(stmt: string): { ok: boolean; reason?: string } {
   const s = stmt.trim();
