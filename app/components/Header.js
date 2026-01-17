@@ -9,9 +9,6 @@ export default function Header({ darkMode, setDarkMode }) {
       <div className="container mx-auto px-4 py-4">
         <div className="flex items-center justify-between">
           <a href="/" className="flex items-center space-x-3">
-            <div className="w-16 h-16 bg-white/10 backdrop-blur-sm rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex justify-center items-center">
-              <img src="/img/roundedhayrolsun.png" alt="Hayrolsun Logo" className="h-14 w-14 rounded-full transition-transform duration-300 hover:scale-125 hover:rotate-6" />
-            </div>
             <div>
               <h1 className="text-[1.75rem] font-bold bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">
                 hayrolsun.site

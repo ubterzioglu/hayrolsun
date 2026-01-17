@@ -3,7 +3,6 @@ export default function Footer({ darkMode }) {
     <footer className={`py-12 border-t transition-all duration-300 ${darkMode ? 'border-slate-800/50 bg-gradient-to-r from-slate-900 to-gray-900' : 'border-emerald-200/50 bg-gradient-to-r from-white to-emerald-50/50'}`}>
       <div className="container mx-auto px-4 text-center">
         <div className="flex items-center justify-center space-x-2 mb-4">
-          <img src="/img/logo.png" alt="Hayrolsun Logo" className="h-6 w-6 rounded transition-transform duration-300 hover:scale-125 hover:rotate-12" />
           <span className="text-xl font-bold">hayrolsun.site</span>
         </div>
         <p className={`mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
