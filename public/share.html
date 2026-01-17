@@ -1,0 +1,346 @@
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rüya Paylaş | hayrolsun.site</title>
+    <meta name="description" content="Rüyanızı anonim olarak paylaşın. Diğer kullanıcıların rüyalarını okuyun." />
+    <meta name="robots" content="index,follow" />
+    <link rel="icon" type="image/png" href="/img/favicon.png" />
+    <link rel="canonical" href="https://www.hayrolsun.site/share.html" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="hayrolsun.site" />
+    <meta property="og:title" content="Rüya Paylaş | hayrolsun.site" />
+    <meta property="og:image" content="https://www.hayrolsun.site/img/hayrolsun.png" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content="https://www.hayrolsun.site/img/hayrolsun.png" />
+    <style>
+      :root { color-scheme: light; }
+      * { box-sizing: border-box; }
+      body {
+        font-family: "Segoe UI", "Trebuchet MS", "Verdana", sans-serif;
+        line-height: 1.7;
+        margin: 0;
+        color: #1f2937;
+        background: radial-gradient(circle at top left, #f0fdf4 0%, #e6fff0 35%, #f8fafc 100%);
+        min-height: 100vh;
+      }
+      header {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        backdrop-filter: blur(10px);
+        background: rgba(255, 255, 255, 0.85);
+        border-bottom: 1px solid #e5e7eb;
+      }
+      .container {
+        max-width: 800px;
+        margin: 0 auto;
+        padding: 20px 18px;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+      }
+      .brand img {
+        width: 60px;
+        height: 60px;
+        border-radius: 12px;
+        display: block;
+      }
+      .site-title {
+        font-size: 1.75rem;
+        font-weight: 700;
+        margin: 0;
+        background: linear-gradient(90deg, #16a34a, #10b981);
+        -webkit-background-clip: text;
+        color: transparent;
+      }
+      .site-tagline {
+        font-size: 14px;
+        margin: 2px 0 0;
+        color: #6b7280;
+      }
+      .divider {
+        width: 1px;
+        height: 40px;
+        background: #d1d5db;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 8px 16px;
+        border-radius: 8px;
+        font-weight: 500;
+        font-size: 14px;
+        text-decoration: none;
+        color: #ffffff;
+        background: #16a34a;
+        border: none;
+        cursor: pointer;
+        transition: background 0.2s;
+      }
+      .btn:hover { background: #15803d; }
+      .btn:disabled { background: #9ca3af; cursor: not-allowed; }
+
+      .hero {
+        padding: 40px 0 20px;
+        text-align: center;
+      }
+      .hero h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin: 0 0 8px;
+        color: #0f172a;
+      }
+      .hero p {
+        margin: 0;
+        color: #4b5563;
+      }
+
+      .form-section {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 18px;
+        padding: 24px;
+        margin-bottom: 24px;
+        box-shadow: 0 8px 24px rgba(15, 23, 42, 0.05);
+      }
+      .form-section h2 {
+        margin: 0 0 16px;
+        font-size: 1.25rem;
+        color: #0f172a;
+      }
+      textarea {
+        width: 100%;
+        min-height: 120px;
+        padding: 12px;
+        border: 1px solid #d1d5db;
+        border-radius: 12px;
+        font-family: inherit;
+        font-size: 15px;
+        resize: vertical;
+        margin-bottom: 12px;
+      }
+      textarea:focus {
+        outline: none;
+        border-color: #16a34a;
+        box-shadow: 0 0 0 3px rgba(22, 163, 74, 0.1);
+      }
+      .char-count {
+        font-size: 13px;
+        color: #6b7280;
+        margin-bottom: 12px;
+      }
+      .message {
+        padding: 12px 16px;
+        border-radius: 8px;
+        margin-bottom: 16px;
+        font-size: 14px;
+      }
+      .message.success {
+        background: #dcfce7;
+        color: #166534;
+      }
+      .message.error {
+        background: #fee2e2;
+        color: #991b1b;
+      }
+
+      .dreams-section h2 {
+        margin: 0 0 16px;
+        font-size: 1.25rem;
+        color: #0f172a;
+      }
+      .dream-card {
+        background: #ffffff;
+        border: 1px solid #e5e7eb;
+        border-radius: 14px;
+        padding: 16px;
+        margin-bottom: 12px;
+        box-shadow: 0 4px 12px rgba(15, 23, 42, 0.03);
+      }
+      .dream-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 8px;
+      }
+      .dream-user {
+        font-weight: 600;
+        color: #16a34a;
+        font-size: 14px;
+      }
+      .dream-date {
+        font-size: 13px;
+        color: #9ca3af;
+      }
+      .dream-content {
+        color: #374151;
+        white-space: pre-wrap;
+        word-break: break-word;
+      }
+      .empty-state {
+        text-align: center;
+        padding: 40px 20px;
+        color: #6b7280;
+      }
+      .loading {
+        text-align: center;
+        padding: 40px 20px;
+        color: #6b7280;
+      }
+
+      .footer {
+        padding: 26px 0 40px;
+        color: #6b7280;
+        font-size: 14px;
+        text-align: center;
+      }
+
+      @media (max-width: 720px) {
+        .brand {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 12px;
+        }
+        .divider { display: none; }
+        .hero h1 { font-size: 1.5rem; }
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="container">
+        <div class="brand">
+          <a href="/" style="display:flex;align-items:center;gap:12px;text-decoration:none;">
+            <img src="/img/logo.png" alt="hayrolsun.site logo" />
+            <div>
+              <h2 class="site-title">hayrolsun.site</h2>
+              <p class="site-tagline">İslami Rüya Tabirleri Rehberiniz</p>
+            </div>
+          </a>
+          <div class="divider" aria-hidden="true"></div>
+          <a class="btn" href="/art.html">Yazılarımız</a>
+        </div>
+      </div>
+    </header>
+
+    <main class="container">
+      <section class="hero">
+        <h1>Rüya Paylaş</h1>
+        <p>Rüyanızı anonim olarak paylaşın. Onaylandıktan sonra herkes görebilir.</p>
+      </section>
+
+      <section class="form-section">
+        <h2>Rüyanı Anlat</h2>
+        <div id="form-message"></div>
+        <textarea id="dream-input" placeholder="Rüyanızı buraya yazın..." maxlength="2000"></textarea>
+        <div class="char-count"><span id="char-count">0</span> / 2000</div>
+        <button class="btn" id="submit-btn">Gönder</button>
+      </section>
+
+      <section class="dreams-section">
+        <h2>Paylaşılan Rüyalar</h2>
+        <div id="dreams-list">
+          <div class="loading">Yükleniyor...</div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="container footer">
+      Allah Teâlâ en doğrusunu bilir.
+    </footer>
+
+    <script>
+      const input = document.getElementById('dream-input');
+      const charCount = document.getElementById('char-count');
+      const submitBtn = document.getElementById('submit-btn');
+      const formMessage = document.getElementById('form-message');
+      const dreamsList = document.getElementById('dreams-list');
+
+      input.addEventListener('input', () => {
+        charCount.textContent = input.value.length;
+      });
+
+      submitBtn.addEventListener('click', async () => {
+        const content = input.value.trim();
+        if (content.length < 10) {
+          showMessage('Rüya en az 10 karakter olmalı.', 'error');
+          return;
+        }
+
+        submitBtn.disabled = true;
+        submitBtn.textContent = 'Gönderiliyor...';
+
+        try {
+          const res = await fetch('/api/shares', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content })
+          });
+          const data = await res.json();
+
+          if (res.ok) {
+            showMessage(`Rüyanız gönderildi! Kullanıcı numaranız: #${data.userId}`, 'success');
+            input.value = '';
+            charCount.textContent = '0';
+          } else {
+            showMessage(data.error || 'Bir hata oluştu.', 'error');
+          }
+        } catch (e) {
+          showMessage('Bağlantı hatası.', 'error');
+        } finally {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Gönder';
+        }
+      });
+
+      function showMessage(text, type) {
+        formMessage.innerHTML = `<div class="message ${type}">${text}</div>`;
+        setTimeout(() => { formMessage.innerHTML = ''; }, 5000);
+      }
+
+      async function loadDreams() {
+        try {
+          const res = await fetch('/api/shares');
+          const data = await res.json();
+
+          if (!data.items || data.items.length === 0) {
+            dreamsList.innerHTML = '<div class="empty-state">Henüz paylaşılan rüya yok.</div>';
+            return;
+          }
+
+          dreamsList.innerHTML = data.items.map(d => `
+            <div class="dream-card">
+              <div class="dream-header">
+                <span class="dream-user">#${d.user_id}</span>
+                <span class="dream-date">${formatDate(d.created_at)}</span>
+              </div>
+              <div class="dream-content">${escapeHtml(d.content)}</div>
+            </div>
+          `).join('');
+        } catch (e) {
+          dreamsList.innerHTML = '<div class="empty-state">Yüklenirken hata oluştu.</div>';
+        }
+      }
+
+      function formatDate(iso) {
+        if (!iso) return '';
+        const d = new Date(iso);
+        return d.toLocaleDateString('tr-TR', { day: 'numeric', month: 'short', year: 'numeric' });
+      }
+
+      function escapeHtml(text) {
+        const div = document.createElement('div');
+        div.textContent = text;
+        return div.innerHTML;
+      }
+
+      loadDreams();
+    </script>
+    <script data-goatcounter="https://hayrolsun.goatcounter.com/count" async src="//gc.zgo.at/count.js"></script>
+  </body>
+</html>
