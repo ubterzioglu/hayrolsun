@@ -237,95 +237,94 @@
     </footer>
 
     <script>
-        // Mock database of dream interpretations
-        const dreamDatabase = [
-            {
-                keyword: "su",
-                interpretation: "Rüyada su görmek ilim, hayat ve rızık demektir. Eğer suyu temiz içiyorsa, faydalı ilim veya helal rızık elde edeceğine işarettir. Eğer suyun rengi bulanıksa, bu gam ve sıkıntıya işaret eder."
-            },
-            {
-                keyword: "nehir",
-                interpretation: "Nehir görmek uzun ömür ve bol rızık işaretidir. Nehirde yüzmek ise saltanat veya insanların ihtiyaçlarından kurtulmak mânâsınadır."
-            },
-            {
-                keyword: "gök",
-                interpretation: "Gök görmek yücelik ve yükseliş işaretidir. Gökten inmek ise büyük bir fethe veya bol hayra delalet eder."
-            },
-            {
-                keyword: "kitap",
-                interpretation: "Kitap görmek ilim ve hikmet işaretidir. Kitap okumak ise ilim sahibi olmak veya yeni bir şey öğrenmek mânâsınadır. Eğer kitap gökten iniyorsa, hidayet ve doğru yola erişmek anlamına gelir."
-            },
-            {
-                keyword: "ağaç",
-                interpretation: "Ağaç görmek salih bir adam veya kadın işaretidir. Ağaç dikmek ise salih amel işlemek demektir. Eğer ağaç meyve veriyorsa, amelinin karşılığını alacağına işarettir."
-            },
-            {
-                keyword: "nur",
-                interpretation: "Nur görmek hidayet ve iman işaretidir. Nur taşıyan birini görmek ise başkalarını hidayete eriştirmek veya ilminden istifade etmek mânâsınadır. Eğer nur her yeri aydınlatıyorsa, hayır ve bereketin yayılacağına delalet eder."
-            },
-            {
-                keyword: "at",
-                interpretation: "At görmek hayır ve bereket işaretidir. At binmek ise izzet ve düşman üstüne galip gelmek mânâsınadır. Eğer at beyazsa, mutlak hayır ve bereket getirir."
-            },
-            {
-                keyword: "ev",
-                interpretation: "Ev görmek kadın veya aile işaretidir. Evi yeni görürse evlenecek veya ailesinde hayır olacak demektir. Eğer ev yıkılıyorsa, işlerinde bozukluk olacağına işarettir."
-            }
+        // Fallback data in case API fails
+        const fallbackDreams = [
+            { title: "Rüyada Su Görmek", slug: "ruyada-su-gormek", shortDesc: "Rüyada su görmek ilim, hayat ve rızık demektir.", category: "Doğa" },
+            { title: "Rüyada Uçmak", slug: "ruyada-ucmak", shortDesc: "Uçmak özgürlük ve hırslarınızı temsil eder.", category: "Hareket" },
+            { title: "Rüyada Diş Düşmesi", slug: "ruyada-dis-dusmesi", shortDesc: "Diş düşmesi kaygı veya bir kaybı simgeler.", category: "Vücut" }
         ];
 
-        // Function to search dreams
-        function searchDreams(query) {
-            if (!query.trim()) {
-                return [];
+        let dreams = [];
+        let isLoading = false;
+
+        // Fetch dreams from API
+        async function fetchDreams(query = '') {
+            const container = document.getElementById('resultsContainer');
+            isLoading = true;
+            container.innerHTML = '<div class="no-results">Yükleniyor...</div>';
+
+            try {
+                const params = new URLSearchParams();
+                if (query.trim()) params.set('query', query.trim());
+
+                const res = await fetch(`/api/dreams?${params.toString()}`);
+                if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+                const data = await res.json();
+                if (Array.isArray(data.items)) {
+                    dreams = data.items;
+                } else {
+                    throw new Error('Invalid response');
+                }
+            } catch (err) {
+                console.warn('API error, using fallback:', err);
+                dreams = fallbackDreams;
+            } finally {
+                isLoading = false;
+                displayResults(dreams);
             }
-            
-            const searchTerm = query.toLowerCase().trim();
-            return dreamDatabase.filter(item => 
-                item.keyword.toLowerCase().includes(searchTerm) ||
-                item.interpretation.toLowerCase().includes(searchTerm)
-            );
         }
 
-        // Function to display results
-        function displayResults(results) {
+        // Display results
+        function displayResults(items) {
             const container = document.getElementById('resultsContainer');
-            
-            if (results.length === 0) {
+
+            if (!items || items.length === 0) {
                 container.innerHTML = '<div class="no-results">Bu rüya için yorum bulunamadı. Başka bir kelime deneyin.</div>';
                 return;
             }
-            
+
             let html = '';
-            results.forEach(item => {
+            items.forEach(item => {
                 html += `
                     <div class="result-item">
-                        <h3>${item.keyword}</h3>
-                        <p>${item.interpretation}</p>
+                        <h3><a href="dream.html?slug=${encodeURIComponent(item.slug)}" style="color: inherit; text-decoration: none;">${item.title}</a></h3>
+                        <p>${item.shortDesc || ''}</p>
+                        <small style="color: #888;">${item.category || 'Genel'}</small>
                     </div>
                 `;
             });
-            
+
             container.innerHTML = html;
+        }
+
+        // Debounce for search
+        let debounceTimer;
+        function debounceSearch(query) {
+            clearTimeout(debounceTimer);
+            debounceTimer = setTimeout(() => fetchDreams(query), 300);
         }
 
         // Event listeners
         document.getElementById('searchButton').addEventListener('click', () => {
             const query = document.getElementById('searchInput').value;
-            const results = searchDreams(query);
-            displayResults(results);
+            fetchDreams(query);
         });
 
         document.getElementById('searchInput').addEventListener('keypress', (e) => {
             if (e.key === 'Enter') {
                 const query = document.getElementById('searchInput').value;
-                const results = searchDreams(query);
-                displayResults(results);
+                fetchDreams(query);
             }
         });
 
-        // Initial load - show all interpretations
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            debounceSearch(e.target.value);
+        });
+
+        // Initial load
         window.addEventListener('DOMContentLoaded', () => {
-            displayResults(dreamDatabase);
+            fetchDreams();
         });
     </script>
 </body>
