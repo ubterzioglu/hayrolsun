@@ -159,17 +159,15 @@ export default function Home(_: Props) {
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-4 md:gap-6">
                 <div className="flex items-center space-x-3">
-                  <div className="p-2 rounded-xl bg-white shadow-sm border border-gray-200">
-                    <img
-                      src="/img/favicon.png"
-                      alt="hayrolsun.site logo"
-                      className="h-9 w-9"
-                      onError={(e) => {
-                        // If logo file is missing, hide the broken image icon.
-                        (e.currentTarget as HTMLImageElement).style.display = 'none';
-                      }}
-                    />
-                  </div>
+                  <img
+                    src="/img/favicon.png"
+                    alt="hayrolsun.site logo"
+                    className="h-[72px] w-[72px]"
+                    onError={(e) => {
+                      // If logo file is missing, hide the broken image icon.
+                      (e.currentTarget as HTMLImageElement).style.display = 'none';
+                    }}
+                  />
                   <div>
                     <h1 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
                       hayrolsun.site

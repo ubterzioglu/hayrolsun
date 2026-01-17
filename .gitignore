@@ -15,3 +15,5 @@ yarn-error.log*
 # TS build artifacts
 *.tsbuildinfo
 
+
+/.0
