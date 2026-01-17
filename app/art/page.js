@@ -208,7 +208,7 @@ export default function Articles() {
             {articles.map((article) => (
               <article
                 key={article.id}
-                className={`block rounded-3xl p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] group ${
+                className={`block rounded-3xl p-6 min-h-[300px] flex flex-col transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] group ${
                   darkMode
                     ? 'bg-slate-800/80 hover:bg-slate-750 backdrop-blur-sm border border-slate-700/50'
                     : 'bg-white/90 hover:bg-white shadow-xl backdrop-blur-sm border border-emerald-100/50'
