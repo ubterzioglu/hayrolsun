@@ -20,7 +20,6 @@ module.exports = async function handler(req, res) {
 
   const url = getUrl(req);
   const query = (url.searchParams.get('query') || '').trim();
-  const category = (url.searchParams.get('category') || '').trim();
   const tag = (url.searchParams.get('tag') || '').trim();
   const limit = Math.min(Math.max(parseInt(url.searchParams.get('limit') || '30', 10) || 30, 1), 100);
   const offset = Math.max(parseInt(url.searchParams.get('offset') || '0', 10) || 0, 0);
@@ -32,22 +31,17 @@ module.exports = async function handler(req, res) {
     const where = [];
     const args = [];
 
-    let from = 'dreams d LEFT JOIN categories c ON c.slug = d.category_slug';
+    let from = 'dreams d';
     const select =
-      'd.id, d.title, d.slug, d.body, COALESCE(c.name, d.category_slug) as category, d.views, d.rating, d.created_at, d.updated_at';
+      'd.id, d.title, d.slug, d.body, d.views, d.rating, d.created_at, d.updated_at';
     let orderBy = 'd.views DESC, d.id DESC';
 
     if (query.length > 0) {
       // Use FTS for search. Quote query to avoid special char issues; keep it basic.
-      from = 'dreams_fts f JOIN dreams d ON d.id = f.rowid LEFT JOIN categories c ON c.slug = d.category_slug';
+      from = 'dreams_fts f JOIN dreams d ON d.id = f.rowid';
       where.push('dreams_fts MATCH ?');
       args.push(query);
       orderBy = 'bm25(f) ASC, d.views DESC';
-    }
-
-    if (category.length > 0 && category !== 'tumu') {
-      where.push('d.category_slug = ?');
-      args.push(category);
     }
 
     if (tag.length > 0) {
@@ -74,7 +68,6 @@ module.exports = async function handler(req, res) {
       title: r.title,
       slug: r.slug,
       shortDesc: String(r.body).slice(0, 180) + (String(r.body).length > 180 ? '.' : ''),
-      category: r.category,
       popularity: r.views,
       rating: r.rating,
       updatedAt: r.updated_at,

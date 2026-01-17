@@ -27,10 +27,8 @@ module.exports = async function handler(req, res) {
   try {
     const dreamRes = await client.execute({
       sql: `
-        SELECT d.id, d.title, d.slug, d.body, COALESCE(c.name, d.category_slug) as category,
-               d.views, d.likes, d.dislikes, d.updated_at
+        SELECT d.id, d.title, d.slug, d.body, d.views, d.likes, d.dislikes, d.updated_at
         FROM dreams d
-        LEFT JOIN categories c ON c.slug = d.category_slug
         WHERE d.slug = ?
         LIMIT 1
       `,
@@ -42,7 +40,7 @@ module.exports = async function handler(req, res) {
 
     const tagsRes = await client.execute({
       sql: `
-        SELECT t.slug, t.name
+        SELECT t.slug, LOWER(t.name) as name
         FROM dream_tags dt
         JOIN tags t ON t.slug = dt.tag_slug
         WHERE dt.dream_id = ?
@@ -56,7 +54,6 @@ module.exports = async function handler(req, res) {
       title: row.title,
       slug: row.slug,
       body: row.body,
-      category: row.category,
       views: row.views,
       likes: row.likes,
       dislikes: row.dislikes,
