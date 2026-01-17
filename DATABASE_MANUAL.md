@@ -43,6 +43,47 @@ Bu işlem için iki yol var:
 
 Şu an repoda (kasıtlı olarak) “admin panel / content editor” yok; içerik ekleme genelde Dashboard üzerinden yapılır.
 
+### SQL query’yi nereye yazıyorum? (Turso Dashboard)
+
+1. Turso’da ilgili **database**’i aç
+2. Sol menüden **SQL / Query / SQL Editor** benzeri bölüme gir
+3. Query alanına SQL’ini yapıştır ve **Run** (çalıştır) de
+
+> Not: `dreams.category_slug` alanı `categories.slug`’a bağlı. Bu yüzden `islami` gibi yeni bir kategori kullanacaksan, önce kategoriyi ekle.
+
+Örnek:
+
+```sql
+INSERT OR IGNORE INTO categories (name, slug)
+VALUES ('İslami', 'islami');
+```
+
+### Turso paneli yoksa: Admin panelden SQL import
+
+Eğer Turso Dashboard’a erişemiyorsan, sitedeki admin ekranını kullanabilirsin:
+
+- URL: **`/admin`**
+- Token: **`ADMIN_TOKEN`** (Vercel Env’e eklediğin değer)
+- “**SQL Çalıştır (Import)**” alanına SQL’ini yapıştır → **Çalıştır**
+
+Güvenlik için backend yalnızca şu tablolara **INSERT** (ve kontrol amaçlı **SELECT**) kabul eder:
+
+- `dreams`
+- `categories`
+- `tags`
+- `dream_tags`
+
+### Terminalden SQL çalıştırma (dosya ile)
+
+Eğer SQL’i dosyada tutmak istersen:
+
+1. Örn. `import.sql` dosyası oluştur ve SQL’ini içine koy
+2. Çalıştır:
+
+```bash
+npm run db:sql -- import.sql
+```
+
 ### A) Turso Dashboard ile yeni rüya ekleme
 
 1. Turso’da DB’yi aç → **SQL Editor**
@@ -93,7 +134,45 @@ SET body = 'Güncel uzun tabir metni...'
 WHERE slug = 'ruyada-evlilik-gormek';
 ```
 
+#### Başlık formatını “Rüyada X Görmek” olarak güncelleme (örnek)
+
+Elindeki kayıtlar “X Rüyası Tabiri” formatındaysa, aşağıdaki gibi `UPDATE` ile tek seferde düzeltebilirsin:
+
+```sql
+UPDATE dreams SET title = 'Rüyada Su Görmek' WHERE slug = 'ruyada-su-gormek';
+UPDATE dreams SET title = 'Rüyada Uçmak Görmek' WHERE slug = 'ruyada-ucmak';
+UPDATE dreams SET title = 'Rüyada Diş Düşmesi Görmek' WHERE slug = 'ruyada-dis-dusmesi';
+UPDATE dreams SET title = 'Rüyada Yılan Görmek' WHERE slug = 'ruyada-yilan-gormek';
+UPDATE dreams SET title = 'Rüyada Ölüm Görmek' WHERE slug = 'ruyada-olum-gormek';
+UPDATE dreams SET title = 'Rüyada Para Görmek' WHERE slug = 'ruyada-para-gormek';
+```
+
 > Not: `dreams_fts` (arama index’i) trigger’lar sayesinde otomatik güncellenir. Ekstra işlem yapmana gerek yok.
+
+## 1.1) Views ve Like/Dislike (rating) nasıl çalışıyor?
+
+- **Views**: Detay sayfası açıldığında backend şu endpoint’e istek atar ve DB’de `views = views + 1` olur:
+  - `POST /api/dreams/:slug/view`
+- **Rating (Like/Dislike)**: Detay sayfasındaki butonlar şu endpoint’e istek atar:
+  - `POST /api/dreams/:slug/vote` body: `{ "vote": "like" }` veya `{ "vote": "dislike" }`
+
+> Not: Şu an kullanıcı hesabı yok. Tekrarlı oyları engellemek için frontend tarafında basit bir `localStorage` kilidi var (tarayıcı bazlı).
+
+### SQL ile manuel artırmak istersen
+
+#### Views artırma
+
+```sql
+UPDATE dreams SET views = views + 1 WHERE slug = 'ruyada-yilan-gormek';
+```
+
+#### Like / Dislike artırma
+
+```sql
+UPDATE dreams SET likes = likes + 1 WHERE slug = 'ruyada-yilan-gormek';
+-- veya
+UPDATE dreams SET dislikes = dislikes + 1 WHERE slug = 'ruyada-yilan-gormek';
+```
 
 ## 2) Schema değişikliği (migration)
 

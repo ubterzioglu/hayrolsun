@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import { BookOpen, Clock, Eye, Search } from 'lucide-react';
+import { Clock, Eye, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export type DreamListItem = {
@@ -16,53 +16,53 @@ const fallbackDreams: DreamListItem[] = [
   {
     id: 1,
     slug: 'ruyada-su-gormek',
-    title: 'Su Rüyası Tabiri',
+    title: 'Rüyada Su Görmek',
     shortDesc:
       'Suyun durumu rüyanın anlamını belirler. Temiz su mutluluk, kirli su ise sorunları simgeler.',
     category: 'Doğa',
-    popularity: 95000,
+    popularity: 0,
   },
   {
     id: 2,
     slug: 'ruyada-ucmak',
-    title: 'Uçmak Rüyası Tabiri',
+    title: 'Rüyada Uçmak Görmek',
     shortDesc: 'Uçmak özgürlük ve hırslarınızı temsil eder. Yüksekten uçmak başarıyı gösterir.',
     category: 'Hareket',
-    popularity: 88000,
+    popularity: 0,
   },
   {
     id: 3,
     slug: 'ruyada-dis-dusmesi',
-    title: 'Diş Düşmesi Rüyası Tabiri',
+    title: 'Rüyada Diş Düşmesi Görmek',
     shortDesc:
       'Diş düşmesi kaygı, güvensizlik veya bir kaybı simgeler. Aile fertlerine dikkat edilmelidir.',
     category: 'Vücut',
-    popularity: 92000,
+    popularity: 0,
   },
   {
     id: 4,
     slug: 'ruyada-yilan-gormek',
-    title: 'Yılan Rüyası Tabiri',
+    title: 'Rüyada Yılan Görmek',
     shortDesc: 'Yılan hem tehlike hem de dönüşüm sembolüdür. Rüyanın detayları yorumu değiştirir.',
     category: 'Hayvanlar',
-    popularity: 85000,
+    popularity: 0,
   },
   {
     id: 5,
     slug: 'ruyada-olum-gormek',
-    title: 'Ölüm Rüyası Tabiri',
+    title: 'Rüyada Ölüm Görmek',
     shortDesc: 'Ölüm rüyası genellikle yeni başlangıçları temsil eder, korkulacak bir şey değildir.',
     category: 'Hayat',
-    popularity: 78000,
+    popularity: 0,
   },
   {
     id: 6,
     slug: 'ruyada-para-gormek',
-    title: 'Para Rüyası Tabiri',
+    title: 'Rüyada Para Görmek',
     shortDesc:
       'Para kazanmak zenginlik değil, değer kazanmayı simgeler. Kaybetmek ise endişeyi gösterir.',
     category: 'Maddi',
-    popularity: 82000,
+    popularity: 0,
   },
 ];
 
@@ -137,8 +137,16 @@ export default function Home(_: Props) {
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center space-x-3">
-                <div className="p-2 rounded-xl bg-green-500">
-                  <BookOpen className="h-6 w-6 text-white" />
+                <div className="p-2 rounded-xl bg-white shadow-sm border border-gray-200">
+                  <img
+                    src="/img/favicon.png"
+                    alt="Hayrolsun.site logo"
+                    className="h-6 w-6"
+                    onError={(e) => {
+                      // If logo file is missing, hide the broken image icon.
+                      (e.currentTarget as HTMLImageElement).style.display = 'none';
+                    }}
+                  />
                 </div>
                 <div>
                   <h1 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
@@ -283,7 +291,6 @@ export default function Home(_: Props) {
       <footer className="py-8 border-t border-gray-200 bg-white">
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <BookOpen className="h-6 w-6 text-green-600" />
             <span className="text-xl font-bold">Hayrolsun.site</span>
           </div>
           <p className="mb-2 text-gray-600">

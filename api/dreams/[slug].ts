@@ -4,7 +4,8 @@ import { tursoClient } from '../_lib/turso';
 function json(res: ServerResponse, status: number, body: unknown) {
   res.statusCode = status;
   res.setHeader('content-type', 'application/json; charset=utf-8');
-  res.setHeader('cache-control', 's-maxage=60, stale-while-revalidate=300');
+  // Detail includes dynamic counters (views/likes/dislikes); do not cache.
+  res.setHeader('cache-control', 'no-store');
   res.end(JSON.stringify(body));
 }
 
@@ -27,7 +28,8 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
   try {
     const dreamRes = await client.execute({
       sql: `
-        SELECT d.id, d.title, d.slug, d.body, COALESCE(c.name, d.category_slug) as category, d.updated_at
+        SELECT d.id, d.title, d.slug, d.body, COALESCE(c.name, d.category_slug) as category,
+               d.views, d.likes, d.dislikes, d.updated_at
         FROM dreams d
         LEFT JOIN categories c ON c.slug = d.category_slug
         WHERE d.slug = ?
@@ -56,6 +58,9 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
       slug: row.slug,
       body: row.body,
       category: row.category,
+      views: row.views,
+      likes: row.likes,
+      dislikes: row.dislikes,
       updatedAt: row.updated_at,
       tags: tagsRes.rows.map((t) => ({ slug: t.slug, name: t.name })),
     };

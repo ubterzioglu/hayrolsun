@@ -18,52 +18,52 @@ INSERT OR IGNORE INTO tags (name, slug) VALUES
 
 INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating) VALUES
   (
-    'Su Rüyası Tabiri',
+    'Rüyada Su Görmek',
     'ruyada-su-gormek',
     'Rüyada su görmek; suyun temizliği, berraklığı ve akışına göre farklı mânâlara gelebilir. Temiz ve berrak su hayra, ferahlığa ve gönül huzuruna işaret eder. Bulanık/kirli su ise sıkıntı ve imtihanı hatırlatabilir. Allah Teâlâ en doğrusunu bilir.',
     'doga',
-    95000,
-    4.7
+    0,
+    0
   ),
   (
-    'Uçmak Rüyası Tabiri',
+    'Rüyada Uçmak Görmek',
     'ruyada-ucmak',
     'Rüyada uçmak; niyet ve hâle göre yükseliş, arzu edilen bir maksada yaklaşma veya bir belâdan kurtuluş şeklinde yorumlanabilir. Uçuş esnasındaki huzur, tabirin hayra dönmesine vesile olabilir. Allah Teâlâ en doğrusunu bilir.',
     'hareket',
-    88000,
-    4.5
+    0,
+    0
   ),
   (
-    'Diş Düşmesi Rüyası Tabiri',
+    'Rüyada Diş Düşmesi Görmek',
     'ruyada-dis-dusmesi',
     'Rüyada dişin düşmesi; aile, yakınlar ve geçimle ilgili bazı endişeleri hatırlatabilir. Detaylar (kaç diş, acı, kan vb.) tabiri etkiler. Dua ve sadaka ile hayra çevirmeye gayret edilebilir. Allah Teâlâ en doğrusunu bilir.',
     'vucut',
-    92000,
-    4.6
+    0,
+    0
   ),
   (
-    'Yılan Rüyası Tabiri',
+    'Rüyada Yılan Görmek',
     'ruyada-yilan-gormek',
     'Rüyada yılan görmek; bazen düşmanlık, bazen de gizli bir imtihanı işaret edebilir. Yılanın rengi, büyüklüğü ve davranışı tabiri değiştirir. Korunma duaları ve istiğfar tavsiye edilir. Allah Teâlâ en doğrusunu bilir.',
     'hayvanlar',
-    85000,
-    4.4
+    0,
+    0
   ),
   (
-    'Ölüm Rüyası Tabiri',
+    'Rüyada Ölüm Görmek',
     'ruyada-olum-gormek',
     'Rüyada ölüm görmek; çoğu zaman bir hâlin kapanıp yeni bir dönemin başlamasına, tevbe ve dönüşe işaret edebilir. Böyle rüyalar ibret ve muhasebeye vesile olabilir. Allah Teâlâ en doğrusunu bilir.',
     'hayat',
-    78000,
-    4.2
+    0,
+    0
   ),
   (
-    'Para Rüyası Tabiri',
+    'Rüyada Para Görmek',
     'ruyada-para-gormek',
     'Rüyada para görmek; rızık, emanet ve sorumlulukla ilgili işaretler taşıyabilir. Paranın bulunması/harcanması, miktarı ve türü tabiri değiştirir. Helâl kazanca yönelip şükür tavsiye edilir. Allah Teâlâ en doğrusunu bilir.',
     'maddi',
-    82000,
-    4.3
+    0,
+    0
   );
 
 -- Tag relations

@@ -4,47 +4,28 @@ import process from 'node:process';
 import { createClient } from '@libsql/client';
 import dotenv from 'dotenv';
 
-function requiredEnv(name) {
-  const v = process.env[name];
-  if (!v) throw new Error(`Missing env: ${name}`);
-  return v;
-}
-
 function loadEnv() {
-  // Load env from common local files; later ones can override earlier ones.
   const candidates = ['.env', '.env.local', '.env.development.local'];
   for (const p of candidates) {
     dotenv.config({ path: path.join(process.cwd(), p), override: true });
   }
 }
 
+function requiredEnv(name) {
+  const v = process.env[name];
+  if (!v) throw new Error(`Missing env: ${name}`);
+  return v;
+}
+
 function splitSqlStatements(sqlText) {
-  // Minimal statement splitter that keeps CREATE TRIGGER ... BEGIN ... END; blocks intact.
   const lines = sqlText.replace(/\r\n/g, '\n').split('\n');
   const statements = [];
   let buf = '';
-  let inTrigger = false;
 
   for (const line of lines) {
     const trimmed = line.trim();
     if (trimmed.startsWith('--')) continue;
-
-    if (!inTrigger && /^CREATE\s+TRIGGER/i.test(trimmed)) {
-      inTrigger = true;
-    }
-
     buf += line + '\n';
-
-    if (inTrigger) {
-      if (/\bEND\s*;\s*$/i.test(trimmed)) {
-        const s = buf.trim();
-        if (s) statements.push(s);
-        buf = '';
-        inTrigger = false;
-      }
-      continue;
-    }
-
     if (trimmed.endsWith(';')) {
       const s = buf.trim();
       if (s) statements.push(s);
@@ -59,32 +40,29 @@ function splitSqlStatements(sqlText) {
 
 async function main() {
   loadEnv();
+
+  const file = process.argv[2];
+  if (!file) throw new Error('Usage: npm run db:sql -- path/to/file.sql');
+  const fullPath = path.isAbsolute(file) ? file : path.join(process.cwd(), file);
+
   const url = requiredEnv('TURSO_DATABASE_URL');
   const authToken = requiredEnv('TURSO_AUTH_TOKEN');
   const client = createClient({ url, authToken });
 
-  const schemaPath = path.join(process.cwd(), 'db', 'schema.sql');
-  const sql = await fs.readFile(schemaPath, 'utf8');
-
+  const sql = await fs.readFile(fullPath, 'utf8');
   const statements = splitSqlStatements(sql);
+  if (statements.length === 0) throw new Error('No statements found');
 
   for (const stmt of statements) {
-    try {
-      await client.execute(stmt);
-    } catch (e) {
-      const msg = String(e?.message ?? e);
-      // Allow schema.sql to include backfills (ALTER TABLE ...) safely.
-      if (msg.toLowerCase().includes('duplicate column name')) continue;
-      throw e;
-    }
+    await client.execute(stmt);
   }
 
   await client.close();
-  console.log('✅ migrated schema');
+  console.log(`✅ executed ${statements.length} statements from ${file}`);
 }
 
 main().catch((err) => {
-  console.error('❌ migrate failed:', err?.message ?? err);
+  console.error('❌ db:sql failed:', err?.message ?? err);
   process.exit(1);
 });
 

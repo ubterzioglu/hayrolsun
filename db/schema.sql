@@ -24,6 +24,8 @@ CREATE TABLE IF NOT EXISTS dreams (
   category_slug TEXT,
   views INTEGER NOT NULL DEFAULT 0,
   rating REAL NOT NULL DEFAULT 0,
+  likes INTEGER NOT NULL DEFAULT 0,
+  dislikes INTEGER NOT NULL DEFAULT 0,
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   FOREIGN KEY (category_slug) REFERENCES categories(slug) ON UPDATE CASCADE ON DELETE SET NULL
@@ -66,3 +68,6 @@ CREATE TRIGGER IF NOT EXISTS dreams_au AFTER UPDATE ON dreams BEGIN
   INSERT INTO dreams_fts(rowid, title, body) VALUES (new.id, new.title, new.body);
 END;
 
+-- Backfill columns for older DBs (scripts ignore duplicate-column errors)
+ALTER TABLE dreams ADD COLUMN likes INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE dreams ADD COLUMN dislikes INTEGER NOT NULL DEFAULT 0;
