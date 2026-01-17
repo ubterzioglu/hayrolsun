@@ -3,12 +3,7 @@
 
 PRAGMA foreign_keys = ON;
 
--- Categories (optional normalization; you can also keep category text directly on dreams)
-CREATE TABLE IF NOT EXISTS categories (
-  id INTEGER PRIMARY KEY,
-  name TEXT NOT NULL UNIQUE,
-  slug TEXT NOT NULL UNIQUE
-);
+-- Categories merged into tags table
 
 CREATE TABLE IF NOT EXISTS tags (
   id INTEGER PRIMARY KEY,
@@ -21,14 +16,12 @@ CREATE TABLE IF NOT EXISTS dreams (
   title TEXT NOT NULL,
   slug TEXT NOT NULL UNIQUE,
   body TEXT NOT NULL,
-  category_slug TEXT,
   views INTEGER NOT NULL DEFAULT 0,
   rating REAL NOT NULL DEFAULT 0,
   likes INTEGER NOT NULL DEFAULT 0,
   dislikes INTEGER NOT NULL DEFAULT 0,
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
-  updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
-  FOREIGN KEY (category_slug) REFERENCES categories(slug) ON UPDATE CASCADE ON DELETE SET NULL
+  updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
 );
 
 CREATE TABLE IF NOT EXISTS dream_tags (

@@ -1,28 +1,25 @@
 PRAGMA foreign_keys = ON;
 
-INSERT OR IGNORE INTO categories (name, slug) VALUES
-  ('Doğa', 'doga'),
-  ('Hareket', 'hareket'),
-  ('Vücut', 'vucut'),
-  ('Hayvanlar', 'hayvanlar'),
-  ('Hayat', 'hayat'),
-  ('Maddi', 'maddi'),
-  ('İslami', 'islami');
-
 INSERT OR IGNORE INTO tags (name, slug) VALUES
-  ('Su', 'su'),
-  ('Uçmak', 'ucmak'),
-  ('Diş', 'dis'),
-  ('Yılan', 'yilan'),
-  ('Ölüm', 'olum'),
-  ('Para', 'para');
+  ('doğa', 'doga'),
+  ('hareket', 'hareket'),
+  ('vücut', 'vucut'),
+  ('hayvanlar', 'hayvanlar'),
+  ('hayat', 'hayat'),
+  ('maddi', 'maddi'),
+  ('islami', 'islami'),
+  ('su', 'su'),
+  ('uçmak', 'ucmak'),
+  ('diş', 'dis'),
+  ('yılan', 'yilan'),
+  ('ölüm', 'olum'),
+  ('para', 'para');
 
-INSERT OR IGNORE INTO dreams (title, slug, body, category_slug, views, rating) VALUES
+INSERT OR IGNORE INTO dreams (title, slug, body, views, rating) VALUES
   (
     'Rüyada Su Görmek',
     'ruyada-su-gormek',
     'Rüyada su görmek; suyun temizliği, berraklığı ve akışına göre farklı mânâlara gelebilir. Temiz ve berrak su hayra, ferahlığa ve gönül huzuruna işaret eder. Bulanık/kirli su ise sıkıntı ve imtihanı hatırlatabilir. Allah Teâlâ en doğrusunu bilir.',
-    'doga',
     0,
     0
   ),
@@ -1611,6 +1608,16 @@ Rüyalar, bazen kişinin hâlini yansıtabilir. İhmal edilen ibadetler veya iç
 
 İslam, rüyaları iman ölçüsü olarak görmez. Bir kişinin salihliği rüyalarla ölçülmez. Asıl ölçü, kişinin ameli ve ahlakıdır. Rüyalar bu ölçünün yerine geçmez.
 
-Bu nedenle rüyalar, iman hayatının tamamlayıcı bir parçası olarak görülmelidir. Ne yok sayılır ne de abartılır. Müslüman, rüyayı iman süzgecinden geçirir. Asıl yönlendirici olan Allah’ın kitabıdır.'
+Bu nedenle rüyalar, iman hayatının tamamlayıcı bir parçası olarak görülmelidir. Ne yok sayılır ne de abartılır. Müslüman, rüyayı iman süzgecinden geçirir. Asıl yönlendirici olan Allah'ın kitabıdır.'
   );
 
+-- Kategorileri tags olarak ekle (dream_tags ilişkileri)
+INSERT OR IGNORE INTO dream_tags (dream_id, tag_slug) VALUES
+  (1, 'doga'), -- Rüyada Su Görmek -> doğa
+  (2, 'hareket'), -- Rüyada Uçmak -> hareket
+  (3, 'vucut'), -- Rüyada Diş Düşmesi -> vücut
+  (4, 'hayvanlar'), -- Rüyada Yılan -> hayvanlar
+  (5, 'hayat'); -- Rüyada Ölüm -> hayat
+
+-- Tüm tag isimlerini küçük harf yap
+UPDATE tags SET name = LOWER(name) WHERE name != LOWER(name);
