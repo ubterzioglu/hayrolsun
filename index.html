@@ -4,53 +4,72 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>hayrolsun.site | İslami Rüya Tabirleri</title>
-
     <meta
       name="description"
-      content="hayrolsun.site: İslami rüya tabirleri rehberi. Rüyalarınızı hayra yormaya vesile olacak açıklamalar ve işaretler."
+      content="İslami rüya tabirleri rehberi. Rüyalarınızı hayra yormaya vesile olacak açıklamalar ve işaretler."
     />
-    <meta name="robots" content="index,follow" />
-
-    <link rel="canonical" href="https://www.hayrolsun.site/" />
-    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-
-    <!-- Icons -->
     <link rel="icon" type="image/png" href="/img/favicon.png" />
-    <link rel="apple-touch-icon" href="/img/favicon.png" />
-
-    <!-- Open Graph -->
-    <meta property="og:site_name" content="hayrolsun.site" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="hayrolsun.site | İslami Rüya Tabirleri" />
-    <meta
-      property="og:description"
-      content="İslami rüya tabirleri rehberi. Rüyalarınızı hayra yormaya vesile olacak açıklamalar ve işaretler."
-    />
-    <meta property="og:url" content="https://www.hayrolsun.site/" />
-    <meta property="og:image" content="https://www.hayrolsun.site/img/favicon.png" />
-
-    <!-- Twitter -->
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:title" content="hayrolsun.site | İslami Rüya Tabirleri" />
-    <meta
-      name="twitter:description"
-      content="İslami rüya tabirleri rehberi. Rüyalarınızı hayra yormaya vesile olacak açıklamalar ve işaretler."
-    />
-    <meta name="twitter:image" content="https://www.hayrolsun.site/img/favicon.png" />
-
-    <!-- Geo (hints; not used by all crawlers) -->
-    <meta name="geo.region" content="TR" />
-    <meta name="geo.placename" content="Türkiye" />
-    <meta name="language" content="tr" />
+    <link rel="stylesheet" href="/styles.css" />
   </head>
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
+  <body class="page">
+    <header class="site-header">
+      <div class="container header-row">
+        <div class="brand">
+          <img src="/img/favicon.png" alt="hayrolsun.site logo" class="brand-logo" />
+          <div>
+            <h1 class="brand-title">hayrolsun.site</h1>
+            <p class="brand-tagline">İslami Rüya Tabirleri Rehberiniz</p>
+          </div>
+          <span class="divider" aria-hidden="true"></span>
+          <a class="btn" href="/art.html">Yazılarımız</a>
+        </div>
+        <div class="search-wrap">
+          <input id="search-input" type="search" placeholder="Rüya tabirini ara..." />
+        </div>
+      </div>
+    </header>
 
-    <script
-      data-goatcounter="https://hayrolsun.goatcounter.com/count"
-      async
-      src="//gc.zgo.at/count.js"
-    ></script>
+    <main>
+      <section class="hero">
+        <div class="container">
+          <h2>
+            Rüyalarınızın <span>Hikmetini</span> Keşfedin
+          </h2>
+          <p>
+            Rüyalar, bazen Rabbimizin bir ikazı, bir müjdesi ya da kalbe düşen bir hatırlatmadır.
+            Burada yer alan tabirler; İslami geleneğin genel kabullerine uygun, hayra yormayı esas
+            alan ve kalbi incitmeyen bir üslupla hazırlanmıştır. Yorumlar kesin hüküm değildir;
+            rüyanın hâli, kişinin niyeti ve şartlarıyla birlikte değerlendirilir. Allah Teâlâ en
+            doğrusunu bilir.
+          </p>
+        </div>
+      </section>
+
+      <section class="categories">
+        <div class="container">
+          <h3>Kategoriler</h3>
+          <div id="category-list" class="category-list"></div>
+        </div>
+      </section>
+
+      <section class="dreams">
+        <div class="container">
+          <div class="dreams-header">
+            <h3>Popüler Rüya Tabirleri</h3>
+            <span id="result-status" class="muted">Yükleniyor...</span>
+          </div>
+          <div id="dream-list" class="dream-grid"></div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="container">
+        <p>© 2026 hayrolsun.site - Tüm hakları saklıdır.</p>
+        <p class="muted">Rüya tabirleri yorum mahiyetindedir; kesin hüküm ifade etmez.</p>
+      </div>
+    </footer>
+
+    <script type="module" src="/app.js"></script>
   </body>
 </html>

@@ -1,6 +1,6 @@
 ## hayrolsun.site
 
-Basit bir **React + Vite + Tailwind** arayüzü (rüya tabirleri demo).
+Basit bir **HTML + CSS + JavaScript** arayüzü (rüya tabirleri demo).
 
 ### Dokümantasyon
 
@@ -19,30 +19,10 @@ Gerekli değişkenler:
 
 Admin paneli (`/admin`) için `ADMIN_TOKEN` değerini Vercel ve `.env` için ayarlayın.
 
-Schema / seed:
+Schema / seed (Turso paneli veya admin paneli üzerinden):
 
-```bash
-npm run db:migrate
-npm run db:seed
-```
-
-### Kurulum
-
-```bash
-npm install
-```
-
-### Geliştirme
-
-```bash
-npm run dev
-```
-
-### Build
-
-```bash
-npm run build
-```
+- Turso SQL editor ile `db/schema.sql` ve `db/seed.sql` çalıştırın
+- Admin paneldeki SQL import alanını kullanın
 
 ### SEO / Robots / Sitemap
 

@@ -19,3 +19,9 @@
 - `db/seed.sql` icindeki kod fence satirlari temizlendi; satir-içi `);INSERT` bolunmeleri duzeltildi.
 - `npm run db:seed` calistirildi ve basarili oldu.
 - Duplicate kontrolu: `db/seed.sql` icinde tekrar eden slug bulundu ve temizlendi (artık duplicate yok).
+- `olddev` branch olusturuldu ve mevcut durum oraya commitlendi.
+- HTML tabanli sistem ana sisteme alindi: `index.html` root, `public/` altina `app.js`, `styles.css`, `dream.html`, `dream.js`, `admin.html`, `admin.js` tasindi.
+- React/TSX yapisi kaldirildi (`src/` ve TS/Tailwind configleri silindi), `package.json` sadeleştirildi, `vite.config.ts` basit hale getirildi.
+- `vercel.json` SPA rewrite kaldirildi, statik dosya servis (filesystem) ayarlandi.
+- `npm install` calistirildi (lock dosyasi guncellendi).
+- `npm run build` calistirildi ve basarili oldu.
