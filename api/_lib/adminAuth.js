@@ -1,6 +1,4 @@
-import type { IncomingMessage, ServerResponse } from 'node:http';
-
-export function requireAdmin(req: IncomingMessage, res: ServerResponse): boolean {
+function requireAdmin(req, res) {
   const expected = process.env.ADMIN_TOKEN;
   if (!expected) {
     res.statusCode = 500;
@@ -10,7 +8,7 @@ export function requireAdmin(req: IncomingMessage, res: ServerResponse): boolean
     return false;
   }
 
-  const provided = (req.headers['x-admin-token'] as string | undefined) ?? '';
+  const provided = req.headers['x-admin-token'] || '';
   if (provided !== expected) {
     res.statusCode = 401;
     res.setHeader('content-type', 'application/json; charset=utf-8');
@@ -22,3 +20,4 @@ export function requireAdmin(req: IncomingMessage, res: ServerResponse): boolean
   return true;
 }
 
+module.exports = { requireAdmin };

@@ -1,7 +1,6 @@
-import type { IncomingMessage, ServerResponse } from 'node:http';
-import { tursoClient } from './_lib/turso';
+const { tursoClient } = require('./_lib/turso');
 
-function json(res: ServerResponse, status: number, body: unknown) {
+function json(res, status, body) {
   res.statusCode = status;
   res.setHeader('content-type', 'application/json; charset=utf-8');
   // cache read-heavy responses a bit (Vercel edge/CDN)
@@ -9,32 +8,32 @@ function json(res: ServerResponse, status: number, body: unknown) {
   res.end(JSON.stringify(body));
 }
 
-function getUrl(req: IncomingMessage) {
+function getUrl(req) {
   // Vercel provides host; in dev this is also fine.
-  const host = req.headers.host ?? 'localhost';
-  const proto = (req.headers['x-forwarded-proto'] as string | undefined) ?? 'http';
-  return new URL(req.url ?? '/', `${proto}://${host}`);
+  const host = req.headers.host || 'localhost';
+  const proto = req.headers['x-forwarded-proto'] || 'http';
+  return new URL(req.url || '/', `${proto}://${host}`);
 }
 
-export default async function handler(req: IncomingMessage, res: ServerResponse) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'GET') return json(res, 405, { error: 'Method not allowed' });
 
   const url = getUrl(req);
-  const query = (url.searchParams.get('query') ?? '').trim();
-  const category = (url.searchParams.get('category') ?? '').trim(); // category slug
-  const tag = (url.searchParams.get('tag') ?? '').trim(); // tag slug
-  const limit = Math.min(Math.max(parseInt(url.searchParams.get('limit') ?? '30', 10) || 30, 1), 100);
-  const offset = Math.max(parseInt(url.searchParams.get('offset') ?? '0', 10) || 0, 0);
+  const query = (url.searchParams.get('query') || '').trim();
+  const category = (url.searchParams.get('category') || '').trim();
+  const tag = (url.searchParams.get('tag') || '').trim();
+  const limit = Math.min(Math.max(parseInt(url.searchParams.get('limit') || '30', 10) || 30, 1), 100);
+  const offset = Math.max(parseInt(url.searchParams.get('offset') || '0', 10) || 0, 0);
 
   const client = tursoClient();
 
   try {
     // Build SQL with optional filters; keep it simple and safe with positional args.
-    const where: string[] = [];
-    const args: unknown[] = [];
+    const where = [];
+    const args = [];
 
     let from = 'dreams d LEFT JOIN categories c ON c.slug = d.category_slug';
-    let select =
+    const select =
       'd.id, d.title, d.slug, d.body, COALESCE(c.name, d.category_slug) as category, d.views, d.rating, d.created_at, d.updated_at';
     let orderBy = 'd.views DESC, d.id DESC';
 
@@ -74,7 +73,7 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
       id: r.id,
       title: r.title,
       slug: r.slug,
-      shortDesc: String(r.body).slice(0, 180) + (String(r.body).length > 180 ? '…' : ''),
+      shortDesc: String(r.body).slice(0, 180) + (String(r.body).length > 180 ? '.' : ''),
       category: r.category,
       popularity: r.views,
       rating: r.rating,
@@ -82,10 +81,9 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
     }));
 
     return json(res, 200, { items, count: items.length, limit, offset });
-  } catch (e: any) {
-    return json(res, 500, { error: 'DB error', detail: e?.message ?? String(e) });
+  } catch (e) {
+    return json(res, 500, { error: 'DB error', detail: (e && e.message) || String(e) });
   } finally {
     await client.close();
   }
-}
-
+};

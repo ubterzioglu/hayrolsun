@@ -63,6 +63,10 @@
         height: 36px;
         background: #e5e7eb;
       }
+      .nav-actions {
+        display: inline-flex;
+        gap: 12px;
+      }
       .btn {
         display: inline-flex;
         align-items: center;
@@ -73,6 +77,8 @@
         font-weight: 600;
         font-size: 14px;
         text-decoration: none;
+        justify-content: center;
+        width: 140px;
         color: #ffffff;
         background: #16a34a;
         box-shadow: 0 6px 12px rgba(22, 163, 74, 0.18);
@@ -138,7 +144,10 @@
             <p class="site-tagline">İslami Rüya Tabirleri Rehberiniz</p>
           </div>
           <div class="divider" aria-hidden="true"></div>
-          <a class="btn" href="/art.html">Yazılarımız</a>
+          <div class="nav-actions">
+            <a class="btn" href="/art.html">Yazılarımız</a>
+            <a class="btn" href="/">Anasayfa</a>
+          </div>
         </div>
       </div>
     </header>

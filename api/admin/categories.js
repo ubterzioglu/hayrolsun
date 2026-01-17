@@ -1,15 +1,14 @@
-import type { IncomingMessage, ServerResponse } from 'node:http';
-import { requireAdmin } from '../_lib/adminAuth';
-import { tursoClient } from '../_lib/turso';
+const { requireAdmin } = require('../_lib/adminAuth');
+const { tursoClient } = require('../_lib/turso');
 
-function json(res: ServerResponse, status: number, body: unknown) {
+function json(res, status, body) {
   res.statusCode = status;
   res.setHeader('content-type', 'application/json; charset=utf-8');
   res.setHeader('cache-control', 'no-store');
   res.end(JSON.stringify(body));
 }
 
-export default async function handler(req: IncomingMessage, res: ServerResponse) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'GET') return json(res, 405, { error: 'Method not allowed' });
   if (!requireAdmin(req, res)) return;
 
@@ -29,14 +28,13 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
       id: Number(row.id),
       name: String(row.name),
       slug: String(row.slug),
-      dreamCount: Number(row.dreamCount ?? 0),
+      dreamCount: Number(row.dreamCount || 0),
     }));
 
     return json(res, 200, { items, count: items.length });
-  } catch (e: any) {
-    return json(res, 500, { error: 'DB error', detail: e?.message ?? String(e) });
+  } catch (e) {
+    return json(res, 500, { error: 'DB error', detail: (e && e.message) || String(e) });
   } finally {
     await client.close();
   }
-}
-
+};

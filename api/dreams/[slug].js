@@ -1,7 +1,6 @@
-import type { IncomingMessage, ServerResponse } from 'node:http';
-import { tursoClient } from '../_lib/turso';
+const { tursoClient } = require('../_lib/turso');
 
-function json(res: ServerResponse, status: number, body: unknown) {
+function json(res, status, body) {
   res.statusCode = status;
   res.setHeader('content-type', 'application/json; charset=utf-8');
   // Detail includes dynamic counters (views/likes/dislikes); do not cache.
@@ -9,18 +8,18 @@ function json(res: ServerResponse, status: number, body: unknown) {
   res.end(JSON.stringify(body));
 }
 
-function getUrl(req: IncomingMessage) {
-  const host = req.headers.host ?? 'localhost';
-  const proto = (req.headers['x-forwarded-proto'] as string | undefined) ?? 'http';
-  return new URL(req.url ?? '/', `${proto}://${host}`);
+function getUrl(req) {
+  const host = req.headers.host || 'localhost';
+  const proto = req.headers['x-forwarded-proto'] || 'http';
+  return new URL(req.url || '/', `${proto}://${host}`);
 }
 
-export default async function handler(req: IncomingMessage, res: ServerResponse) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'GET') return json(res, 405, { error: 'Method not allowed' });
 
   const url = getUrl(req);
   const parts = url.pathname.split('/').filter(Boolean);
-  const slug = decodeURIComponent(parts[parts.length - 1] ?? '').trim();
+  const slug = decodeURIComponent(parts[parts.length - 1] || '').trim();
   if (!slug) return json(res, 400, { error: 'Missing slug' });
 
   const client = tursoClient();
@@ -66,10 +65,9 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
     };
 
     return json(res, 200, { item });
-  } catch (e: any) {
-    return json(res, 500, { error: 'DB error', detail: e?.message ?? String(e) });
+  } catch (e) {
+    return json(res, 500, { error: 'DB error', detail: (e && e.message) || String(e) });
   } finally {
     await client.close();
   }
-}
-
+};

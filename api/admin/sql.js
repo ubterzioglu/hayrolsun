@@ -1,17 +1,16 @@
-import type { IncomingMessage, ServerResponse } from 'node:http';
-import { requireAdmin } from '../_lib/adminAuth';
-import { tursoClient } from '../_lib/turso';
-import { splitSqlStatements } from '../_lib/sqlSplit';
+const { requireAdmin } = require('../_lib/adminAuth');
+const { tursoClient } = require('../_lib/turso');
+const { splitSqlStatements } = require('../_lib/sqlSplit');
 
-function json(res: ServerResponse, status: number, body: unknown) {
+function json(res, status, body) {
   res.statusCode = status;
   res.setHeader('content-type', 'application/json; charset=utf-8');
   res.setHeader('cache-control', 'no-store');
   res.end(JSON.stringify(body));
 }
 
-async function readJson(req: IncomingMessage) {
-  return await new Promise<any>((resolve, reject) => {
+async function readJson(req) {
+  return await new Promise((resolve, reject) => {
     let data = '';
     req.on('data', (chunk) => (data += chunk));
     req.on('end', () => {
@@ -27,35 +26,35 @@ async function readJson(req: IncomingMessage) {
 
 const ALLOWED_TABLES = new Set(['dreams', 'categories', 'tags', 'dream_tags', 'articles']);
 
-function isAllowedStatement(stmt: string): { ok: boolean; reason?: string } {
+function isAllowedStatement(stmt) {
   const s = stmt.trim();
 
   // Allow SELECT for quick checks
-  if (/^select\b/i.test(s) || /^with\b/i.test(s)) return { ok: true };
+  if (/^select/i.test(s) || /^with/i.test(s)) return { ok: true };
 
   // Allow INSERTs only (optionally OR IGNORE/REPLACE).
-  const m = s.match(/^insert\s+(?:or\s+(?:ignore|replace)\s+)?into\s+([a-zA-Z_][a-zA-Z0-9_]*)\b/i);
+  const m = s.match(/^insert\s+(?:or\s+(?:ignore|replace)\s+)?into\s+([a-zA-Z_][a-zA-Z0-9_]*)/i);
   if (!m) return { ok: false, reason: 'Only INSERT/SELECT statements are allowed' };
 
-  const table = m[1]?.toLowerCase();
+  const table = (m[1] || '').toLowerCase();
   if (!ALLOWED_TABLES.has(table)) return { ok: false, reason: `Table not allowed: ${table}` };
 
   // Block obviously dangerous keywords even if someone tries weird syntax.
-  if (/\b(drop|alter|pragma|attach|detach|vacuum)\b/i.test(s)) {
+  if (/(drop|alter|pragma|attach|detach|vacuum)/i.test(s)) {
     return { ok: false, reason: 'Dangerous SQL keyword detected' };
   }
 
   return { ok: true };
 }
 
-export default async function handler(req: IncomingMessage, res: ServerResponse) {
+module.exports = async function handler(req, res) {
   if (req.method !== 'POST') return json(res, 405, { error: 'Method not allowed' });
   if (!requireAdmin(req, res)) return;
 
-  let sql: string | undefined;
+  let sql;
   try {
     const body = await readJson(req);
-    sql = body?.sql;
+    sql = body && body.sql;
   } catch {
     return json(res, 400, { error: 'Invalid JSON' });
   }
@@ -79,10 +78,9 @@ export default async function handler(req: IncomingMessage, res: ServerResponse)
       await client.execute(stmt);
     }
     return json(res, 200, { ok: true, executed: statements.length });
-  } catch (e: any) {
-    return json(res, 500, { error: 'DB error', detail: e?.message ?? String(e) });
+  } catch (e) {
+    return json(res, 500, { error: 'DB error', detail: (e && e.message) || String(e) });
   } finally {
     await client.close();
   }
-}
-
+};

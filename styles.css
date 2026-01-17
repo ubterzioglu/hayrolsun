@@ -53,6 +53,10 @@ body.page {
   color: #16a34a;
 }
 
+.home .brand-title {
+  font-size: 40px;
+}
+
 .brand-tagline {
   margin: 4px 0 0;
   color: #6b7280;
