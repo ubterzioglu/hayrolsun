@@ -1546,3 +1546,71 @@ VALUES (
   0,
   0
 );
+
+INSERT OR IGNORE INTO articles (title, slug, body) VALUES
+  (
+    'İslam’da Rüyaların Kaynağı',
+    'islamda-ruyalarin-kaynagi',
+    'Rüyalar, insanın uyku hâlinde gördüğü hallerdir. İslam’da rüyalar, tamamen inkâr edilmez. Ancak her rüya da ilahi bir mesaj olarak kabul edilmez. Rüyaların kaynağı, Allah’ın izniyle oluşan bir süreçtir. Bu nedenle rüyalar, dikkatle ve ölçülü şekilde değerlendirilmelidir.
+
+Peygamberimiz (s.a.v.), rüyaların üç kısımdan oluştuğunu bildirmiştir. Bunlar Allah’tan gelen müjdeli rüyalar, kişinin kendi düşüncelerinden oluşan rüyalar ve şeytanın vesvesesiyle görülen rüyalardır. Bu ayrım, rüyaların anlaşılması için temel bir ölçüdür. Her görülen rüya aynı değerde değildir.
+
+İslam’da güzel ve huzur veren rüyalar hayra yorulur. Bu rüyalar, kişiyi iyiliğe ve doğruya yöneltebilir. Ancak bu durum, rüyanın kesin bir hüküm taşıdığı anlamına gelmez. Rüyalar, dinî hükümlerin yerine geçmez. Sadece bir hatırlatma veya teselli olabilir.
+
+Korkutucu ve rahatsız edici rüyalar ise önemsenmez. Bu tür rüyaların anlatılması tavsiye edilmez. Kişinin Allah’a sığınması ve rüyayı unutması öğütlenir. Bu yaklaşım, insanın ruh sağlığını korumayı amaçlar. İslam, korku üzerine değil, umut üzerine bir inançtır.
+
+Sonuç olarak rüyalar, İslam’da ölçülü bir yere sahiptir. Ne tamamen yok sayılır ne de hayatın merkezine konur. Müslüman, rüyalarını Kur’an ve Sünnet ışığında değerlendirir. Asıl rehber, vahiy ve akıldır. Allah en doğrusunu bilir.'
+  ),
+  (
+    'Rüyaların Üçe Ayrılması',
+    'ruyalarin-uce-ayrilmasi',
+    'İslam’da rüyalar tek tip kabul edilmez. Peygamberimiz (s.a.v.) rüyaları üç ana gruba ayırmıştır. Bu ayrım, rüya yorumlarında temel bir çerçeve sunar. Her rüya aynı kaynaktan gelmez. Bu nedenle rüyaların niteliği önemlidir.
+
+Birinci tür, Allah’tan gelen rüyalardır. Bu rüyalar genellikle sade ve nettir. Kişide huzur bırakır. Müjde veya uyarı niteliği taşıyabilir. Ancak bu rüyalar bile kesin hüküm sayılmaz.
+
+İkinci tür rüyalar, kişinin kendi düşüncelerinden oluşur. Gün içinde yaşanan olaylar, kaygılar ve beklentiler rüyalara yansıyabilir. Bu rüyalar ilahi bir mesaj içermez. Zihnin doğal bir faaliyetidir. Bu nedenle yorumlanması gerekmez.
+
+Üçüncü tür rüyalar, şeytanın vesvesesiyle oluşan rüyalardır. Bu rüyalar genellikle korkutucu ve karmaşıktır. İslam’da bu rüyaların üzerinde durulması tavsiye edilmez. Allah’a sığınılması yeterlidir. Bu rüyalar bağlayıcı değildir.
+
+Bu üçlü ayrım, rüyalara yaklaşımda denge sağlar. Müslüman, her rüyaya anlam yüklemez. Aynı zamanda rüyaları tamamen reddetmez. Ölçü, Kur’an ve Sünnettir. Rüyalar bu ölçüye göre değerlendirilir.'
+  ),
+  (
+    'Rüya Tabirinin Sınırları',
+    'ruya-tabirinin-sinirlari',
+    'Rüya tabiri, İslam’da herkesin yapabileceği bir alan değildir. Bilgi ve tecrübe gerektirir. Yanlış yapılan bir tabir, kişiyi hataya sürükleyebilir. Bu nedenle rüya tabirinde dikkatli olunmalıdır. Her rüya tabire uygun değildir.
+
+İslam’da rüya tabiri kesinlik taşımaz. Bir ihtimal olarak değerlendirilir. “Kesin böyle olacak” anlayışı doğru değildir. Rüyalar geleceği bildirme aracı değildir. Bu yaklaşım, batıl inançlara kapı açar.
+
+Rüyayı gören kişinin durumu önemlidir. Aynı rüya, farklı kişiler için farklı anlamlar taşıyabilir. Kişinin niyeti, yaşam tarzı ve ruh hâli dikkate alınmalıdır. Bu yüzden genel yorumlar her zaman sağlıklı değildir.
+
+Rüya tabiri yapılırken hayra yormak esastır. Korkutucu ve üzücü yorumlardan kaçınılır. İslam, insanı karamsarlığa sürüklemez. Rüya tabiri, moral bozmak için değil, hikmetle yaklaşmak için yapılır.
+
+En güvenli yol, rüyayı Allah’a havale etmektir. Eğer rüya hayırlıysa kabul edilir. Değilse üzerinde durulmaz. Müslüman için asıl rehber rüya değil, iman ve ameldir. Rüya sadece yardımcı bir unsurdur.'
+  ),
+  (
+    'Rüyalar Hayat Kararlarını Belirler mi?',
+    'ruyalar-hayat-kararlarini-belirler-mi',
+    'İslam’da rüyalar, hayatın merkezine konulmaz. Önemli kararlar rüyaya göre alınmaz. Evlilik, ticaret veya ibadet rüyaya dayanmaz. Bu konularda ölçü, akıl ve istişaredir. Rüya tek başına yeterli değildir.
+
+Bazı insanlar rüyaları yönlendirici kabul eder. Bu yaklaşım İslamî değildir. Rüyalar, kişiyi yanıltabilir. Bu nedenle rüya ile kesin karar vermek doğru değildir. İslam, dengeyi esas alır.
+
+İstihare, bu noktada ayrı bir yere sahiptir. İstihare, dua ve tevekkül esasına dayanır. Ama istihare bile sadece rüyaya indirgenmez. Kalpte oluşan huzur veya sıkıntı da dikkate alınır. Rüya tek ölçü değildir.
+
+Rüyalar bazen destekleyici olabilir. Kişiyi düşünmeye sevk edebilir. Ancak bu, rüyanın emredici olduğu anlamına gelmez. Müslüman, rüyayı işaret olarak görür ama hüküm kaynağı yapmaz.
+
+Sonuç olarak rüyalar, hayatı yöneten bir araç değildir. İslam’da sorumluluk bilinci esastır. Kararlar bilgi, dua ve istişare ile alınır. Rüya bu sürecin merkezinde yer almaz. Yerini aşmamalıdır.'
+  ),
+  (
+    'Rüyalar ve İman İlişkisi',
+    'ruyalar-ve-iman-iliskisi',
+    'Rüyalar ile iman arasında dolaylı bir ilişki vardır. İslam’a göre rüyalar, kişinin iç dünyasından bağımsız değildir. İmanı güçlü olan kimselerin rüyaları daha sakin olabilir. Ancak bu durum mutlak bir kural değildir. Her mümin güzel rüyalar görecek diye bir şart yoktur.
+
+İman, rüyaların yorumlanmasında belirleyici bir etkendir. Mümin, rüyaya aşırı anlam yüklemez. Rüyayı imtihan sebebi yapmaz. Rüyalar üzerinden kendini üstün görmez. Bu denge, İslam’ın temel yaklaşımıdır.
+
+Rüyalar, bazen kişinin hâlini yansıtabilir. İhmal edilen ibadetler veya iç huzursuzluk rüyalara yansıyabilir. Bu durumda rüya bir uyarı olarak düşünülebilir. Ancak yine de kesin hüküm verilmez.
+
+İslam, rüyaları iman ölçüsü olarak görmez. Bir kişinin salihliği rüyalarla ölçülmez. Asıl ölçü, kişinin ameli ve ahlakıdır. Rüyalar bu ölçünün yerine geçmez.
+
+Bu nedenle rüyalar, iman hayatının tamamlayıcı bir parçası olarak görülmelidir. Ne yok sayılır ne de abartılır. Müslüman, rüyayı iman süzgecinden geçirir. Asıl yönlendirici olan Allah’ın kitabıdır.'
+  );
+
