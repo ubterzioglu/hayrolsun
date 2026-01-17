@@ -15,6 +15,9 @@ Gerekli değişkenler:
 
 - `TURSO_DATABASE_URL`
 - `TURSO_AUTH_TOKEN`
+- `ADMIN_TOKEN` (admin paneli için)
+
+Admin paneli (`/admin`) için `ADMIN_TOKEN` değerini Vercel ve `.env` için ayarlayın.
 
 Schema / seed:
 

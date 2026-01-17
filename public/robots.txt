@@ -1,5 +1,5 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://hayrolsun.site/sitemap.xml
+Sitemap: https://www.hayrolsun.site/sitemap.xml
 
