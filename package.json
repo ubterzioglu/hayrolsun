@@ -4,6 +4,7 @@
   "description": "Basit bir **HTML + CSS + JavaScript** arayüzü (rüya tabirleri demo).",
   "main": "admin-local.js",
   "dependencies": {
+    "@libsql/client": "^0.17.0",
     "@tailwindcss/postcss": "^4.1.18",
     "async-retry": "^1.3.3",
     "baseline-browser-mapping": "^2.9.15",
