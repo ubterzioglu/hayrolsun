@@ -1,16 +1,13 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Search, Moon, Sun, BookOpen, Eye, Heart, Clock } from 'lucide-react';
+import { Search, Moon, Sun, Eye, Heart, Clock } from 'lucide-react';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
   const [darkMode, setDarkMode] = useState(false);
   const [dreams, setDreams] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [selectedCategory, setSelectedCategory] = useState('Tümü');
-
-  const categories = ['Tümü', 'Doğa', 'Hayvanlar', 'Vücut', 'Hareket', 'Hayat', 'Maddi', 'İslami'];
 
   // Fallback data
   const fallbackDreams = [
@@ -24,12 +21,11 @@ export default function Home() {
     fetchDreams();
   }, []);
 
-  async function fetchDreams(query = '', category = '') {
+  async function fetchDreams(query = '') {
     setLoading(true);
     try {
       const params = new URLSearchParams();
       if (query.trim()) params.set('query', query.trim());
-      if (category && category !== 'Tümü') params.set('category', category.toLowerCase());
 
       const res = await fetch(`/api/dreams?${params.toString()}`);
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
@@ -51,105 +47,55 @@ export default function Home() {
   // Debounced search
   useEffect(() => {
     const timer = setTimeout(() => {
-      fetchDreams(searchTerm, selectedCategory);
+      fetchDreams(searchTerm);
     }, 300);
     return () => clearTimeout(timer);
-  }, [searchTerm, selectedCategory]);
-
-  const filteredDreams = dreams;
+  }, [searchTerm]);
 
   return (
     <div className={`min-h-screen transition-colors duration-300 ${darkMode ? 'bg-gray-900 text-white' : 'bg-gradient-to-br from-green-50 to-emerald-100 text-gray-800'}`}>
       {/* Header */}
       <header className={`sticky top-0 z-50 backdrop-blur-md border-b ${darkMode ? 'bg-gray-800/80 border-gray-700' : 'bg-white/80 border-gray-200'}`}>
         <div className="container mx-auto px-4 py-4">
-          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
-            <div className="flex items-center justify-between">
-              <div className="flex items-center space-x-3">
-                <div className={`p-2 rounded-xl ${darkMode ? 'bg-green-600' : 'bg-green-500'}`}>
-                  <BookOpen className="h-6 w-6 text-white" />
-                </div>
-                <div>
-                  <h1 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                    Hayrolsun.site
-                  </h1>
-                  <p className="text-sm opacity-75">İslami Rüya Tabirleri Rehberiniz</p>
-                </div>
+          <div className="flex items-center justify-between">
+            <a href="/" className="flex items-center space-x-3">
+              <img src="/img/logo.png" alt="Hayrolsun Logo" className="h-10 w-10 rounded-xl" />
+              <div>
+                <h1 className="text-2xl font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                  Hayrolsun.site
+                </h1>
+                <p className="text-sm opacity-75">İslami Rüya Tabirleri Rehberiniz</p>
               </div>
-              <button
-                onClick={() => setDarkMode(!darkMode)}
-                className={`p-2 rounded-lg ${darkMode ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
-              >
-                {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-              </button>
-            </div>
-
-            <div className="relative w-full md:w-96">
-              <Search className={`absolute left-3 top-1/2 transform -translate-y-1/2 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} />
-              <input
-                type="text"
-                placeholder="Rüya tabirini ara..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className={`w-full pl-10 pr-4 py-2 rounded-xl border focus:ring-2 focus:ring-green-500 focus:border-transparent outline-none ${
-                  darkMode
-                    ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400'
-                    : 'bg-white border-gray-300 text-gray-800 placeholder-gray-500'
-                }`}
-              />
-            </div>
+            </a>
+            <button
+              onClick={() => setDarkMode(!darkMode)}
+              className={`p-2 rounded-lg ${darkMode ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
+            >
+              {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </button>
           </div>
         </div>
       </header>
 
-      {/* Hero Section */}
-      <section className="py-16 px-4">
-        <div className="container mx-auto text-center">
-          <h2 className="text-4xl md:text-6xl font-bold mb-6">
-            Rüyalarınızın <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Kutsal Anlamını</span> Keşfedin
+      {/* Search Section */}
+      <section className="py-12 px-4">
+        <div className="container mx-auto max-w-2xl">
+          <h2 className="text-3xl md:text-4xl font-bold mb-6 text-center">
+            Rüyalarınızın <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">Anlamını</span> Keşfedin
           </h2>
-          <p className={`text-xl max-w-2xl mx-auto mb-8 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
-            Kur'an-ı Kerim ve hadis-i şeriflere dayanan İslami rüya tabirleriyle ruhunuza rehberlik ediyoruz.
-            Rüyanızda gördüğünüz sembollerin ilahi mesajlarını öğrenin.
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            {['Su', 'Uçmak', 'Diş', 'Yılan', 'Ölüm', 'Para'].map((keyword) => (
-              <button
-                key={keyword}
-                onClick={() => setSearchTerm(keyword.toLowerCase())}
-                className={`px-6 py-3 rounded-full font-medium transition-all hover:scale-105 ${
-                  darkMode
-                    ? 'bg-green-600 hover:bg-green-700 text-white'
-                    : 'bg-white hover:bg-green-50 text-green-600 shadow-lg'
-                }`}
-              >
-                {keyword}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Categories */}
-      <section className="px-4 pb-12">
-        <div className="container mx-auto">
-          <h3 className="text-2xl font-bold mb-6 text-center">Kategoriler</h3>
-          <div className="flex flex-wrap justify-center gap-3">
-            {categories.map((category) => (
-              <button
-                key={category}
-                onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-full font-medium transition-all ${
-                  selectedCategory === category
-                    ? 'bg-green-600 text-white'
-                    : darkMode
-                      ? 'bg-gray-800 hover:bg-gray-700 text-white'
-                      : 'bg-white hover:bg-green-50 text-gray-700 shadow'
-                }`}
-              >
-                {category}
-              </button>
-            ))}
+          <div className="relative">
+            <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 h-6 w-6 ${darkMode ? 'text-gray-400' : 'text-gray-500'}`} />
+            <input
+              type="text"
+              placeholder="Rüyanızda ne gördünüz? (örn: su, yılan, uçmak...)"
+              value={searchTerm}
+              onChange={(e) => setSearchTerm(e.target.value)}
+              className={`w-full pl-14 pr-6 py-4 text-lg rounded-2xl border-2 focus:ring-2 focus:ring-green-500 focus:border-green-500 outline-none transition-all ${
+                darkMode
+                  ? 'bg-gray-800 border-gray-700 text-white placeholder-gray-400'
+                  : 'bg-white border-gray-200 text-gray-800 placeholder-gray-500 shadow-lg'
+              }`}
+            />
           </div>
         </div>
       </section>
@@ -160,7 +106,7 @@ export default function Home() {
           <div className="flex items-center justify-between mb-8">
             <h3 className="text-2xl font-bold">İslami Rüya Tabirleri</h3>
             <span className="text-sm opacity-75">
-              {loading ? 'Yükleniyor...' : `${filteredDreams.length} sonuç bulundu`}
+              {loading ? 'Yükleniyor...' : `${dreams.length} sonuç bulundu`}
             </span>
           </div>
 
@@ -171,7 +117,7 @@ export default function Home() {
             </div>
           ) : (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {filteredDreams.map((dream) => (
+              {dreams.map((dream) => (
                 <a
                   key={dream.id || dream.slug}
                   href={`/dream.html?slug=${encodeURIComponent(dream.slug)}`}
@@ -243,7 +189,7 @@ export default function Home() {
       <footer className={`py-8 border-t ${darkMode ? 'border-gray-800 bg-gray-900' : 'border-gray-200 bg-white'}`}>
         <div className="container mx-auto px-4 text-center">
           <div className="flex items-center justify-center space-x-2 mb-4">
-            <BookOpen className="h-6 w-6 text-green-600" />
+            <img src="/img/logo.png" alt="Hayrolsun Logo" className="h-6 w-6 rounded" />
             <span className="text-xl font-bold">Hayrolsun.site</span>
           </div>
           <p className={`mb-4 ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
