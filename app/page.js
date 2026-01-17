@@ -2,12 +2,9 @@
 
 import React, { useState, useEffect } from 'react';
 import { Search, Eye, Heart, Clock } from 'lucide-react';
-import Header from './components/Header';
-import Footer from './components/Footer';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
-  const [darkMode, setDarkMode] = useState(false);
   const [dreams, setDreams] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
@@ -67,8 +64,7 @@ export default function Home() {
   }, [searchTerm]);
 
   return (
-    <div className={`min-h-screen transition-all duration-500 ${darkMode ? 'bg-gradient-to-br from-slate-900 via-gray-900 to-zinc-900 text-white' : 'bg-gradient-to-br from-emerald-50 via-green-50 to-teal-50 text-gray-800'}`}>
-      <Header darkMode={darkMode} setDarkMode={setDarkMode} />
+    <div>
 
       {/* Hero Section with Search */}
       <section className="py-16 px-4">
@@ -76,26 +72,18 @@ export default function Home() {
           <h2 className="text-base font-bold mb-4 leading-tight">
             Rüyalarınızın <span className="bg-gradient-to-r from-emerald-600 via-green-600 to-teal-600 bg-clip-text text-transparent">hikmetini</span> keşfedin
           </h2>
-          <p className={`text-base max-w-2xl mx-auto mb-6 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+          <p className="text-base max-w-2xl mx-auto mb-6 text-gray-600">
             Kur'an-ı Kerim ve hadis-i şeriflere dayanan İslami rüya tabirleriyle ruhunuza rehberlik ediyoruz.
             Rüyanızda gördüğünüz sembollerin ilahi mesajlarını öğrenin.
           </p>
 
           {/* Stats */}
           <div className="flex justify-center gap-6 mb-8">
-            <div className={`aspect-square w-24 flex flex-col justify-center items-center rounded-xl transition-all duration-300 ${
-              darkMode
-                ? 'bg-slate-800/80 text-gray-300 hover:bg-slate-750 border border-slate-700/50'
-                : 'bg-white/90 text-gray-600 hover:bg-white shadow-lg border border-emerald-100/50'
-            } backdrop-blur-sm`}>
+            <div className="aspect-square w-24 flex flex-col justify-center items-center rounded-xl transition-all duration-300 bg-white/90 text-gray-600 hover:bg-white shadow-lg border border-emerald-100/50 backdrop-blur-sm">
               <div className="text-2xl font-bold text-emerald-600">{stats.dreamCount.toLocaleString()}</div>
               <div className="text-sm mt-1">Rüya Tabiri</div>
             </div>
-            <div className={`aspect-square w-24 flex flex-col justify-center items-center rounded-xl transition-all duration-300 ${
-              darkMode
-                ? 'bg-slate-800/80 text-gray-300 hover:bg-slate-750 border border-slate-700/50'
-                : 'bg-white/90 text-gray-600 hover:bg-white shadow-lg border border-emerald-100/50'
-            } backdrop-blur-sm`}>
+            <div className="aspect-square w-24 flex flex-col justify-center items-center rounded-xl transition-all duration-300 bg-white/90 text-gray-600 hover:bg-white shadow-lg border border-emerald-100/50 backdrop-blur-sm">
               <div className="text-2xl font-bold text-emerald-600">{stats.articleCount.toLocaleString()}</div>
               <div className="text-sm mt-1">Makale</div>
             </div>
@@ -103,23 +91,19 @@ export default function Home() {
 
           {/* Search Bar */}
           <div className="relative max-w-2xl mx-auto group">
-            <Search className={`absolute left-4 top-1/2 transform -translate-y-1/2 h-6 w-6 transition-all duration-200 ${darkMode ? 'text-slate-400 group-hover:text-emerald-400' : 'text-gray-500 group-hover:text-emerald-500'} group`} />
+            <Search className="absolute left-4 top-1/2 transform -translate-y-1/2 h-6 w-6 transition-all duration-200 text-gray-500 group-hover:text-emerald-500" />
             <input
               type="text"
               placeholder="Rüyanı Ara. Hayrolsun..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
-              className={`w-full pl-14 pr-6 py-4 text-lg rounded-3xl border-2 focus:ring-4 focus:ring-emerald-500/30 focus:border-emerald-500 outline-none transition-all duration-300 ${
-                darkMode
-                  ? 'bg-slate-800/80 border-slate-700 text-white placeholder-slate-400 backdrop-blur-sm'
-                  : 'bg-white/90 border-emerald-200 text-gray-800 placeholder-gray-500 shadow-xl backdrop-blur-sm'
-              }`}
+              className="w-full pl-14 pr-6 py-4 text-lg rounded-3xl border-2 focus:ring-4 focus:ring-emerald-500/30 focus:border-emerald-500 outline-none transition-all duration-300 bg-white/90 border-emerald-200 text-gray-800 placeholder-gray-500 shadow-xl backdrop-blur-sm"
             />
           </div>
 
           {/* Search status */}
           {searchTerm && !loading && (
-            <p className={`mt-4 text-sm transition-all duration-300 ${darkMode ? 'text-slate-400' : 'text-gray-500'}`}>
+            <p className="mt-4 text-sm transition-all duration-300 text-gray-500">
               "{searchTerm}" için {totalCount} sonuç bulundu
             </p>
           )}
@@ -137,10 +121,10 @@ export default function Home() {
             </div>
           ) : dreams.length === 0 ? (
             <div className="text-center py-12">
-              <div className={`inline-block p-8 rounded-2xl ${darkMode ? 'bg-gray-800' : 'bg-white shadow-lg'}`}>
-                <Search className={`h-16 w-16 mx-auto mb-4 ${darkMode ? 'text-gray-600' : 'text-gray-300'}`} />
+              <div className="inline-block p-8 rounded-2xl bg-white shadow-lg">
+                <Search className="h-16 w-16 mx-auto mb-4 text-gray-300" />
                 <h4 className="text-xl font-bold mb-2">Sonuç Bulunamadı</h4>
-                <p className={`${darkMode ? 'text-gray-400' : 'text-gray-500'}`}>
+                <p className="text-gray-500">
                   "{searchTerm}" ile ilgili rüya tabiri bulunamadı.<br />
                   Farklı kelimelerle aramayı deneyin.
                 </p>
@@ -152,11 +136,7 @@ export default function Home() {
                 <a
                   key={dream.id || dream.slug}
                   href={`/dream.html?slug=${encodeURIComponent(dream.slug)}`}
-                  className={`block rounded-3xl p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] group ${
-                    darkMode
-                      ? 'bg-slate-800/80 hover:bg-slate-750 backdrop-blur-sm border border-slate-700/50'
-                      : 'bg-white/90 hover:bg-white shadow-xl backdrop-blur-sm border border-emerald-100/50'
-                  }`}
+                  className="block rounded-3xl p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] group bg-white/90 hover:bg-white shadow-xl backdrop-blur-sm border border-emerald-100/50"
                 >
                   <div className="flex items-start justify-end mb-3">
                     <div className="flex items-center space-x-1 text-sm opacity-75">
@@ -167,7 +147,7 @@ export default function Home() {
 
                   <h4 className="text-base font-bold mb-4">{dream.title}</h4>
 
-                  <p className={`mb-4 ${darkMode ? 'text-gray-300' : 'text-gray-600'}`}>
+                  <p className="mb-4 text-gray-600">
                     {dream.shortDesc || ''}
                   </p>
 
@@ -176,9 +156,7 @@ export default function Home() {
                       <Clock className="h-4 w-4" />
                       <span>{dream.updatedAt ? new Date(dream.updatedAt).toLocaleDateString('tr-TR') : 'Yeni'}</span>
                     </div>
-                    <span className={`flex items-center space-x-1 font-medium transition-all duration-200 group-hover:translate-x-1 ${
-                      darkMode ? 'text-emerald-400 group-hover:text-emerald-300' : 'text-emerald-600 group-hover:text-emerald-700'
-                    }`}>
+                    <span className="flex items-center space-x-1 font-medium transition-all duration-200 group-hover:translate-x-1 text-emerald-600 group-hover:text-emerald-700">
                       <span>Oku</span>
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
@@ -193,23 +171,20 @@ export default function Home() {
       </section>
 
       {/* Religious Note */}
-      <section className={`py-12 px-4 transition-colors duration-500 ${darkMode ? 'bg-gradient-to-r from-slate-800 to-gray-800' : 'bg-gradient-to-r from-emerald-50 to-green-50'}`}>
+      <section className="py-12 px-4 transition-colors duration-500 bg-gradient-to-r from-emerald-50 to-green-50">
         <div className="container mx-auto max-w-4xl text-center">
-          <div className={`inline-block p-8 rounded-3xl ${darkMode ? 'bg-slate-700/80' : 'bg-white/90'} backdrop-blur-xl shadow-xl border ${darkMode ? 'border-slate-600/50' : 'border-emerald-200/50'}`}>
+          <div className="inline-block p-8 rounded-3xl bg-white/90 backdrop-blur-xl shadow-xl border border-emerald-200/50">
             <Heart className="h-8 w-8 text-green-600 mx-auto mb-4" />
-            <p className={`text-lg italic ${darkMode ? 'text-gray-200' : 'text-gray-700'}`}>
+            <p className="text-lg italic text-gray-700">
               "Rüyalar, Rahmân'ın kuluna gönderdiği müjde veya ikaz olabilir.
               Her rüya tabirini kalbinize göre değerlendirin ve her zaman Allah'a sığının."
             </p>
-            <p className={`mt-2 text-sm ${darkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+            <p className="mt-2 text-sm text-gray-600">
               — Kur'an ve Sünnet'e Dayalı Yorumlar
             </p>
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <Footer darkMode={darkMode} />
     </div>
   );
 }
