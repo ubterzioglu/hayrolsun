@@ -37,6 +37,9 @@ CREATE TABLE IF NOT EXISTS articles (
   title TEXT NOT NULL,
   slug TEXT NOT NULL UNIQUE,
   body TEXT NOT NULL,
+  views INTEGER NOT NULL DEFAULT 0,
+  likes INTEGER NOT NULL DEFAULT 0,
+  dislikes INTEGER NOT NULL DEFAULT 0,
   created_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now')),
   updated_at TEXT NOT NULL DEFAULT (strftime('%Y-%m-%dT%H:%M:%fZ','now'))
 );
@@ -78,6 +81,10 @@ END;
 -- Backfill columns for older DBs (scripts ignore duplicate-column errors)
 ALTER TABLE dreams ADD COLUMN likes INTEGER NOT NULL DEFAULT 0;
 ALTER TABLE dreams ADD COLUMN dislikes INTEGER NOT NULL DEFAULT 0;
+
+ALTER TABLE articles ADD COLUMN views INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE articles ADD COLUMN likes INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE articles ADD COLUMN dislikes INTEGER NOT NULL DEFAULT 0;
 
 -- User submitted dreams (anonymous)
 CREATE TABLE IF NOT EXISTS user_dreams (

@@ -31,10 +31,10 @@ function renderItem(item, fallback) {
   bodyEl.textContent = item.body || '';
   categoryEl.textContent = item.category || 'Genel';
   dateEl.textContent = item.updatedAt
-    ? new Date(item.updatedAt).toLocaleDateString('tr-TR')
+    ? `📅 ${new Date(item.updatedAt).toLocaleDateString('tr-TR')}`
     : '';
   slugEl.textContent = slug ? `/${slug}` : '';
-  viewsEl.textContent = `${item.views ?? 0} görüntülenme`;
+  viewsEl.textContent = `👁️ ${item.views ?? 0} görüntülenme`;
   if (fallback) {
     stateEl.textContent = 'Demo içerik gösteriliyor.';
   } else {
@@ -78,7 +78,7 @@ async function countView() {
     if (!res.ok) return;
     const data = await res.json();
     if (data && typeof data.views === 'number') {
-      viewsEl.textContent = `${data.views} görüntülenme`;
+      viewsEl.textContent = `👁️ ${data.views} görüntülenme`;
     }
   } catch (err) {
     // ignore

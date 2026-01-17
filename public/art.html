@@ -326,49 +326,136 @@
         document.getElementById('menuDropdown').classList.toggle('open');
       }
 
-      function toggleLike(btn, articleId) {
-        const card = btn.closest('.article-card');
-        const dislikeBtn = card.querySelector('.icon-btn:last-child');
-        
-        // Toggle like
-        btn.classList.toggle('active-like');
-        
-        // Remove dislike if active
-        if (dislikeBtn.classList.contains('active-dislike')) {
-          dislikeBtn.classList.remove('active-dislike');
-        }
-        
-        // Update count (demo - in real app would call API)
-        const countSpan = btn.querySelector('span');
-        const currentCount = parseInt(countSpan.textContent);
-        if (btn.classList.contains('active-like')) {
-          countSpan.textContent = currentCount + 1;
-        } else {
-          countSpan.textContent = currentCount - 1;
+      // Track article view when card is clicked
+      async function trackView(articleSlug) {
+        try {
+          const res = await fetch(`/api/articles/${encodeURIComponent(articleSlug)}/view`, {
+            method: 'POST',
+          });
+          if (res.ok) {
+            const data = await res.json();
+            // Update view count in UI
+            const cards = document.querySelectorAll('.article-card');
+            cards.forEach(card => {
+              const link = card.querySelector('a');
+              if (link && link.getAttribute('href') === '#' + articleSlug) {
+                const viewSpan = card.querySelector('.article-views');
+                if (viewSpan) {
+                  const parts = viewSpan.textContent.split(' ');
+                  viewSpan.textContent = `👁️ ${data.views}`;
+                }
+              }
+            });
+          }
+        } catch (e) {
+          console.warn('Failed to track view:', e);
         }
       }
 
-      function toggleDislike(btn, articleId) {
+      // Call track view when article title is clicked
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.article-card h2 a').forEach(link => {
+          link.addEventListener('click', (e) => {
+            const slug = link.getAttribute('href').substring(1); // Remove #
+            if (slug) trackView(slug);
+          });
+        });
+      });
+
+      async function toggleLike(btn, articleId) {
         const card = btn.closest('.article-card');
-        const likeBtn = card.querySelector('.icon-btn:first-child');
+        const dislikeBtn = card.querySelectorAll('.icon-btn')[1];
         
-        // Toggle dislike
-        btn.classList.toggle('active-dislike');
+        // Check if already liked
+        const wasLiked = btn.classList.contains('active-like');
+        
+        // Don't allow double voting
+        if (wasLiked) return;
+        
+        // Remove dislike if active
+        if (dislikeBtn.classList.contains('active-dislike')) {
+          return; // Don't allow switching votes
+        }
+        
+        // Call API
+        try {
+          const res = await fetch(`/api/articles/${encodeURIComponent(articleId)}/vote`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ vote: 'like' }),
+          });
+          
+          if (res.ok) {
+            const data = await res.json();
+            btn.classList.add('active-like');
+            btn.querySelector('span').textContent = data.likes;
+            dislikeBtn.querySelector('span').textContent = data.dislikes;
+            
+            // Store in localStorage to prevent double voting
+            localStorage.setItem(`article_${articleId}_voted`, 'like');
+          }
+        } catch (e) {
+          console.warn('Failed to vote:', e);
+        }
+      }
+
+      async function toggleDislike(btn, articleId) {
+        const card = btn.closest('.article-card');
+        const likeBtn = card.querySelectorAll('.icon-btn')[0];
+        
+        // Check if already disliked
+        const wasDisliked = btn.classList.contains('active-dislike');
+        
+        // Don't allow double voting
+        if (wasDisliked) return;
         
         // Remove like if active
         if (likeBtn.classList.contains('active-like')) {
-          likeBtn.classList.remove('active-like');
+          return; // Don't allow switching votes
         }
         
-        // Update count (demo - in real app would call API)
-        const countSpan = btn.querySelector('span');
-        const currentCount = parseInt(countSpan.textContent);
-        if (btn.classList.contains('active-dislike')) {
-          countSpan.textContent = currentCount + 1;
-        } else {
-          countSpan.textContent = currentCount - 1;
+        // Call API
+        try {
+          const res = await fetch(`/api/articles/${encodeURIComponent(articleId)}/vote`, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ vote: 'dislike' }),
+          });
+          
+          if (res.ok) {
+            const data = await res.json();
+            btn.classList.add('active-dislike');
+            btn.querySelector('span').textContent = data.dislikes;
+            likeBtn.querySelector('span').textContent = data.likes;
+            
+            // Store in localStorage to prevent double voting
+            localStorage.setItem(`article_${articleId}_voted`, 'dislike');
+          }
+        } catch (e) {
+          console.warn('Failed to vote:', e);
         }
       }
+
+      // Restore vote state from localStorage on page load
+      document.addEventListener('DOMContentLoaded', () => {
+        document.querySelectorAll('.article-card').forEach(card => {
+          const likeBtn = card.querySelectorAll('.icon-btn')[0];
+          const dislikeBtn = card.querySelectorAll('.icon-btn')[1];
+          
+          // Get article slug from the card
+          const link = card.querySelector('h2 a');
+          if (link) {
+            const slug = link.getAttribute('href').substring(1);
+            const voted = localStorage.getItem(`article_${slug}_voted`);
+            
+            if (voted === 'like') {
+              likeBtn.classList.add('active-like');
+            } else if (voted === 'dislike') {
+              dislikeBtn.classList.add('active-dislike');
+            }
+          }
+        });
+      });
     </script>
 
     <main class="container">

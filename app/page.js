@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Search, Eye, Heart, Clock } from 'lucide-react';
+import { Search, Heart } from 'lucide-react';
 
 export default function Home() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -138,11 +138,9 @@ export default function Home() {
                   href={`/dream.html?slug=${encodeURIComponent(dream.slug)}`}
                   className="block rounded-3xl p-6 transition-all duration-300 hover:shadow-2xl hover:-translate-y-2 hover:scale-[1.02] group bg-white/90 hover:bg-white shadow-xl backdrop-blur-sm border border-emerald-100/50"
                 >
-                  <div className="flex items-start justify-end mb-3">
-                    <div className="flex items-center space-x-1 text-sm opacity-75">
-                      <Eye className="h-4 w-4" />
-                      <span>{dream.popularity || 0}</span>
-                    </div>
+                  <div className="flex items-start justify-between mb-3 text-xs text-gray-500">
+                    <span>📅 {dream.updatedAt ? new Date(dream.updatedAt).toLocaleDateString('tr-TR') : 'Yeni'}</span>
+                    <span>👁️ {dream.popularity || 0}</span>
                   </div>
 
                   <h4 className="text-base font-bold mb-4">{dream.title}</h4>
@@ -151,11 +149,7 @@ export default function Home() {
                     {dream.shortDesc || ''}
                   </p>
 
-                  <div className="flex items-end justify-between mt-auto text-sm opacity-75">
-                    <div className="flex items-center space-x-1">
-                      <Clock className="h-4 w-4" />
-                      <span>{dream.updatedAt ? new Date(dream.updatedAt).toLocaleDateString('tr-TR') : 'Yeni'}</span>
-                    </div>
+                  <div className="flex items-end justify-end mt-auto text-sm">
                     <span className="flex items-center space-x-1 font-medium transition-all duration-200 group-hover:translate-x-1 text-emerald-600 group-hover:text-emerald-700">
                       <span>Oku</span>
                       <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
