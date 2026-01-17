@@ -9,6 +9,7 @@ export default function Home() {
   const [dreams, setDreams] = useState([]);
   const [loading, setLoading] = useState(true);
   const [totalCount, setTotalCount] = useState(0);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   // Fetch dreams from API
   useEffect(() => {
@@ -55,27 +56,44 @@ export default function Home() {
       <header className={`sticky top-0 z-50 backdrop-blur-md border-b ${darkMode ? 'bg-gray-800/80 border-gray-700' : 'bg-white/80 border-gray-200'}`}>
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
-            <div className="flex items-center space-x-4">
-              <a href="/" className="flex items-center space-x-3">
-                <img src="/img/logo.png" alt="Hayrolsun Logo" className="h-[60px] w-[60px] rounded-xl" />
-                <div>
-                  <h1 className="text-[1.75rem] font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                    hayrolsun.site
-                  </h1>
-                  <p className="text-sm opacity-75">İslami Rüya Tabirleri Rehberiniz</p>
+            <a href="/" className="flex items-center space-x-3">
+              <img src="/img/logo.png" alt="Hayrolsun Logo" className="h-[60px] w-[60px] rounded-xl" />
+              <div>
+                <h1 className="text-[1.75rem] font-bold bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
+                  hayrolsun.site
+                </h1>
+                <p className="text-sm opacity-75">İslami Rüya Tabirleri Rehberiniz</p>
+              </div>
+            </a>
+            <div className="relative">
+              <button
+                onClick={() => setMenuOpen(!menuOpen)}
+                className="px-5 py-2.5 text-sm font-semibold rounded-xl bg-green-600 text-white hover:bg-green-700 transition-colors shadow-lg"
+              >
+                Menü
+              </button>
+              {menuOpen && (
+                <div className="absolute right-0 mt-2 w-56 bg-white rounded-2xl shadow-2xl border border-gray-100 overflow-hidden z-50">
+                  <button
+                    onClick={() => setMenuOpen(false)}
+                    className="w-full px-4 py-3 text-sm font-semibold text-white bg-red-500 hover:bg-red-600 transition-colors"
+                  >
+                    Menüyü Kapat
+                  </button>
+                  <a href="/" className="block px-4 py-3 text-gray-700 hover:bg-gray-50 border-b border-gray-100">Ana Sayfa</a>
+                  <a href="/art.html" className="block px-4 py-3 text-gray-700 hover:bg-gray-50 border-b border-gray-100">Yazılarımız</a>
+                  <a href="/share.html" className="block px-4 py-3 text-gray-700 hover:bg-gray-50 border-b border-gray-100">Rüya Paylaş</a>
+                  <a href="/contact.html" className="block px-4 py-3 text-gray-700 hover:bg-gray-50 border-b border-gray-100">İletişim</a>
+                  <button
+                    onClick={() => { setDarkMode(!darkMode); setMenuOpen(false); }}
+                    className="w-full px-4 py-3 text-left text-gray-700 hover:bg-gray-50 flex items-center gap-2"
+                  >
+                    {darkMode ? <Sun className="h-4 w-4" /> : <Moon className="h-4 w-4" />}
+                    {darkMode ? 'Aydınlık Mod' : 'Karanlık Mod'}
+                  </button>
                 </div>
-              </a>
-              <div className="w-px h-10 bg-gray-300 dark:bg-gray-600"></div>
-              <a href="/art.html" className="px-4 py-2 text-sm font-medium rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors">
-                Yazılarımız
-              </a>
+              )}
             </div>
-            <button
-              onClick={() => setDarkMode(!darkMode)}
-              className={`p-2 rounded-lg ${darkMode ? 'bg-gray-700 text-yellow-300' : 'bg-gray-200 text-gray-700'}`}
-            >
-              {darkMode ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
-            </button>
           </div>
         </div>
       </header>
