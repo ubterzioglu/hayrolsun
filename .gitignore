@@ -1,8 +1,37 @@
+# Vercel
 .vercel/
 
-# env (never commit secrets)
+# Environment (never commit secrets)
 .env
 .env.*
 !env.example
 
+# Dependencies
+node_modules/
+
+# Next.js build output
+.next/
+
+# IDE
+.idea/
+*.iml
+.vscode/
+
+# Claude Code
+.claude/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+npm-debug.log*
+
+# Temporary files
+*.tmp
+*.temp
 /.0
+
+# Package lock (optional - uncomment if you don't want to commit)
+# package-lock.json

@@ -1,75 +1,333 @@
-<!doctype html>
-<html lang="tr">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>hayrolsun.site | İslami Rüya Tabirleri</title>
-    <meta
-      name="description"
-      content="İslami rüya tabirleri rehberi. Rüyalarınızı hayra yormaya vesile olacak açıklamalar ve işaretler."
-    />
-    <link rel="icon" type="image/png" href="/img/favicon.png" />
-    <link rel="stylesheet" href="/styles.css" />
-  </head>
-  <body class="page home">
-    <header class="site-header">
-      <div class="container header-row">
-        <div class="brand">
-          <img src="/img/favicon.png" alt="hayrolsun.site logo" class="brand-logo" />
-          <div>
-            <h1 class="brand-title">hayrolsun.site</h1>
-            <p class="brand-tagline">İslami Rüya Tabirleri Rehberiniz</p>
-          </div>
-          <span class="divider" aria-hidden="true"></span>
-          <a class="btn" href="/art.html">Yazılarımız</a>
+<!DOCTYPE html>
+<html lang="tr" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hayrolsun - Rüya Tabirleri</title>
+    <style>
+        :root {
+            --imam-green: #2e5a32;
+            --imam-green-light: #3a7040;
+            --imam-green-dark: #1e3d21;
+            --cream: #f8f4e9;
+            --dark-text: #2c2c2c;
+            --light-text: #f8f4e9;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--cream);
+            color: var(--dark-text);
+            line-height: 1.6;
+            direction: ltr;
+        }
+        
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+        
+        header {
+            background-color: var(--imam-green);
+            color: var(--light-text);
+            padding: 1rem 0;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-decoration: none;
+            color: var(--light-text);
+        }
+        
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        nav a {
+            color: var(--light-text);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        nav a:hover {
+            color: #e0d7c0;
+        }
+        
+        .hero {
+            background-color: var(--imam-green);
+            color: var(--light-text);
+            padding: 4rem 0;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .hero h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        .search-container {
+            background-color: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            margin: 2rem auto;
+            max-width: 700px;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 1rem;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--imam-green);
+            border-radius: 5px;
+            font-size: 1.1rem;
+            direction: ltr;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: var(--imam-green-dark);
+        }
+        
+        .search-box button {
+            background-color: var(--imam-green);
+            color: white;
+            border: none;
+            padding: 0.75rem 1.5rem;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+        
+        .search-box button:hover {
+            background-color: var(--imam-green-dark);
+        }
+        
+        .results {
+            margin-top: 2rem;
+        }
+        
+        .result-item {
+            background-color: white;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+        
+        .result-item h3 {
+            color: var(--imam-green);
+            margin-bottom: 0.5rem;
+            font-size: 1.4rem;
+        }
+        
+        .result-item p {
+            color: var(--dark-text);
+            line-height: 1.8;
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 2rem;
+            color: #666;
+            font-style: italic;
+        }
+        
+        footer {
+            background-color: var(--imam-green-dark);
+            color: var(--light-text);
+            text-align: center;
+            padding: 2rem 0;
+            margin-top: 4rem;
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            nav ul {
+                gap: 1rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">Hayrolsun</a>
+            <nav>
+                <ul>
+                    <li><a href="#">Rüya Tabirleri</a></li>
+                    <li><a href="art.html">Makaleler</a></li>
+                    <li><a href="#">Hakkımızda</a></li>
+                </ul>
+            </nav>
         </div>
-        <div class="search-wrap">
-          <input id="search-input" type="search" placeholder="Rüya tabirini ara..." />
-        </div>
-      </div>
     </header>
 
-    <main>
-      <section class="hero">
+    <section class="hero">
         <div class="container">
-          <h2>
-            Rüyalarınızın <span>Hikmetini</span> Keşfedin
-          </h2>
-          <p>
-            Rüyalar, bazen Rabbimizin bir ikazı, bir müjdesi ya da kalbe düşen bir hatırlatmadır.
-            Burada yer alan tabirler; İslami geleneğin genel kabullerine uygun, hayra yormayı esas
-            alan ve kalbi incitmeyen bir üslupla hazırlanmıştır. Yorumlar kesin hüküm değildir;
-            rüyanın hâli, kişinin niyeti ve şartlarıyla birlikte değerlendirilir. Allah Teâlâ en
-            doğrusunu bilir.
-          </p>
+            <h1>Rüya Tabirleri</h1>
+            <p>Bismillahirrahmanirrahim - Rüyanızın yorumunu bu mübarek sitede arayabilirsiniz</p>
         </div>
-      </section>
+    </section>
 
-      <section class="categories">
+    <div class="container">
+        <div class="search-container">
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Rüyanızdan bir kelime girin..." autocomplete="off">
+                <button id="searchButton">Ara</button>
+            </div>
+            <div class="results" id="resultsContainer">
+                <!-- Results will be displayed here -->
+            </div>
+        </div>
+    </div>
+
+    <footer>
         <div class="container">
-          <h3>Kategoriler</h3>
-          <div id="category-list" class="category-list"></div>
+            <p>&copy; 2026 Hayrolsun. Tüm hakları saklıdır.</p>
+            <p>Kur'an ve Sünnet ışığında rüya tabirleri</p>
         </div>
-      </section>
-
-      <section class="dreams">
-        <div class="container">
-          <div class="dreams-header">
-            <h3>Popüler Rüya Tabirleri</h3>
-            <span id="result-status" class="muted">Yükleniyor...</span>
-          </div>
-          <div id="dream-list" class="dream-grid"></div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="site-footer">
-      <div class="container">
-        <p>© 2026 hayrolsun.site - Tüm hakları saklıdır.</p>
-        <p class="muted">Rüya tabirleri yorum mahiyetindedir; kesin hüküm ifade etmez.</p>
-      </div>
     </footer>
 
-    <script type="module" src="/app.js"></script>
-  </body>
+    <script>
+        // Mock database of dream interpretations
+        const dreamDatabase = [
+            {
+                keyword: "su",
+                interpretation: "Rüyada su görmek ilim, hayat ve rızık demektir. Eğer suyu temiz içiyorsa, faydalı ilim veya helal rızık elde edeceğine işarettir. Eğer suyun rengi bulanıksa, bu gam ve sıkıntıya işaret eder."
+            },
+            {
+                keyword: "nehir",
+                interpretation: "Nehir görmek uzun ömür ve bol rızık işaretidir. Nehirde yüzmek ise saltanat veya insanların ihtiyaçlarından kurtulmak mânâsınadır."
+            },
+            {
+                keyword: "gök",
+                interpretation: "Gök görmek yücelik ve yükseliş işaretidir. Gökten inmek ise büyük bir fethe veya bol hayra delalet eder."
+            },
+            {
+                keyword: "kitap",
+                interpretation: "Kitap görmek ilim ve hikmet işaretidir. Kitap okumak ise ilim sahibi olmak veya yeni bir şey öğrenmek mânâsınadır. Eğer kitap gökten iniyorsa, hidayet ve doğru yola erişmek anlamına gelir."
+            },
+            {
+                keyword: "ağaç",
+                interpretation: "Ağaç görmek salih bir adam veya kadın işaretidir. Ağaç dikmek ise salih amel işlemek demektir. Eğer ağaç meyve veriyorsa, amelinin karşılığını alacağına işarettir."
+            },
+            {
+                keyword: "nur",
+                interpretation: "Nur görmek hidayet ve iman işaretidir. Nur taşıyan birini görmek ise başkalarını hidayete eriştirmek veya ilminden istifade etmek mânâsınadır. Eğer nur her yeri aydınlatıyorsa, hayır ve bereketin yayılacağına delalet eder."
+            },
+            {
+                keyword: "at",
+                interpretation: "At görmek hayır ve bereket işaretidir. At binmek ise izzet ve düşman üstüne galip gelmek mânâsınadır. Eğer at beyazsa, mutlak hayır ve bereket getirir."
+            },
+            {
+                keyword: "ev",
+                interpretation: "Ev görmek kadın veya aile işaretidir. Evi yeni görürse evlenecek veya ailesinde hayır olacak demektir. Eğer ev yıkılıyorsa, işlerinde bozukluk olacağına işarettir."
+            }
+        ];
+
+        // Function to search dreams
+        function searchDreams(query) {
+            if (!query.trim()) {
+                return [];
+            }
+            
+            const searchTerm = query.toLowerCase().trim();
+            return dreamDatabase.filter(item => 
+                item.keyword.toLowerCase().includes(searchTerm) ||
+                item.interpretation.toLowerCase().includes(searchTerm)
+            );
+        }
+
+        // Function to display results
+        function displayResults(results) {
+            const container = document.getElementById('resultsContainer');
+            
+            if (results.length === 0) {
+                container.innerHTML = '<div class="no-results">Bu rüya için yorum bulunamadı. Başka bir kelime deneyin.</div>';
+                return;
+            }
+            
+            let html = '';
+            results.forEach(item => {
+                html += `
+                    <div class="result-item">
+                        <h3>${item.keyword}</h3>
+                        <p>${item.interpretation}</p>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Event listeners
+        document.getElementById('searchButton').addEventListener('click', () => {
+            const query = document.getElementById('searchInput').value;
+            const results = searchDreams(query);
+            displayResults(results);
+        });
+
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                const query = document.getElementById('searchInput').value;
+                const results = searchDreams(query);
+                displayResults(results);
+            }
+        });
+
+        // Initial load - show all interpretations
+        window.addEventListener('DOMContentLoaded', () => {
+            displayResults(dreamDatabase);
+        });
+    </script>
+</body>
 </html>
+
